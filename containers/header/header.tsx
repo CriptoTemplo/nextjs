@@ -3,7 +3,6 @@ import Dropdown, { IDropdownOptions, IDropdownProps } from "../../components/dro
 import SearchBar from "../../components/header/searchBar";
 import Global, { IHeaderDropdown, TDropwdown } from "../../definitions/global";
 import { IHeaderProps } from "./headerWrapper";
-import './header.module.scss';
 export interface IHeaderState {
 }
 

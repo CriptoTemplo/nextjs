@@ -1,7 +1,8 @@
 import * as React from 'react';
 import GlobalStore from "../../Stores/GlobalStore";
 import createDOMPurify from 'dompurify';
-import './sitemapmodule.scss';import { ISitemap } from "../../definitions/mediaPost";
+import './sitemap.module.scss';
+import { ISitemap } from "../../definitions/mediaPost";
 
 export interface ISitemapProps {
 }

@@ -1,6 +1,5 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { HelmetProvider } from "react-helmet-async";
 import { useRouter } from "next/router";
 import HeaderWrapper from "containers/header/headerWrapper";
 import ReturnTop from "components/returnTop/returnTop";
@@ -12,6 +11,8 @@ import Exchanges from "pages/exchanges";
 import ErrorPage from "pages/errorPage";
 import Sitemap from "pages/sitemap/sitemap";
 import "components/table/table.scss"
+import "containers/header/header.scss"
+import "../App.scss"
 
 export default function App({ Component, pageProps }: AppProps) {
 	const router = useRouter();

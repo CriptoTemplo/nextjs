@@ -1,5 +1,5 @@
-import { Helmet } from 'react-helmet-async';
 import Global from "../definitions/global";
+import Head from 'next/head'
 
 // TODO esto tampoco mola, habria que hacer un ipartial o algo asi
 export interface IMetaTags {
@@ -16,7 +16,7 @@ export default class HelmetUtils {
         const canonical: string = Global.hostFront + metadata.canonical;
         return (
             <>
-			<Helmet>
+			<Head>
                 <title>{metadata.title}</title>
                 <meta name="title" content={metadata.title} />
                 <meta name="description" content={metadata.description} />
@@ -26,7 +26,7 @@ export default class HelmetUtils {
                 <meta property="og:title" content={metadata.title} />
 	            <meta property="og:description" content={metadata.description} />
                 <meta property="og:url" content={canonical} />
-            </Helmet>
+            </Head>
             </>
         );
     }

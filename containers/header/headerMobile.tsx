@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './headermodule.scss';import Dropdown, { IDropdownOptions, IDropdownProps } from "../../components/dropdown/dropdown";
+import Dropdown, { IDropdownOptions, IDropdownProps } from "../../components/dropdown/dropdown";
 import { IHeaderDropdown, TDropwdown, TStringDuple, TStringTriple } from "../../definitions/global";
 import { IHeaderProps } from "./headerWrapper";
 import DropdownMobile from "../../components/dropdownMobile/dropdownMobile";

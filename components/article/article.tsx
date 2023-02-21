@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Utils from "../../utils/utils";
-import createDOMPurify from 'dompurify';
+import DOMPurify from 'isomorphic-dompurify';
 import "./article.module.scss";
 import GlobalCache from '../../definitions/cache';
 
@@ -34,7 +34,7 @@ export default class Article extends React.Component<IArticleProps, IArticleStat
 
         return (
             <>
-                {<div dangerouslySetInnerHTML={{ __html: createDOMPurify.sanitize(content) }} />}
+                {<div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }} />}
             </>
         );
     }
