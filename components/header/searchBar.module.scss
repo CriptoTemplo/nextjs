@@ -1,0 +1,19 @@
+
+.searchBar {
+    height: 100%;
+    display: flex;
+    width: 10rem;
+    align-items: center;
+    flex-grow: 1;
+    input {
+        height: 65%;
+        width: 100%;
+        color: $text-color;
+        border-radius: $border-radius;
+        border: none;
+        outline: none;
+        background-color: $background-card-post-item;
+        padding: 0 1rem;
+        box-sizing: border-box;
+    }
+}

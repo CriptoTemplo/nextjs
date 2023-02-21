@@ -1,0 +1,35 @@
+
+.sitemapTitle {
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+
+.anchorContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+    grid-gap: 1rem;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+    transition: color 5s ease-out;
+    padding: 2rem 0 4rem 0;
+
+    a {
+        text-decoration: none;
+        -webkit-user-drag: none;
+        -webkit-user-select: none;
+        user-select: none;
+        color: inherit;
+        transition: color 5s ease-out;
+        font-weight: 300;
+    }
+    a:hover {
+        color: $text-hover-link;
+        transition: color 0.2s ease-out;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .anchorContainer {
+        grid-template-columns: repeat(auto-fill, 150px);
+    }
+}

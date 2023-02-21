@@ -1,0 +1,112 @@
+
+.footer {
+    position: relative;
+    height: fit-content;
+    // margin-bottom: -20rem;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .upper,.lower {
+        .wrapperFooter {
+            max-width: 1200px;
+            height: 100%;
+            margin: auto;
+            padding: 0 $padding-default;
+        }
+    }
+
+    .upper {
+        width: 100%;
+        height: 30%;
+        background-color: $background-card-post-item;
+        .wrapperFooter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            .socialText{
+                text-align: center;
+            }
+            .socialWrapper {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                height: 4rem;
+                align-items: center;
+                .socialLogo {
+                    cursor: pointer;
+                    width: 3rem;
+                    height: 3rem;
+                    .coverImage {
+                        width: 3rem;
+                        height: 3rem;
+                        transition: transform 0.4s ease-out;   
+                    }
+                    .coverImage:hover {
+                        transform: scale(1.2);
+                    }
+                }
+            }
+        }
+    }
+
+    .lower{
+        width: 100%;
+        height: 70%;
+        background-color: #252423c7;
+        .wrapperFooter {
+            display: grid;
+            grid-template-columns: 25% repeat(4, 1fr);
+            padding: 2rem $padding-default;
+            box-sizing: border-box;
+            .imgLogo {
+                .coverImage {
+                    width: fit-content;
+					height: 100%;
+                }
+            }
+            .footerLinks {
+                display: grid;
+                grid-template-rows: auto;
+                a {
+                    text-decoration: none;
+                    -webkit-user-drag: none;
+                    user-select: none;
+                    color: inherit;    
+                }
+                .title{
+                    font-size: 1.3rem;
+                    font-weight: 600;
+                }
+                .link {
+                    cursor: pointer;
+                    transition: color 0.2s ease-out;
+                    width: fit-content;
+                }
+                .link:hover {
+                    color: $text-hover-link;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .lower{
+            .wrapperFooter {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                text-align: center;
+                row-gap: 2rem;
+                .imgLogo {
+                    grid-column: 1 / -1;
+                }
+                .footerLinks {
+                    .link {
+                        width: 100%;
+                    }
+                }
+            }
+	    }
+    }
+}

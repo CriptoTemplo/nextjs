@@ -1,0 +1,121 @@
+
+.dropdownMobile {
+    cursor: pointer;
+    //margin-left: 5rem;
+    position: relative;
+    // height: 100%;
+    text-align: center;
+
+    .dropdownMobilePlaceholder {
+        height: 3rem;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.2rem;
+        background-color: #292727;
+        border-radius: 1.5rem;
+        padding: 0 0.7rem;
+        box-sizing: border-box;
+        position: relative;    
+        z-index: 1;
+    }
+
+    a {
+        text-decoration: none;
+        -webkit-user-drag: none;
+        user-select: none;
+        color: inherit;
+    }
+}
+
+.dropdownMobile:hover,
+.dropdownMobileMenu:hover {
+    .dropdownMobilePlaceholder {
+        color: $text-hover-link;
+    }
+}
+
+.dropdownMobile.active {
+    .dropdownMobileMenu {
+        max-height: 100vh;
+        transition: max-height ease-out 3s;
+        opacity: 1;
+    }
+
+    .arrow {
+        transform: rotate(45deg) translate(-5px, -5px);
+
+        &:before {
+            transform: translate(10px, 0);
+        }
+
+        &:after {
+            transform: rotate(90deg) translate(10px, 0);
+        }
+    }
+}
+
+.dropdownMobilePlaceholder {
+    transition: color 0.2s ease-out;
+}
+
+.dropdownMobileMenu {
+    width: 100%;
+    background-color: rgb(35 33 32 / 22%);
+    border-radius: 0 0 $border-radius $border-radius;
+    max-height: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    margin-top: -1rem;
+    padding-top: 1rem;
+    opacity: 0;
+
+    .dropdownMobileItem {
+        height: 2.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0.2rem 0.8rem;
+        border-radius: $border-radius;
+        font-size: 1.1rem;
+    }
+
+    .dropdownMobileItem:hover {
+        background-color: rgb(117, 97, 207);
+        transition: background-color ease-out 0.4s;
+    }
+}
+
+.arrow {
+
+    width: 13px;
+    height: 13px;
+    //display: inline-block;
+    position: relative;
+    bottom: -5px;
+    left: -10px;
+    transition: 0.4s ease;
+    // margin-top: 2px;
+    text-align: left;
+    transform: rotate(45deg);
+    // float: right;
+
+    &:before,
+    &:after {
+        position: absolute;
+        content: '';
+        // display: inline-block;
+        width: 12px;
+        height: 3px;
+        background-color: #fff;
+        transition: 0.4s ease;
+    }
+
+    &:after {
+        position: absolute;
+        transform: rotate(90deg);
+        top: -5px;
+        left: 5px;
+    }
+}

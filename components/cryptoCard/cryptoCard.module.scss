@@ -1,0 +1,102 @@
+
+$padding-crypto-card: 1rem;
+$padding-crypto-card-mobile: 0.5rem;
+
+.cryptoCard {
+    width: 100%;
+    height: 4rem;
+    border-radius: $border-radius;
+    margin-bottom: $padding-default;
+    background: linear-gradient(90deg, hsl(0deg 0% 42% / 19%), rgba(38, 38, 38, 0.3));
+    // background: $content-background-linear;
+    box-sizing: border-box;
+    // box-shadow: $card-shadow;
+    color: $text-color;
+    display: flex;
+    align-items: center;
+    padding: 0 $padding-default;
+    //padding-left: $padding-default;
+    flex-wrap: nowrap;
+    flex-basis: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: $padding-crypto-card;
+
+    div {
+        display: flex;
+        align-items: center;
+
+        &.mainData {
+            padding-right: $padding-crypto-card;
+            border-inline-end: 1px solid;
+            white-space: nowrap;
+
+            .imgRank {
+                position: relative;
+
+                img {
+                    height: 2rem;
+                    width: 2rem;
+                    padding-right: $padding-crypto-card;
+                }
+
+                span {
+                    position: absolute;
+                    z-index: 111;
+                    background-color: darkblue;
+                    border-radius: $padding-crypto-card;
+                    padding: 0.2rem;
+                    bottom: 0;
+                    right: 0;
+                    font-size: 0.8rem;
+                }
+            }
+
+            span {
+                font-size: 1.5rem;
+                font-weight: 500;
+
+                &.symbol {
+                    font-size: 0.9rem;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+
+    .property {
+        padding: 0 $padding-crypto-card;
+        background-color: #57575769;
+        border-radius: 1.4rem;
+        font-size: 1.1rem;
+        height: 2rem;
+        flex: 0 0 auto;
+        gap: $padding-crypto-card;
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    @media only screen and (max-width: 480px) {
+        gap: $padding-crypto-card-mobile;
+        padding: 0 $padding-crypto-card-mobile;
+        height: 3rem;
+
+        div.mainData {
+            padding-right: $padding-crypto-card-mobile;
+            span {
+                font-size: 1.2rem;
+            }
+            .imgRank img {
+                padding-right: $padding-crypto-card-mobile;
+            }
+        }
+        
+
+        .property {
+            font-size: 0.9rem;
+            padding: 0 0.7rem;
+        }
+    }
+}
