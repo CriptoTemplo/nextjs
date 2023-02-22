@@ -7,6 +7,7 @@ import twitterLogo from '../../public/highlights-twitter.svg'
 import tiktokLogo from '../../public/highlights-tiktok.svg'
 import mailLogo from '../../public/highlights-mail.svg'
 import instagramLogo from '../../public/highlights-instagram.svg'
+import Link from "next/link";
 
 export interface IFooterProps {
 }
@@ -121,7 +122,7 @@ export default class Footer extends React.Component<IFooterProps, IFooterState> 
 					<span className="link">Grupo inversion</span>
 				</div>
 				<div className="footerLinks">
-					<a href="/sitemap" className="title">Sitemap</a>
+					<Link href="/sitemap" className="title">Sitemap</Link>
 				</div>
 			</>
 		);
