@@ -1,8 +1,7 @@
 import * as React from 'react';
-import GlobalStore from "../Stores/GlobalStore";
-import createDOMPurify from 'dompurify';
+import GlobalStore from "../stores/GlobalStore";
+import DOMPurify from 'isomorphic-dompurify';
 import { ISitemap } from "../definitions/mediaPost";
-import '../styles/sitemap.module.scss';
 
 export interface ISitemapProps {
 }
@@ -24,7 +23,7 @@ export default class Sitemap extends React.Component<ISitemapProps, ISitemapStat
 	public render() {
 		return (
             <>
-                {<div dangerouslySetInnerHTML={{ __html: createDOMPurify.sanitize(this.state.content) }} />}
+                {<div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.state.content) }} />}
             </>
 		);
 	}

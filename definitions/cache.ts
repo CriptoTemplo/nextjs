@@ -1,5 +1,5 @@
 import { Converter } from 'showdown';
-import GlobalStore from "../Stores/GlobalStore";
+import GlobalStore from "../stores/GlobalStore";
 import { ILanding } from "./mediaPost";
 
 export default class GlobalCache {

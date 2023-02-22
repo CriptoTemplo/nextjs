@@ -2,8 +2,8 @@ import * as React from 'react';
 import { ILanding, IMediaPost, IPost } from "../definitions/mediaPost";
 import HelmetUtils, { IMetaTags } from "../utils/helmet";
 import Utils from "../utils/utils";
-import Article, { IArticleProps } from "../components/article";
-import GlobalStore from "../Stores/GlobalStore";
+import Article, { IArticleProps } from "../components/Article";
+import GlobalStore from "../stores/GlobalStore";
 
 export interface IExchangesProps {
 }

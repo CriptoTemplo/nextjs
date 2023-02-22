@@ -2,6 +2,7 @@ import * as React from 'react';
 import Global from "../definitions/global";
 import { IMediaPost } from "../definitions/mediaPost";
 import withRouter, { WithRouter } from "../utils/withRouter";
+import Image from 'next/image'
 
 export interface ISectionWrapperProps {
 	posts: IMediaPost[];
@@ -43,9 +44,11 @@ class SectionWrapper extends React.Component<ISectionWrapperPropsType, ISectionW
 			<div className="post" key={index} onClick={() => this.redirect(post.url)}>
 				<a href={Global.hostFront + "/" + post.url} onClick={(e) => e.preventDefault()}>
 					<div className="imageWrapper">
-						<img className="coverImage"
+						<Image className="coverImage"
 							src={Global.host + post.coverImage.formats.small.url}
 							alt={post.coverImage.alternativeText}
+							width={300}
+							height={300}
 						/>
 					</div>
 					<div className="content">

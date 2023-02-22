@@ -1,12 +1,12 @@
 import * as React from 'react';
-import Article, { IArticleProps } from "../components/article";
+import Article, { IArticleProps } from "../components/Article";
 import RankingCrypto, { IRankingCryptoProps } from "../containers/rankingCrypto/rankingCrypto";
-import SectionWrapper, { ISectionWrapperProps } from "../components/sectionWrapper";
+import SectionWrapper, { ISectionWrapperProps } from "../components/SectionWrapper";
 import { IRow, IStrapiCrypto } from "../definitions/crypto";
 import { ILanding, IMediaPost, IPost } from "../definitions/mediaPost";
-import CryptoStore from "../Stores/CryptoStore";
-import GlobalStore from "../Stores/GlobalStore";
-import PostStore from "../Stores/PostStore";
+import CryptoStore from "../stores/CryptoStore";
+import GlobalStore from "../stores/GlobalStore";
+import PostStore from "../stores/PostStore";
 import HelmetUtils, { IMetaTags } from "../utils/helmet";
 import Utils from "../utils/utils";
 

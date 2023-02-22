@@ -1,12 +1,12 @@
 import * as React from 'react';
-import SectionWrapper, { ISectionWrapperProps } from "../components/sectionWrapper";
+import SectionWrapper, { ISectionWrapperProps } from "../components/SectionWrapper";
 import { IPost, IMediaPost } from "../definitions/mediaPost";
-import PostStore from "../Stores/PostStore";
+import PostStore from "../stores/PostStore";
 import withRouter, { WithRouter } from "../utils/withRouter";
 import MediaPost, { IMediaPostProps } from "../containers/mediaPost";
 import CryptoCard, { ICryptoCardProps } from "../components/cryptoCard/cryptoCard";
 import { IStrapiCrypto } from "../definitions/crypto";
-import CryptoStore from "../Stores/CryptoStore";
+import CryptoStore from "../stores/CryptoStore";
 import Utils from "../utils/utils";
 import HelmetUtils, { IMetaTags } from "../utils/helmet";
 import GlobalCache from '../definitions/cache';
@@ -41,7 +41,7 @@ class Post extends React.Component<IPostPropsType, IPostState> {
 	}
 
 	public async componentDidUpdate(prevProps: Readonly<IPostPropsType>, prevState: Readonly<IPostState>, snapshot?: any): Promise<void> {
-		if (prevProps.location.pathname !== this.props.location.pathname) await this.getPosts();
+		if (prevProps.router.pathname !== this.props.router.pathname) await this.getPosts();
 	}
 
 	public shouldComponentUpdate(nextProps: Readonly<IPostPropsType>, nextState: Readonly<IPostState>, nextContext: any): boolean {
@@ -104,7 +104,7 @@ class Post extends React.Component<IPostPropsType, IPostState> {
 				crypto,
 				cryptoPost
 			}, () => {
-				if (!this.props.checkHistory(this.props.location.key)) window.scrollTo({ top: 0, behavior: 'smooth' });
+				if (!this.props.checkHistory(this.props.router.asPath)) window.scrollTo({ top: 0, behavior: 'smooth' });
 			});
 		}
 		catch {
@@ -153,7 +153,7 @@ class Post extends React.Component<IPostPropsType, IPostState> {
 		const aux: IMetaTags = {
 			title: this.constructDefaultTitle(),
 			description: this.constructDefaultDescription(),
-			canonical: this.props.location.pathname,
+			canonical: this.props.router.pathname,
 			published_time: this.compareDataLesser(this.state.cryptoPost.published_at, this.state.crypto.published_at),
 			modified_time: this.compareDataHigher(this.state.cryptoPost.updatedAt, this.state.crypto.updatedAt)
 		}

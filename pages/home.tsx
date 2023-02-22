@@ -1,94 +1,72 @@
-import * as React from 'react';
-import Article, { IArticleProps } from "../components/article";
-import SectionWrapper, { ISectionWrapperProps } from "../components/sectionWrapper";
-import { ILanding, IMediaPost, IPost } from "../definitions/mediaPost";
-import GlobalStore from "../Stores/GlobalStore";
-import PostStore from "../Stores/PostStore";
+import { GetServerSideProps } from 'next';
+import Head from 'next/head';
+import { useState } from 'react';
+import Article from '../components/Article';
+import SectionWrapper from '../components/SectionWrapper';
+import GlobalStore from "../stores/GlobalStore";
+import PostStore from "../stores/PostStore";
 import HelmetUtils, { IMetaTags } from "../utils/helmet";
 import Utils from "../utils/utils";
+import { ILanding, IMediaPost, IPost } from "../definitions/mediaPost";
 
-export interface IHomeProps {
-}
-
-export interface IHomeState {
-	posts: IMediaPost[];
+interface IProps {
 	landingInfo: ILanding;
+	posts: IMediaPost[];
 }
 
-// TODO aqui se deberia inicializar el navigate y el use params y pasar a los hijos la misma referencia
-
-export default class Home extends React.Component<IHomeProps, IHomeState> {
-	constructor(props: IHomeProps) {
-		super(props);
-
-		this.state = {
-			posts: [],
-			landingInfo: {} as ILanding
+export default function Home(props: IProps) {
+	//const [landingInfo, setLandingInfo] = useState<ILanding>(props.landingInfo);
+	//const [posts, setPosts] = useState<IMediaPost[]>(props.posts);
+	console.log(props)
+	
+	const getMetaTags = (): IMetaTags => {
+		return {
+			title: props.landingInfo.MetaTags.title,
+			description: props.landingInfo.MetaTags.description,
+			canonical: "",
+			published_time: props.landingInfo.published_at,
+			modified_time: props.landingInfo.updatedAt
 		}
-	}
+	};
 
-	// After the component did mount
-	public async componentDidMount() {
-		await this.getPosts();
-	}
-
-
-	public render() {
-		// if (Utils.isObjectEmpty(this.state.landingInfo) || !this.state.posts.length) return "";
-		return (
+	return (
+		<>
+			<Head>
+				<title>{getMetaTags().title}</title>
+				<meta name="description" content={getMetaTags().description} />
+				<meta name="canonical" content={getMetaTags().canonical} />
+			</Head> 
 			<div className="home">
-				{!Utils.isObjectEmpty(this.state.landingInfo) ?
-					HelmetUtils.getHead(this.getMetaTags()) : ""}
 				<div className="articleWrapper">
-					<Article {...this.getArticleProps()} />
+					<Article content={props.landingInfo.content} />
 				</div>
 				<div className="sectionWrapper latestPosts">
-					<SectionWrapper {...this.getSectionWrapperProps()} />
+					<SectionWrapper title="Últimas Publicaciones" posts={props.posts} />
 				</div>
 			</div>
-		);
-	}
-
-	private getSectionWrapperProps(): ISectionWrapperProps {
-		return {
-			title: "Últimas Publicaciones",
-			posts: this.state.posts
-		}
-	}
-
-	private getArticleProps(): IArticleProps {
-		return {
-			content: this.state.landingInfo.content
-		}
-	}
-
-	private async getPosts(): Promise<void> {
-		try {
-			const landingInfo: ILanding = await GlobalStore.getLanding();
-			const posts: IPost[] = await PostStore.getCryptoPosts();
-			const mediaPosts: IMediaPost[] = posts.map((post: IPost) => {
-				const aux: IMediaPost = post.Post;
-				aux.published_at = post.published_at;
-				aux.updatedAt = post.updatedAt;
-				return aux;
-			})
-			this.setState({
-				posts: mediaPosts,
-				landingInfo
-			})
-		}
-		catch {
-			throw new Error("Ha fallado algo");
-		}
-	}
-
-	private getMetaTags(): IMetaTags {
-		return {
-			title: this.state.landingInfo.MetaTags.title,
-			description: this.state.landingInfo.MetaTags.description,
-			canonical: "",
-			published_time: this.state.landingInfo.published_at,
-			modified_time: this.state.landingInfo.updatedAt
-		}
-	}
+		</>
+	);
 }
+
+export const getServerSideProps: GetServerSideProps<IProps> = async () => {
+	try {
+		const [landingInfo, posts]: [ILanding, IPost[]] = await Promise.all([
+			GlobalStore.getLanding(),
+			PostStore.getCryptoPosts()
+		]);
+		const mediaPosts: IMediaPost[] = posts.map((post: IPost) => {
+			const aux: IMediaPost = post.Post;
+			aux.published_at = post.published_at;
+			aux.updatedAt = post.updatedAt;
+			return aux;
+		})
+		return {
+			props: {
+				landingInfo,
+				posts: mediaPosts
+			}
+		}
+	} catch (error) {
+		throw new Error("Ha fallado algo");
+	}
+};

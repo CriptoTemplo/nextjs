@@ -3,6 +3,8 @@ import Dropdown, { IDropdownOptions, IDropdownProps } from "../../components/dro
 import SearchBar from "../../components/header/searchBar";
 import Global, { IHeaderDropdown, TDropwdown } from "../../definitions/global";
 import { IHeaderProps } from "./headerWrapper";
+import Image from 'next/image'
+
 export interface IHeaderState {
 }
 
@@ -22,8 +24,10 @@ export default class Header extends React.Component<IHeaderProps, IHeaderState> 
 					<div className="homeButton" onClick={() => this.redirectHome()}>
 						<a href={Global.hostFront} onClick={(e) => e.preventDefault()}>
 							<div className="imgLogo">
-								<img className="coverImage" src={Global.host + "/uploads/thumbnail_logo_fe6e7fe36f.png"}
-									alt="Toca para volver al incio" />
+								<Image className="coverImage" src={Global.host + "/uploads/thumbnail_logo_fe6e7fe36f.png"}
+									alt="Toca para volver al incio"
+									width={150}
+									height={150} />
 							</div>
 							<span className="nameLogo">
 								Empezar a Invertir

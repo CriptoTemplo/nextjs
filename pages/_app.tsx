@@ -1,4 +1,3 @@
-import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { useRouter } from "next/router";
 import HeaderWrapper from "containers/header/headerWrapper";
@@ -14,7 +13,23 @@ import "../styles/table.scss"
 import "../styles/header.scss"
 import "../styles/App.scss"
 import '../styles/dropdownMobile.scss';
+import '../styles/footer.scss';
+import '../styles/sitemap.scss';
 
+export default function App({ Component, pageProps }: AppProps) {
+	return (
+		<div className="globalWrapper">
+			<HeaderWrapper />
+			<div className="wrapperMain">
+				<Component {...pageProps} />
+			</div>
+			<ReturnTop />
+			<Footer />
+		</div>
+	);
+}
+
+/*
 export default function App({ Component, pageProps }: AppProps) {
 	const router = useRouter();
 	return (
@@ -33,3 +48,4 @@ export default function App({ Component, pageProps }: AppProps) {
 		</div>
 	);
 }
+*/

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IHeader } from "../../definitions/global";
-import GlobalStore from "../../Stores/GlobalStore";
+import GlobalStore from "../../stores/GlobalStore";
 import withRouter, { WithRouter } from "../../utils/withRouter";
 import Header from "./header";
 import HeaderMobile from "./headerMobile";

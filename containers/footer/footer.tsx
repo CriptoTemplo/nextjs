@@ -1,6 +1,13 @@
 import * as React from 'react';
 import Global from "../../definitions/global";
-import '../../styles/footer.module.scss';
+import Image from 'next/image'
+import youtubeLogo from '../../public/highlights-youtube.svg'
+import telegramLogo from '../../public/highlights-telegram.svg'
+import twitterLogo from '../../public/highlights-twitter.svg'
+import tiktokLogo from '../../public/highlights-tiktok.svg'
+import mailLogo from '../../public/highlights-mail.svg'
+import instagramLogo from '../../public/highlights-instagram.svg'
+
 export interface IFooterProps {
 }
 
@@ -42,39 +49,39 @@ export default class Footer extends React.Component<IFooterProps, IFooterState> 
 		return (
 			<>
 				<div className="socialLogo">
-					<img className="coverImage"
-						src={"/highlights-youtube.svg"}
+					<Image className="coverImage"
+						src={youtubeLogo}
 						alt="Link para ir al canal de Youtube de Empezar a Invertir"
 					/>
 				</div>
 				<div className="socialLogo">
-					<img className="coverImage"
-						src={"/highlights-telegram.svg"}
+					<Image className="coverImage"
+						src={telegramLogo}
 						alt="Link para ir al canal de Telegram de Empezar a Invertir"
 					/>
 				</div>
 				<div className="socialLogo">
-					<img className="coverImage"
-						src={"/highlights-twitter.svg"}
+					<Image className="coverImage"
+						src={twitterLogo}
 						alt="Link para ir al Twitter de Empezar a Invertir"
 					/>
 				</div>
 				<div className="socialLogo">
-					<img className="coverImage"
-						src={"/highlights-instagram.svg"}
+					<Image className="coverImage"
+						src={instagramLogo}
 						alt="Link para ir al Instagram de Empezar a Invertir"
 					/>
 				</div>
 				<div className="socialLogo">
-					<img className="coverImage"
-						src={"/highlights-tiktok.svg"}
+					<Image className="coverImage"
+						src={tiktokLogo}
 						alt="Link para ir al canal de TikTok de Empezar a Invertir"
 					/>
 
 				</div>
 				<div className="socialLogo">
-					<img className="coverImage"
-						src={"/highlights-mail.svg"}
+					<Image className="coverImage"
+						src={mailLogo}
 						alt="Link para ir enviar un e-mail a Empezar a Invertir"
 					/>
 				</div>
@@ -86,8 +93,10 @@ export default class Footer extends React.Component<IFooterProps, IFooterState> 
 		return (
 			<>
 				<div className="imgLogo">
-					<img className="coverImage" src={Global.host + "/uploads/thumbnail_logo_fe6e7fe36f.png" }
+					<Image className="coverImage" src={Global.host + "/uploads/thumbnail_logo_fe6e7fe36f.png" }
 						alt="Logo en grande de Empezar a Invertir"
+						width={300}
+						height={300}
 						/>
 				</div>
 				<div className="footerLinks">

@@ -24,7 +24,6 @@ class ErrorPage extends React.Component<IErrorPageType, IErrorPageState> {
 	}
 
 	public render() {
-		return "";
 		return (
 			<div>
 				404! Parece que te has perdido...

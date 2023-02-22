@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom/client';
 import * as React from 'react';
 import CryptoCalculator, { ICryptoCalculatorProps } from "../components/cryptoCalculator/cryptoCalculator";
 import { ICryptoDetailed } from "../definitions/crypto";
-import CryptoStore from "../Stores/CryptoStore";
+import CryptoStore from "../stores/CryptoStore";
 import Publisher from "../logic/publisher";
 
 export interface ICryptoUtilitesProps {
