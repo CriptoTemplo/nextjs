@@ -1,14 +1,14 @@
 import * as React from 'react';
-import Article, { IArticleProps } from "../../components/article/article";
-import RankingCrypto, { IRankingCryptoProps } from "../../containers/rankingCrypto/rankingCrypto";
-import SectionWrapper, { ISectionWrapperProps } from "../../components/sectionWrapper";
-import { IRow, IStrapiCrypto } from "../../definitions/crypto";
-import { ILanding, IMediaPost, IPost } from "../../definitions/mediaPost";
-import CryptoStore from "../../Stores/CryptoStore";
-import GlobalStore from "../../Stores/GlobalStore";
-import PostStore from "../../Stores/PostStore";
-import HelmetUtils, { IMetaTags } from "../../utils/helmet";
-import Utils from "../../utils/utils";
+import Article, { IArticleProps } from "../components/article";
+import RankingCrypto, { IRankingCryptoProps } from "../containers/rankingCrypto/rankingCrypto";
+import SectionWrapper, { ISectionWrapperProps } from "../components/sectionWrapper";
+import { IRow, IStrapiCrypto } from "../definitions/crypto";
+import { ILanding, IMediaPost, IPost } from "../definitions/mediaPost";
+import CryptoStore from "../Stores/CryptoStore";
+import GlobalStore from "../Stores/GlobalStore";
+import PostStore from "../Stores/PostStore";
+import HelmetUtils, { IMetaTags } from "../utils/helmet";
+import Utils from "../utils/utils";
 
 export interface ICriptomonedasProps {
 }

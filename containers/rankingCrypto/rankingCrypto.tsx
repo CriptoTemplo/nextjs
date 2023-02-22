@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Table, { ITableProps } from "../../components/table/table";
+import Table, { ITableProps } from "../../components/table";
 import GlobalCache from "../../definitions/cache";
 import { ECryptoFields, IRow, IRowContent, IStrapiCrypto } from "../../definitions/crypto";
 import Global from "../../definitions/global";

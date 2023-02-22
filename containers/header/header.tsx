@@ -19,7 +19,7 @@ export default class Header extends React.Component<IHeaderProps, IHeaderState> 
 		return (
 			<div className="header">
 				<div className="wrapperHeader">
-					<div className="homeButton" onClick={() => this.redirect("/")}>
+					<div className="homeButton" onClick={() => this.redirectHome()}>
 						<a href={Global.hostFront} onClick={(e) => e.preventDefault()}>
 							<div className="imgLogo">
 								<img className="coverImage" src={Global.host + "/uploads/thumbnail_logo_fe6e7fe36f.png"}
@@ -39,6 +39,13 @@ export default class Header extends React.Component<IHeaderProps, IHeaderState> 
 				</div>
 			</div>
 		);
+	}
+
+	private redirectHome(): void {
+		this.redirect("/");
+		if (document.getElementById("headerButton")?.className.includes("active")) {
+			document.getElementById("headerButton")?.click();
+		}
 	}
 
 	private renderDropdowns(): JSX.Element[] {

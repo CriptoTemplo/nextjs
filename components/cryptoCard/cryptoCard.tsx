@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ICryptoDetailed, IStrapiCrypto } from "../../definitions/crypto";
 import CryptoStore from "../../Stores/CryptoStore";
 import Utils from "../../utils/utils";
-import "./cryptoCard.module.scss";
+import "../../styles/cryptoCard.module.scss";
 
 export interface ICryptoCardProps {
 	crypto: IStrapiCrypto;

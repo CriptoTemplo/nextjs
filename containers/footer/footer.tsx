@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Global from "../../definitions/global";
-import './footer.module.scss';
+import '../../styles/footer.module.scss';
 export interface IFooterProps {
 }
 

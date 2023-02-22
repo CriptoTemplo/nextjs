@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Global from "../../definitions/global";
-import './dropdown.module.scss';
+import styles from "../../styles/dropdown.module.scss";
 export interface IDropdownOptions {
 	title: string;
 	action: () => void;
@@ -25,14 +25,14 @@ export default class Dropdown extends React.Component<IDropdownProps, IDropdownS
 
 	public render() {
 		return (
-			<div className="dropdown">
-				<div className="dropdownPlaceholder" onClick={this.props.main.action}>
+			<div className={styles.dropdown}>
+				<div className={styles.dropdownPlaceholder} onClick={this.props.main.action}>
 					<a href={Global.hostFront + this.props.main.url} onClick={(e) => e.preventDefault()}>
 						{this.props.main.title}
 					</a>
 				</div>
 				{!this.props.actions.length ? "" :
-					<div className="dropdownMenu">
+					<div className={styles.dropdownMenu}>
 						{this.renderDropdownMenu()}
 					</div>
 				}
@@ -43,7 +43,7 @@ export default class Dropdown extends React.Component<IDropdownProps, IDropdownS
 	private renderDropdownMenu(): JSX.Element[] {
 		return this.props.actions.map((option: IDropdownOptions, index: number) => {
 			return (
-				<div className="dropdownItem" onClick={option.action} key={index} >
+				<div className={styles.dropdownItem} onClick={option.action} key={index} >
 					<a href={Global.hostFront + option.url} onClick={(e) => e.preventDefault()}>
 						{option.title}
 					</a>

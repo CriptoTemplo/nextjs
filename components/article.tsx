@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Utils from "../../utils/utils";
+import Utils from "../utils/utils";
 import DOMPurify from 'isomorphic-dompurify';
-import "./article.module.scss";
-import GlobalCache from '../../definitions/cache';
+import "../styles/article.module.scss";
+import GlobalCache from '../definitions/cache';
 
 export interface IArticleProps {
 	content: string;

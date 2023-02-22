@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Global from "../../definitions/global";
-import { IDropdownOptions, IDropdownProps } from "../dropdown/dropdown";
-import './dropdownMobile.module.scss';
+import { IDropdownOptions, IDropdownProps } from "./dropdown";
 
 export interface IDropdownState {
 	collapsed: boolean;

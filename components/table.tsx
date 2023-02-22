@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ECryptoFields, IRow, ITable } from "../../definitions/crypto";
+import { ECryptoFields, IRow, ITable } from "../definitions/crypto";
 
 export interface ITableProps {
 	TableProps: ITable;

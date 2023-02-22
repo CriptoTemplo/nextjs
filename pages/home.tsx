@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Article, { IArticleProps } from "../components/article/article";
+import Article, { IArticleProps } from "../components/article";
 import SectionWrapper, { ISectionWrapperProps } from "../components/sectionWrapper";
 import { ILanding, IMediaPost, IPost } from "../definitions/mediaPost";
 import GlobalStore from "../Stores/GlobalStore";

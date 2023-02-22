@@ -51,9 +51,10 @@ export default class CryptoCalculator extends React.Component<ICryptoCalculatorP
 		//console.log("CALCULTAROOOOO");
 	}
 
+	/*
 	public componentWillReceiveProps(nextProps: Readonly<ICryptoCalculatorProps>, nextContext: any): void {
 		//console.log(nextProps);
-	}
+	}*/
 
 	public render() {
 		return (
