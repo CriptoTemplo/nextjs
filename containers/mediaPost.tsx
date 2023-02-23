@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Auxiliar from "../components/cryptoData/readPost copy";
 import ReadIndex from '../components/mediaPost/readIndex';
-import ReadPost from '../components/mediaPost/readPost';
 import RelatedPosts, { IRelatedPostsProps } from '../components/mediaPost/relatedPosts';
 import { IPost, IMediaPost } from '../definitions/mediaPost';
 
@@ -23,13 +22,12 @@ class MediaPost extends Component <IMediaPostProps, IMediaPostState> {
 	}
 
     public shouldComponentUpdate(nextProps: Readonly<IMediaPostProps>, nextState: Readonly<IMediaPostState>, nextContext: any): boolean {
-		if (nextProps.post.id === this.props.post?.id) return false;
+		if (nextProps.post.Post.content === this.props.post?.Post.content) return false;
 
 		return true;
 	}
 
     public render () {
-
         return (
             <div className="mediaPost">
                 <div className="leftColumnPost">
@@ -38,7 +36,6 @@ class MediaPost extends Component <IMediaPostProps, IMediaPostState> {
                     </div>
                 </div>
                 <div className="midColumnPost">
-                    {/*<ReadPost {...this.getPropsReadPost()}/>*/}
                     <Auxiliar {...this.getPropsReadPost()}/>
                 </div>
                 <div className="rightColumnPost">

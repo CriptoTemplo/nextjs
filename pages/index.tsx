@@ -11,7 +11,8 @@ interface IProps {
 	posts: IMediaPost[];
 }
 
-export default function Home(props: IProps) {	
+export default function Home(props: IProps) {
+
 	const getMetaTags = (): IMetaTags => {
 		return {
 			title: props.landingInfo.MetaTags.title,

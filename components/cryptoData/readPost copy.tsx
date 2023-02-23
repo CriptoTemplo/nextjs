@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { IEmpty, IPost, IMediaPost } from '../../definitions/mediaPost'; // TODO esto habra que mejorarlo
-import createDOMPurify from 'dompurify';
+import DOMPurify from 'isomorphic-dompurify';
 import Global from "../../definitions/global";
 import Utils from "../../utils/utils";
 
@@ -9,12 +9,6 @@ class Auxiliar extends Component<IPost, IEmpty> {
 
     public constructor(props: IPost) {
         super(props);
-    }
-
-    // After the component did mount
-    public componentDidMount() {
-        const h1s = document.getElementsByTagName("h1");
-        if (h1s.length > 1) h1s[1].remove();
     }
 
     public render() {
@@ -86,7 +80,7 @@ class Auxiliar extends Component<IPost, IEmpty> {
     private mountHtmlContent(): JSX.Element {
         return (
             <div>
-                {<div dangerouslySetInnerHTML={{ __html: createDOMPurify.sanitize(this.props.Post.content) }} />}
+                {<div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.props.Post.content) }} />}
             </div>
         );
     }

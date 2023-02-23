@@ -21,7 +21,7 @@ const withRouter = <P extends {}>(Component: React.ComponentType<P>) => (
 			history.push(router.asPath);
 			return router.push(url);
 		}
-		window.scrollTo({ top: 0, behavior: 'smooth' });
+		//window.scrollTo({ top: 0, behavior: 'smooth' });
 	};
 
 	const checkHistory = (key: string) => {

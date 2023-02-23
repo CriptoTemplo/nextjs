@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { IEmpty, IPost } from '../../definitions/mediaPost'; // TODO esto habra que mejorarlo
 import Utils from "../../utils/utils";
+import { JSDOM } from "jsdom";
 
 type HeadingType = { id: string; text: string; level: number };
 
@@ -44,7 +45,9 @@ class ReadIndex extends Component<IPost, IEmpty> {
 
 	private construct(): HeadingType[] {
 
-		const element:HTMLElement = document.createElement('div');
+		const { document } = new JSDOM('<!DOCTYPE html>').window;
+		const element = document.createElement('div');
+	  
 		element.innerHTML = this.props.Post.content;
 
 		const headings = Array.from(element.querySelectorAll("h2, h3"))
