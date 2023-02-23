@@ -13,7 +13,10 @@ import '@/styles/footer.scss';
 import '@/styles/sitemap.scss';
 
 export default function App({ Component, pageProps }: AppProps) {
-	
+	React.useEffect(() => {
+		ReactGA.initialize('G-Z3D5DH5P3F');
+	  });
+
 	return (
 		<>
 		<Head>
