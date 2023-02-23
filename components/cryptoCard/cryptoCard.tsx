@@ -26,7 +26,6 @@ export default class CryptoCard extends React.Component<ICryptoCardProps, ICrypt
 
 	public render() {
 		const crypto: IStrapiCrypto = this.props.crypto;
-		console.log(crypto)
 		return (
 			<div className={styles.cryptoCard}>
 				<div className={styles.mainData}>
