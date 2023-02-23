@@ -5,17 +5,14 @@ import Footer from "containers/footer/footer";
 import ReactGA from 'react-ga4';
 import React from "react";
 import Head from "next/head";
-import "../styles/table.scss"
-import "../styles/header.scss"
-import "../styles/App.scss"
-import '../styles/dropdownMobile.scss';
-import '../styles/footer.scss';
-import '../styles/sitemap.scss';
+import "@/styles/table.scss"
+import "@/styles/header.scss"
+import "@/styles/App.scss"
+import '@/styles/dropdownMobile.scss';
+import '@/styles/footer.scss';
+import '@/styles/sitemap.scss';
 
 export default function App({ Component, pageProps }: AppProps) {
-	React.useEffect(() => {
-		ReactGA.initialize('G-Z3D5DH5P3F');
-	  }, []);
 	
 	return (
 		<>
