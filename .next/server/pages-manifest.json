@@ -3,8 +3,8 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/exchanges": "pages/exchanges.html",
-  "/criptomonedas": "pages/criptomonedas.js",
-  "/sitemap": "pages/sitemap.js",
+  "/": "pages/index.js",
   "/criptomonedas/[slug]": "pages/criptomonedas/[slug].js",
-  "/": "pages/index.js"
+  "/sitemap": "pages/sitemap.js",
+  "/criptomonedas": "pages/criptomonedas.js"
 }

@@ -29,7 +29,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 67:
+/***/ 4987:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -45,6 +45,7 @@ __webpack_require__.d(__webpack_exports__, {
 var jsx_runtime_ = __webpack_require__(997);
 // EXTERNAL MODULE: external "react"
 var external_react_ = __webpack_require__(6689);
+var external_react_default = /*#__PURE__*/__webpack_require__.n(external_react_);
 // EXTERNAL MODULE: ./stores/GlobalStore.ts
 var GlobalStore = __webpack_require__(5553);
 // EXTERNAL MODULE: ./utils/withRouter.tsx
@@ -734,6 +735,9 @@ class Footer extends external_react_.Component {
     }
 }
 
+;// CONCATENATED MODULE: external "react-ga4"
+const external_react_ga4_namespaceObject = require("react-ga4");
+var external_react_ga4_default = /*#__PURE__*/__webpack_require__.n(external_react_ga4_namespaceObject);
 // EXTERNAL MODULE: external "next/head"
 var head_ = __webpack_require__(968);
 var head_default = /*#__PURE__*/__webpack_require__.n(head_);
@@ -762,7 +766,11 @@ var sitemap = __webpack_require__(7031);
 
 
 
+
 function _app_App({ Component , pageProps  }) {
+    external_react_default().useEffect(()=>{
+        external_react_ga4_default().initialize("G-Z3D5DH5P3F");
+    });
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
         children: [
             /*#__PURE__*/ (0,jsx_runtime_.jsxs)((head_default()), {
@@ -1205,7 +1213,7 @@ module.exports = require("showdown");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [398,675,505,664,553,927,433], () => (__webpack_exec__(67)));
+var __webpack_exports__ = __webpack_require__.X(0, [398,675,505,664,553,927,433], () => (__webpack_exec__(4987)));
 module.exports = __webpack_exports__;
 
 })();
