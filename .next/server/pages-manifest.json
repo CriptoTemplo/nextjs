@@ -1,10 +1,10 @@
 {
   "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/exchanges": "pages/exchanges.html",
-  "/_error": "pages/_error.js",
+  "/criptomonedas": "pages/criptomonedas.js",
   "/criptomonedas/[slug]": "pages/criptomonedas/[slug].js",
   "/sitemap": "pages/sitemap.js",
-  "/": "pages/index.js",
-  "/criptomonedas": "pages/criptomonedas.js"
+  "/": "pages/index.js"
 }
