@@ -1,5 +1,5 @@
 import Global from "@/definitions/global";
-import { ITag } from '@/definitions/definitions';
+import { IGuia, ITag } from '@/definitions/definitions';
 import BasicStore from './BasicStore';
 // import {Headers} from 'node-fetch';
 
@@ -23,6 +23,20 @@ export default class GuiaStore {
 
     public static async getTag(id: string): Promise<ITag> {
         let url = new URL(GuiaStore.host + "/tags/" + id)
+        const urlString = url.toString();
+
+        return BasicStore.baseFetch(urlString, "GET", "");
+    }
+
+    public static async getGuias(): Promise<IGuia[]> {
+        let url = new URL(GuiaStore.host + "/guias")
+        const urlString = url.toString();
+
+        return BasicStore.baseFetch(urlString, "GET", "");
+    }
+
+    public static async getGuia(id: string): Promise<IGuia> {
+        let url = new URL(GuiaStore.host + "/guias/" + id)
         const urlString = url.toString();
 
         return BasicStore.baseFetch(urlString, "GET", "");
