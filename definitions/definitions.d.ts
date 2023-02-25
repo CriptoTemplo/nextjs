@@ -1,19 +1,17 @@
 import { IMetaTags } from "../utils/helmet";
+import { ICrypto, IStrapiCrypto } from "./crypto";
 
 export interface IEmpty {};
 
 export type IMediaPostType = "Article" | "Tutorial" | "News";
 
-export interface IMediaPost {
+export interface IPost {
     id: number;
-    dateTime: Date;
     title: string;
     content: string;
-    type: IMediaPostType;
+    //type: IMediaPostType;
     readTime: number;
     coverImage: IMedia;
-    crypto: ICrypto [];
-    entity: IEntity [];
     url: string;
     difficulty: string;
     published_at: string;
@@ -21,7 +19,19 @@ export interface IMediaPost {
     createdAt: string;
 }
 
-export interface IPost {
+export interface IGuia {
+    id: number;
+    Url: string;
+    Post: IPost;
+    MetaTags: IMetaTags;
+    published_at: string;
+    updatedAt: string;
+    createdAt: string;
+    crypto: ICrypto;
+    //TODO habra que anyadir aqui las empresas cuando esten
+}
+
+export interface IMediaPost {
     id: number;
     URL: string;
     Post: IMediaPost;
@@ -90,4 +100,17 @@ export interface ILanding {
 
 export interface ISitemap {
     content: string;
+}
+
+export interface ITag {
+    crypto: IStrapiCrypto;
+    entites: Object[];
+    guias: IPost[];
+    tags: ITag[];
+    name: string;
+    landing: boolean;
+    description: string;
+    descriptionHTML: string;
+    MetaTags: IMetaTags;
+    URL: string;
 }

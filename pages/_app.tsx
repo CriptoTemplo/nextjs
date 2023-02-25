@@ -31,6 +31,8 @@ export default function App({ Component, pageProps }: AppProps) {
 			<meta property="og:url" content="https://empezarainvertir.com" />
 			<meta property="og:image" content="https://empezarainvertir.com/api/uploads/logo_fe6e7fe36f.png" />
 			<meta property="og:locale" content="es_ES" />
+
+			<meta name="viewport" content="width=device-width, initial-scale=1" />
 		</Head>
 		<div className="globalWrapper">
 			<HeaderWrapper />

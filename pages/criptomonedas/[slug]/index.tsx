@@ -1,5 +1,5 @@
 import { ICrypto, IStrapiCrypto } from "@/definitions/crypto";
-import { ILanding, IMediaPost, IPost } from "@/definitions/mediaPost";
+import { ILanding, IMediaPost, IPost } from "@/definitions/definitions";
 import { GetServerSideProps } from 'next';
 import { ParsedUrlQuery } from "querystring";
 import { getHead, IMetaTags } from "@/utils/helmet";
@@ -121,7 +121,7 @@ export const getServerSideProps: GetServerSideProps<ICriptomonedaProps> = async 
 	try {
 		// TODO aqui habra que hacer promise.all
 		const { slug } = context.params as ParsedUrlQuery;
-		if (!slug) throw new Error("Criptomoneda no existente");
+		if (!slug) throw new Error("Criptomoneda no existente"); // TODO ESTO NO TIENE SENTIDO
 		const slugString = slug.toString();
 		const crypto: IStrapiCrypto = await CryptoStore.getStrapiCrypto(slugString);
 		if (Utils.isObjectEmpty(crypto)) throw new Error("Criptomoneda no existente");

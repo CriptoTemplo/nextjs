@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Global from "../../definitions/global";
-import { IEmpty, IMediaPost } from '../../definitions/mediaPost'; // TODO esto habra que mejorarlo
+import { IEmpty, IMediaPost } from '../../definitions/definitions'; // TODO esto habra que mejorarlo
 import Utils from "../../utils/utils";
 import withRouter, { WithRouter } from "../../utils/withRouter";
 

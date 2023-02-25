@@ -4,7 +4,7 @@ import SectionWrapper from '../components/SectionWrapper';
 import GlobalStore from "../stores/GlobalStore";
 import PostStore from "../stores/PostStore";
 import { IMetaTags, getHead } from "../utils/helmet";
-import { ILanding, IMediaPost, IPost } from "../definitions/mediaPost";
+import { ILanding, IMediaPost, IPost } from "../definitions/definitions";
 
 interface IProps {
 	landingInfo: ILanding;

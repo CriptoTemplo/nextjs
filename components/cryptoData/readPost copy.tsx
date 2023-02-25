@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { IEmpty, IPost, IMediaPost } from '../../definitions/mediaPost'; // TODO esto habra que mejorarlo
+import { IEmpty, IPost, IMediaPost } from '../../definitions/definitions'; // TODO esto habra que mejorarlo
 import DOMPurify from 'isomorphic-dompurify';
 import Global from "../../definitions/global";
 import Utils from "../../utils/utils";

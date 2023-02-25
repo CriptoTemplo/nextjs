@@ -1,5 +1,5 @@
 import Global from "../definitions/global";
-import { IPost, IMediaPost } from '../definitions/mediaPost';
+import { IPost, IMediaPost } from '../definitions/definitions';
 import BasicStore from './BasicStore';
 // import {Headers} from 'node-fetch';
 

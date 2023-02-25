@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { IEmpty, IPost } from '../../definitions/mediaPost'; // TODO esto habra que mejorarlo
+import { IEmpty, IPost } from '../../definitions/definitions'; // TODO esto habra que mejorarlo
 import Utils from "../../utils/utils";
 import { JSDOM } from "jsdom";
 

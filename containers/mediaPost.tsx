@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Auxiliar from "../components/cryptoData/readPost copy";
 import ReadIndex from '../components/mediaPost/readIndex';
 import RelatedPosts, { IRelatedPostsProps } from '../components/mediaPost/relatedPosts';
-import { IPost, IMediaPost } from '../definitions/mediaPost';
+import { IPost, IMediaPost } from '../definitions/definitions';
 
 export interface IMediaPostProps {
     post: IPost;

@@ -9,7 +9,7 @@ export enum EHostFront {
 }
 
 export default class Global {
-    static host = EHost.deploy;
+    static host = EHost.develop;
     static hostFront = EHostFront.deploy;
 }
 

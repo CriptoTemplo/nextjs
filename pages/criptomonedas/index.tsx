@@ -3,7 +3,7 @@ import Article, { IArticleProps } from "@/components/Article";
 import RankingCrypto, { IRankingCryptoProps } from "@/containers/rankingCrypto/rankingCrypto";
 import SectionWrapper, { ISectionWrapperProps } from "@/components/SectionWrapper";
 import { IRow, IStrapiCrypto } from "@/definitions/crypto";
-import { ILanding, IMediaPost, IPost } from "@/definitions/mediaPost";
+import { ILanding, IMediaPost, IPost } from "@/definitions/definitions";
 import CryptoStore from "@/stores/CryptoStore";
 import GlobalStore from "@/stores/GlobalStore";
 import PostStore from "@/stores/PostStore";

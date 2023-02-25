@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Global from "../definitions/global";
-import { IMediaPost } from "../definitions/mediaPost";
+import { IMediaPost } from "../definitions/definitions";
 import withRouter, { WithRouter } from "../utils/withRouter";
 import Image from 'next/image'
 
