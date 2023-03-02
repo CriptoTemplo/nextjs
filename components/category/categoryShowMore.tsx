@@ -1,6 +1,7 @@
 import { ICategory, IGuia } from "@/definitions/definitions";
 import * as React from 'react';
 import Carousel from "@/components/guia/carousel";
+import button from "@/styles/button.module.scss";
 
 export interface ICategoryShowMoreProps {
 }
@@ -41,7 +42,7 @@ export default class CategoryShowMore extends React.Component<ICategory, ICatego
     private renderShowMoreButton(): JSX.Element {
         // TODO Hay que hacer que el boton este sea un componente unico
         return (
-            <div className="button" onClick={() => this.showMore()}>▽ Mostrar más</div>
+            <div className={`${button.button} ${button.showMore}`} onClick={() => this.showMore()}>▽ Mostrar más</div>
         )
     }
 

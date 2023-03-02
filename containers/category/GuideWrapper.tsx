@@ -2,6 +2,7 @@ import Carousel from "@/components/guia/carousel";
 import { ICategory, IGuia } from "@/definitions/definitions";
 import global from "@/styles/global.module.scss";
 import GlobalCache from "@/definitions/cache";
+import button from "@/styles/button.module.scss";
 import DOMPurify from 'isomorphic-dompurify';
 import * as React from 'react';
 
@@ -46,7 +47,7 @@ export default class GuideWrapper extends React.Component<ICategory, IGuideWrapp
     private renderShowMoreButton(): JSX.Element {
         // TODO Hay que hacer que el boton este sea un componente unico
         return (
-            <div className="button" onClick={() => this.showMore()}>▽ Mostrar más</div>
+            <div className={`${button.button} ${button.showMore}`} onClick={() => this.showMore()}>▽ Mostrar más</div>
         )
     }
 

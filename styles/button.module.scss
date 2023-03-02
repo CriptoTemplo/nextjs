@@ -1,0 +1,21 @@
+.button {
+    background-color: rgb(117, 97, 207);
+    height: 3rem;
+    line-height: 3rem;
+    border-radius: 1.5rem;
+    text-decoration: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    color: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.showMore {
+    background-color: rgb(87 87 87);
+}

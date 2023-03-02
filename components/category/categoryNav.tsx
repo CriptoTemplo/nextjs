@@ -2,7 +2,7 @@ import { ICategory, IGuia } from "@/definitions/definitions";
 import Link from "next/link";
 import * as React from 'react';
 import Carousel from "@/components/guia/carousel";
-
+import button from "@/styles/button.module.scss";
 export interface ICategoryNavProps {
 }
 
@@ -37,8 +37,8 @@ export default class CategoryNav extends React.Component<ICategory, ICategoryNav
     private renderNavButton(url: string): JSX.Element {
         // TODO Hay que hacer que el boton este sea un componente unico
         return (
-            <Link href={url}>
-                <div className="button">▷ Ver todos</div>
+            <Link href={url} className={button.button}>
+                ▷ Ver todos
             </Link>
         )
     }
