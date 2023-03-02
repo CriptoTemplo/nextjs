@@ -1,5 +1,4 @@
 import * as React from 'react';
-import "../styles/returnTop.module.scss";
 
 export interface IReturnTopProps {
 }

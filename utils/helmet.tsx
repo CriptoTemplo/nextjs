@@ -11,8 +11,9 @@ export interface IMetaTags {
 }
 
 //TODO revisar etiquetas
-export function getHead(metadata: IMetaTags): JSX.Element {
+export function getHead(metadata: IMetaTags, noIndex?: boolean): JSX.Element {
     const canonical: string = Global.hostFront + metadata.canonical;
+    const metaIndex: JSX.Element = noIndex ? <meta name="robots" content='noindex, nofollow' /> : <></>;
     return (
         <>
         <Head>
@@ -26,6 +27,7 @@ export function getHead(metadata: IMetaTags): JSX.Element {
             <meta property="og:title" content={metadata.title} />
             <meta property="og:description" content={metadata.description} />
             <meta property="og:url" content={canonical} />
+            {metaIndex}
         </Head>
         </>
     );

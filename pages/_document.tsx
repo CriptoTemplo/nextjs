@@ -7,7 +7,6 @@ export default function Document() {
 			<Head>
 				<meta charSet="UTF-8" />
 				<meta name="theme-color" content="#100f0e" media="(prefers-color-scheme: dark)" />
-				<meta name="robots" content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 				<meta name="keywords" content="invertir, criptomonedas, bolsa, trading" lang="es" />
 
 				{/*Favicons*/}
