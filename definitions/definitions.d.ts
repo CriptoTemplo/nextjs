@@ -12,7 +12,7 @@ export interface IPost {
     //type: IMediaPostType;
     readTime: number;
     coverImage: IMedia;
-    url: string;
+    //url: string;
     difficulty: string;
     published_at: string;
     updatedAt: string;
@@ -21,13 +21,13 @@ export interface IPost {
 
 export interface IGuia {
     id: number;
-    Url: string;
+    URL: string;
     Post: IPost;
     MetaTags: IMetaTags;
     published_at: string;
     updatedAt: string;
     createdAt: string;
-    crypto: ICrypto;
+    crypto: IStrapiCrypto;
     //TODO habra que anyadir aqui las empresas cuando esten
 }
 
@@ -102,15 +102,19 @@ export interface ISitemap {
     content: string;
 }
 
-export interface ITag {
+export interface ICategory {
     crypto: IStrapiCrypto;
     entites: Object[];
-    guias: IPost[];
-    tags: ITag[];
+    guias: IGuia[];
+    categories: ICategory[];
     name: string;
     landing: boolean;
     description: string;
-    descriptionHTML: string;
+    upsideHTML: string;
+    downsideHTML: string;
     MetaTags: IMetaTags;
     URL: string;
+    createdAt: string;
+    published_at: string;
+    updatedAt: string;
 }

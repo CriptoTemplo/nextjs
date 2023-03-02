@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Global from "../definitions/global";
-import { IMediaPost } from "../definitions/definitions";
+import { IGuia, IPost } from "../definitions/definitions";
 import withRouter, { WithRouter } from "../utils/withRouter";
 import Image from 'next/image'
 
 export interface ISectionWrapperProps {
-	posts: IMediaPost[];
+	guias: IGuia[];
 	title: string;
 }
 
@@ -39,13 +39,15 @@ class SectionWrapper extends React.Component<ISectionWrapperPropsType, ISectionW
 		);
 	}
 
-	private renderSectionPost(post: IMediaPost, index: number): JSX.Element { // TODO Hacer una clase que sea post
+	private renderSectionPost(guia: IGuia, index: number): JSX.Element { // TODO Hacer una clase que sea post
+		const post: IPost = guia.Post;
+		const imageSrc: string = post.coverImage.formats.small ? post.coverImage.formats.small.url : post.coverImage.formats.thumbnail.url
 		return (
-			<div className="post" key={index} onClick={() => this.redirect(post.url)}>
-				<a href={Global.hostFront + "/" + post.url} onClick={(e) => e.preventDefault()}>
+			<div className="post" key={index} onClick={() => this.redirect(guia.URL)}>
+				<a href={Global.hostFront + "/guias/" + guia.URL} onClick={(e) => e.preventDefault()}>
 					<div className="imageWrapper">
 						<Image className="coverImage"
-							src={Global.host + post.coverImage.formats.small.url}
+							src={Global.host + imageSrc}
 							alt={post.coverImage.alternativeText}
 							width={300}
 							height={300}
@@ -62,10 +64,10 @@ class SectionWrapper extends React.Component<ISectionWrapperPropsType, ISectionW
 								</span>
 							</div>
 							<div className="publishedDate">
-								{this.formatDate(post.updatedAt)}
+								{this.formatDate(guia.updatedAt)}
 							</div>
 							<div className="readTime">
-								<i className="icon"/>
+								<i className="icon" />
 								<span> {post.readTime + "min."} </span>
 							</div>
 						</div>
@@ -76,13 +78,13 @@ class SectionWrapper extends React.Component<ISectionWrapperPropsType, ISectionW
 	}
 
 	private renderSectionPostAll(): JSX.Element[] {
-		return this.props.posts.map((post: IMediaPost, index: number) => {
-			return this.renderSectionPost(post, index);
+		return this.props.guias?.map((guia: IGuia, index: number) => {
+			return this.renderSectionPost(guia, index);
 		})
 	}
 
 	private redirect(URL: string): void {
-		const postLink: string = "/" + URL;
+		const postLink: string = "/guias/" + URL;
 		this.props.navigateWrapped(postLink);
 	}
 
@@ -91,7 +93,7 @@ class SectionWrapper extends React.Component<ISectionWrapperPropsType, ISectionW
 		const options: Intl.DateTimeFormatOptions = {
 			month: "short"
 		}
-		let month:string = auxDate.toLocaleDateString("es-ES", options);
+		let month: string = auxDate.toLocaleDateString("es-ES", options);
 		month = month.charAt(0).toUpperCase() + month.slice(1);
 		return (auxDate.getDate() + " " + month + "," + " " + auxDate.getFullYear())
 	}

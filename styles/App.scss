@@ -226,6 +226,7 @@ body::-webkit-scrollbar-thumb {
 					white-space: nowrap;
 					overflow: hidden;
 					text-overflow: ellipsis;
+					text-align-last: end;
 				}
 
 				.readTime {

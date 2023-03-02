@@ -14,7 +14,6 @@ export default function Guias(props: IProps) {
 
 export const getServerSideProps: GetServerSideProps<IProps> = async () => {
 	try {
-        //const tag: ITag = Stra
 		return {
 			props: {
 			}

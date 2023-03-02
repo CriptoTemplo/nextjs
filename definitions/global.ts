@@ -10,7 +10,7 @@ export enum EHostFront {
 
 export default class Global {
     static host = EHost.develop;
-    static hostFront = EHostFront.deploy;
+    static hostFront = EHostFront.develop;
 }
 
 export interface IHeader {

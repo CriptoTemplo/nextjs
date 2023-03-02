@@ -10,6 +10,7 @@ export interface IMetaTags {
     modified_time?: string;
 }
 
+//TODO revisar etiquetas
 export function getHead(metadata: IMetaTags): JSX.Element {
     const canonical: string = Global.hostFront + metadata.canonical;
     return (
@@ -21,6 +22,7 @@ export function getHead(metadata: IMetaTags): JSX.Element {
             <link rel="canonical" href={canonical} />
             <meta property="article:published_time" content={metadata.published_time} />
             <meta property="article:modified_time" content={metadata.modified_time} />
+            <meta property="og:updated_time" content={metadata.modified_time} />
             <meta property="og:title" content={metadata.title} />
             <meta property="og:description" content={metadata.description} />
             <meta property="og:url" content={canonical} />

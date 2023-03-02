@@ -1,14 +1,14 @@
 import { GetServerSideProps } from 'next';
-import Article from '../components/Article';
-import SectionWrapper from '../components/SectionWrapper';
-import GlobalStore from "../stores/GlobalStore";
-import PostStore from "../stores/PostStore";
-import { IMetaTags, getHead } from "../utils/helmet";
-import { ILanding, IMediaPost, IPost } from "../definitions/definitions";
+import Article from '@/components/Article';
+import SectionWrapper from '@/components/SectionWrapper';
+import GlobalStore from "@/stores/GlobalStore";
+import { IMetaTags, getHead } from "@/utils/helmet";
+import { IGuia, ILanding, IMediaPost, IPost } from "@/definitions/definitions";
+import GuiaStore from "@/stores/GuiaStore";
 
 interface IProps {
 	landingInfo: ILanding;
-	posts: IMediaPost[];
+	guias: IGuia[];
 }
 
 export default function Home(props: IProps) {
@@ -31,7 +31,7 @@ export default function Home(props: IProps) {
 					<Article content={props.landingInfo.content} />
 				</div>
 				<div className="sectionWrapper latestPosts">
-					<SectionWrapper title="Últimas Publicaciones" posts={props.posts} />
+					<SectionWrapper title="Últimas Publicaciones" guias={props.guias} />
 				</div>
 			</div>
 		</>
@@ -40,20 +40,14 @@ export default function Home(props: IProps) {
 
 export const getServerSideProps: GetServerSideProps<IProps> = async () => {
 	try {
-		const [landingInfo, posts]: [ILanding, IPost[]] = await Promise.all([
+		const [landingInfo, guias]: [ILanding, IGuia[]] = await Promise.all([
 			GlobalStore.getLanding(),
-			PostStore.getCryptoPosts()
+			GuiaStore.getGuias(6, "DESC")
 		]);
-		const mediaPosts: IMediaPost[] = posts.map((post: IPost) => {
-			const aux: IMediaPost = post.Post;
-			aux.published_at = post.published_at;
-			aux.updatedAt = post.updatedAt;
-			return aux;
-		})
 		return {
 			props: {
 				landingInfo,
-				posts: mediaPosts
+				guias
 			}
 		}
 	} catch (error) {
