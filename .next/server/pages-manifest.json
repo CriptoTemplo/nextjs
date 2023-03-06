@@ -3,10 +3,10 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/exchanges": "pages/exchanges.html",
-  "/guias/[...url]": "pages/guias/[...url].js",
-  "/sitemap": "pages/sitemap.js",
   "/guias": "pages/guias.js",
-  "/": "pages/index.js",
   "/criptomonedas": "pages/criptomonedas.js",
-  "/criptomonedas/[slug]": "pages/criptomonedas/[slug].js"
+  "/": "pages/index.js",
+  "/sitemap": "pages/sitemap.js",
+  "/criptomonedas/[slug]": "pages/criptomonedas/[slug].js",
+  "/guias/[...url]": "pages/guias/[...url].js"
 }
