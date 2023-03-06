@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import Article from '@/components/Article';
-import SectionWrapper from '@/components/SectionWrapper';
+import SectionWrapper from '@/components/sectionWrapper';
 import GlobalStore from "@/stores/GlobalStore";
 import { IMetaTags, getHead } from "@/utils/helmet";
 import { IGuia, ILanding, IMediaPost, IPost } from "@/definitions/definitions";

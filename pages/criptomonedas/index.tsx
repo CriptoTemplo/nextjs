@@ -1,7 +1,7 @@
 import React from 'react';
 import Article, { IArticleProps } from "@/components/Article";
 import RankingCrypto, { IRankingCryptoProps } from "@/containers/rankingCrypto/rankingCrypto";
-import SectionWrapper, { ISectionWrapperProps } from "@/components/SectionWrapper";
+import SectionWrapper, { ISectionWrapperProps } from "@/components/sectionWrapper";
 import { IRow, IStrapiCrypto } from "@/definitions/crypto";
 import { IGuia, ILanding } from "@/definitions/definitions";
 import CryptoStore from "@/stores/CryptoStore";
