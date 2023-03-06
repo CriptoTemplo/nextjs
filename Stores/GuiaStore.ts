@@ -42,10 +42,11 @@ export default class GuiaStore {
         return BasicStore.baseFetch(urlString, "GET", "");
     }
 
-    public static async getGuias(limit?: number, order?: TOrder, where?: [string, string]): Promise<IGuia[]> {
+    public static async getGuias(limit?: number, order?: TOrder, nonUrl?: string, where?: [string, string]): Promise<IGuia[]> {
         let url = new URL(GuiaStore.host + "/guias");
         url.searchParams.append('_limit', (limit || 100).toString());
         url.searchParams.append('_sort', "createdAt:" + (order || "DESC"));
+        if (nonUrl) url.searchParams.append('URL_ne', nonUrl);
         if (where) url.searchParams.append('_where', "[" + where[0] + "]" + "=" + where[1]);
         
         const urlString = url.toString();
@@ -55,6 +56,16 @@ export default class GuiaStore {
 
     public static async getGuia(id: string): Promise<IGuia> {
         let url = new URL(GuiaStore.host + "/guias/" + id)
+        const urlString = url.toString();
+
+        return BasicStore.baseFetch(urlString, "GET", "");
+    }
+
+    public static async getGuiasFindRelationedGuias(categories: string[], nonUrl: string): Promise<IGuia[]> {
+        let url = new URL(GuiaStore.host + "/guias/findRelationedGuias");
+        url.searchParams.append('categories', categories.join(','));
+        url.searchParams.append('url', nonUrl);
+        
         const urlString = url.toString();
 
         return BasicStore.baseFetch(urlString, "GET", "");

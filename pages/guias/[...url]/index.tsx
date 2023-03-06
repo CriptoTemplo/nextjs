@@ -17,7 +17,7 @@ interface IGuiaProps {
 	type: GuiaOrCategory;
 	guia: IGuia;
 	category: ICategory;
-	relationedPosts: IPost[];
+	relationedGuias: IGuia[];
 	lastGuias: IGuia[];
 }
 
@@ -30,9 +30,15 @@ export default function Guia(props: IGuiaProps) {
 		post.content = GlobalCache.converter.makeHtml(post.content);
 		post.published_at = props.guia.published_at;
 		post.updatedAt = props.guia.updatedAt;
+		const relationedPosts: IPost[] = props.relationedGuias.map((guia: IGuia) => {
+			const aux: IPost = guia.Post;
+			aux.url = "guias/" + guia.URL;
+			return aux;
+		}
+		)
 		return {
 			post: post,
-			relationedPosts: []
+			relationedPosts: relationedPosts
 		}
 	};
 
@@ -74,7 +80,7 @@ export default function Guia(props: IGuiaProps) {
 							<Post {...getPostProps()} />
 						</div>
 						<div className="sectionWrapper">
-							<SectionWrapper {...getSectionWrapperProps()} />
+							<SectionWrapper {...getSectionWrapperProps()} /> {/* TODO cambiar esto por un carousel */}
 						</div>
 					</div>
 				</>
@@ -98,26 +104,49 @@ export default function Guia(props: IGuiaProps) {
 }
 
 export const getServerSideProps: GetServerSideProps<IGuiaProps> = async (context) => {
+
+	const constructLastGuias = (lastGuias: IGuia[]): IGuia[] => {
+		return lastGuias.slice(0, 6);
+	}
+
+	const removeRepeated = (lastGuias: IGuia[], relationedGuias: IGuia[]): IGuia[] => {
+		return lastGuias.filter((guiaA: IGuia) => !relationedGuias.some((guiaB: IGuia) => guiaA.id === guiaB._id));
+	}
+
+	const constructRelationedGuias = (lastGuias: IGuia[], relationedGuias: IGuia[]): IGuia[] => {
+		const relationedGuiasLength: number = relationedGuias.length;
+		if (relationedGuiasLength < 5) {
+			const auxAdd: number = 5 - relationedGuiasLength;
+			const slicedElements: IGuia[] = lastGuias.splice(0, auxAdd);
+			return relationedGuias.concat(slicedElements);
+		}
+
+		return relationedGuias;
+	}
+
 	try {
 		const { url } = context.params as any; // = [ 'analisis-tecnico', 'indicadores' ];
 		let type: GuiaOrCategory = "";
 		let urlConcat = ""
 
 		if (url && Array.isArray(url)) urlConcat = url.join('@');
+		const nonUrl: string = url.join('/');
 
-		const [category, guia, lastGuias]: [ICategory, IGuia, IGuia[]] = await Promise.all([
+		const [category, guia, auxLastGuias]: [ICategory, IGuia, IGuia[]] = await Promise.all([
 			GuiaStore.getCategory(urlConcat),
 			GuiaStore.getGuia(urlConcat),
-			GuiaStore.getGuias(6, "DESC") //TODO hay que traerse 7 y quitar en el que estamos si existe
+			GuiaStore.getGuias(11, "DESC", nonUrl)
 		]);
 
-		let relationedPosts: IPost[] = [];
+		let lastGuias: IGuia[] = auxLastGuias;
+		let relationedGuias: IGuia[] = [];
 
 		if (!Utils.isObjectEmpty(guia)) {
 			type = "guia";
-			//GuiaStore.getGuias(6, "DESC", ["tag.id", guia.category.id])
-			//TODO hay que hacer los posts relacionados, o los sacamos de los que tengan el ultimo tag que el
-			// o los mas recientes en caso de que no haya o que sea de la raiz
+			const categoriesId = guia.categories.map((category: ICategory) => category.id);
+			relationedGuias = await GuiaStore.getGuiasFindRelationedGuias(categoriesId, nonUrl);
+			lastGuias = removeRepeated(lastGuias, relationedGuias);
+			relationedGuias = constructRelationedGuias(lastGuias, relationedGuias);
 		}
 
 		if (!Utils.isObjectEmpty(category)) {
@@ -127,17 +156,20 @@ export const getServerSideProps: GetServerSideProps<IGuiaProps> = async (context
 
 		if (type === "") throw new Error("No tiene landing ni guia")
 
+		lastGuias = constructLastGuias(lastGuias);
+
 		return {
 			props: {
 				type,
 				guia,
 				category,
-				relationedPosts,
+				relationedGuias,
 				lastGuias
 			}
 		}
 	}
 	catch (error) {
+		console.log(error)
 		throw new Error("Ha fallado algo");
 	}
 };

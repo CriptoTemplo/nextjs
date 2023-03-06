@@ -361,6 +361,7 @@ body::-webkit-scrollbar-thumb {
 					cursor: pointer;
 
 					a {
+						height: 100%;
 						display: flex;
 						color: inherit;
 						align-items: inherit;
@@ -371,9 +372,11 @@ body::-webkit-scrollbar-thumb {
 
 					.leftSide {
 						padding: 0;
-						max-width: 8rem;
+						//max-width: 8rem;
 						overflow: hidden;
 						border-radius: $border-radius;
+						height: 100%;
+						min-width: 8rem;
 
 						.coverImage {
 							aspect-ratio: 4/3;

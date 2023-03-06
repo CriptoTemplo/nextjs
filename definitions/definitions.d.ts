@@ -5,6 +5,8 @@ export interface IEmpty {};
 
 export type IMediaPostType = "Article" | "Tutorial" | "News";
 
+
+// TODO todos los campos de base de datos deberian de heredar de un top que tuviera los basicos id, fecha creacion, etc
 export interface IPost {
     id: number;
     title: string;
@@ -12,7 +14,7 @@ export interface IPost {
     //type: IMediaPostType;
     readTime: number;
     coverImage: IMedia;
-    //url: string;
+    url: string;
     difficulty: string;
     published_at: string;
     updatedAt: string;
@@ -20,7 +22,8 @@ export interface IPost {
 }
 
 export interface IGuia {
-    id: number;
+    id: string;
+    _id: string;
     URL: string;
     Post: IPost;
     MetaTags: IMetaTags;
@@ -28,6 +31,7 @@ export interface IGuia {
     updatedAt: string;
     createdAt: string;
     crypto: IStrapiCrypto;
+    categories: ICategory[];
     //TODO habra que anyadir aqui las empresas cuando esten
 }
 
@@ -103,6 +107,7 @@ export interface ISitemap {
 }
 
 export interface ICategory {
+    id: string;
     crypto: IStrapiCrypto;
     entites: Object[];
     guias: IGuia[];
