@@ -1,0 +1,12 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/exchanges": "pages/exchanges.html",
+  "/guias/[...url]": "pages/guias/[...url].js",
+  "/sitemap": "pages/sitemap.js",
+  "/guias": "pages/guias.js",
+  "/": "pages/index.js",
+  "/criptomonedas": "pages/criptomonedas.js",
+  "/criptomonedas/[slug]": "pages/criptomonedas/[slug].js"
+}

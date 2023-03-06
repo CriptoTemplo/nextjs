@@ -7,7 +7,7 @@ import Post, { IPostProps } from "@/containers/post";
 import GlobalCache from "@/definitions/cache";
 import CryptoCard, { ICryptoCardProps } from "@/components/cryptoCard/cryptoCard";
 import { useRouter } from "next/router";
-import SectionWrapper, { ISectionWrapperProps } from "@/components/SectionWrapper";
+import SectionWrapper, { ISectionWrapperProps } from "@/components/sectionWrapper";
 import CategoryWrapper from "@/containers/category/CategoryWrapper";
 import GuideWrapper from "@/containers/category/GuideWrapper";
 

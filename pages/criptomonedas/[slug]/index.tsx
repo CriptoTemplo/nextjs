@@ -7,7 +7,7 @@ import CryptoStore from "@/stores/CryptoStore";
 import Utils from "@/utils/utils";
 import CryptoCard, { ICryptoCardProps } from "@/components/cryptoCard/cryptoCard";
 import MediaPost, { IMediaPostProps } from "@/containers/mediaPost";
-import SectionWrapper, { ISectionWrapperProps } from "@/components/SectionWrapper";
+import SectionWrapper, { ISectionWrapperProps } from "@/components/sectionWrapper";
 import DOMPurify from 'isomorphic-dompurify';
 import GlobalCache from "@/definitions/cache";
 import { useRouter } from 'next/router'
