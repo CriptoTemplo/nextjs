@@ -1,5 +1,5 @@
 import Global, { IHeader } from "../definitions/global";
-import { ILanding, ISitemap } from "../definitions/mediaPost";
+import { ILanding, ISitemap } from "../definitions/definitions";
 import BasicStore from './BasicStore';
 
 export default class GlobalStore {

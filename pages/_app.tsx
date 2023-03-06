@@ -16,7 +16,8 @@ export default function App({ Component, pageProps }: AppProps) {
 	React.useEffect(() => {
 		ReactGA.initialize('G-Z3D5DH5P3F');
 	  });
-
+	
+	// TODO revisar el return TOP
 	return (
 		<>
 		<Head>
@@ -31,6 +32,9 @@ export default function App({ Component, pageProps }: AppProps) {
 			<meta property="og:url" content="https://empezarainvertir.com" />
 			<meta property="og:image" content="https://empezarainvertir.com/api/uploads/logo_fe6e7fe36f.png" />
 			<meta property="og:locale" content="es_ES" />
+
+			<meta name="viewport" content="width=device-width, initial-scale=1" />
+			<meta name="robots" content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 		</Head>
 		<div className="globalWrapper">
 			<HeaderWrapper />

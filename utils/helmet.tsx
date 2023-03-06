@@ -10,8 +10,10 @@ export interface IMetaTags {
     modified_time?: string;
 }
 
-export function getHead(metadata: IMetaTags): JSX.Element {
+//TODO revisar etiquetas
+export function getHead(metadata: IMetaTags, noIndex?: boolean): JSX.Element {
     const canonical: string = Global.hostFront + metadata.canonical;
+    const metaIndex: JSX.Element = noIndex ? <meta name="robots" content='noindex, nofollow' /> : <></>;
     return (
         <>
         <Head>
@@ -21,9 +23,11 @@ export function getHead(metadata: IMetaTags): JSX.Element {
             <link rel="canonical" href={canonical} />
             <meta property="article:published_time" content={metadata.published_time} />
             <meta property="article:modified_time" content={metadata.modified_time} />
+            <meta property="og:updated_time" content={metadata.modified_time} />
             <meta property="og:title" content={metadata.title} />
             <meta property="og:description" content={metadata.description} />
             <meta property="og:url" content={canonical} />
+            {metaIndex}
         </Head>
         </>
     );

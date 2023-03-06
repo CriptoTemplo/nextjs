@@ -1,5 +1,5 @@
 import Global from "../definitions/global";
-import { IPost, IMediaPost } from '../definitions/mediaPost';
+import { IPost, IMediaPost } from '../definitions/definitions';
 import BasicStore from './BasicStore';
 // import {Headers} from 'node-fetch';
 
@@ -7,7 +7,7 @@ export default class PostStore {
     // static basicHeaders = this.constructHeaders();
     public static host: string = Global.host;
     
-    public static async getAllPosts (): Promise<IMediaPost[]> {
+    public static async getAllPosts (): Promise<IPost[]> {
         let url = new URL(PostStore.host + "/posts")
         const urlString = url.toString();
 

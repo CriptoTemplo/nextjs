@@ -3,16 +3,16 @@ import Article, { IArticleProps } from "@/components/Article";
 import RankingCrypto, { IRankingCryptoProps } from "@/containers/rankingCrypto/rankingCrypto";
 import SectionWrapper, { ISectionWrapperProps } from "@/components/SectionWrapper";
 import { IRow, IStrapiCrypto } from "@/definitions/crypto";
-import { ILanding, IMediaPost, IPost } from "@/definitions/mediaPost";
+import { IGuia, ILanding } from "@/definitions/definitions";
 import CryptoStore from "@/stores/CryptoStore";
 import GlobalStore from "@/stores/GlobalStore";
-import PostStore from "@/stores/PostStore";
 import { getHead, IMetaTags } from "@/utils/helmet";
 import { GetServerSideProps } from "next";
+import GuiaStore from "@/stores/GuiaStore";
 
 interface ICriptomonedasProps {
 	landingInfo: ILanding;
-	posts: IMediaPost[];
+	guias: IGuia[];
 	cryptos: IStrapiCrypto[];
 }
 
@@ -23,7 +23,7 @@ export default function Criptomonedas(props: ICriptomonedasProps) {
 	const getSectionWrapperProps = (): ISectionWrapperProps => {
 		return {
 			title: "Últimas Publicaciones",
-			posts: props.posts as unknown as IMediaPost[]
+			guias: props.guias
 		}
 	}
 
@@ -115,22 +115,15 @@ export default function Criptomonedas(props: ICriptomonedasProps) {
 
 export const getServerSideProps: GetServerSideProps<ICriptomonedasProps> = async () => {
 	try {
-		const [landingInfo, auxPosts, cryptos]: [ILanding, IPost[], IStrapiCrypto[]] = await Promise.all([
+		const [landingInfo, guias, cryptos]: [ILanding, IGuia[], IStrapiCrypto[]] = await Promise.all([
 			GlobalStore.getLandingCriptomonedas(),
-			PostStore.getCryptoPosts(),
+			GuiaStore.getGuias(6, "DESC"),
 			CryptoStore.getStrapiCryptoAll(0, 25)
 		]);
 
-		const posts: IMediaPost[] = auxPosts.map((post: IPost) => {
-			const aux: IMediaPost = post.Post;
-			aux.published_at = post.published_at;
-			aux.updatedAt = post.updatedAt;
-			return aux;
-		})
-
 		return {
 			props: {
-				posts,
+				guias,
 				landingInfo,
 				cryptos
 			}

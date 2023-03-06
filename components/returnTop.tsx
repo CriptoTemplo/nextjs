@@ -1,5 +1,4 @@
 import * as React from 'react';
-import "../styles/returnTop.module.scss";
 
 export interface IReturnTopProps {
 }
@@ -37,13 +36,14 @@ export default class ReturnTop extends React.Component<IReturnTopProps, IReturnT
 		(this.element.current as HTMLDivElement).classList.toggle("show");
 	}
 
+	// 200 = Numero de pixeles desde el top del document
 	private checkScrollPosition():void {
 		const scrollTop: number = document.documentElement.scrollTop || document.body.scrollTop;
-		if (!this.active && scrollTop > 100) {
+		if (!this.active && scrollTop > 200) {
 			this.active = true;
 			return this.toggleButton();
 		}
-		if (this.active && scrollTop < 100) {
+		if (this.active && scrollTop < 200) {
 			this.active = false;
 			return this.toggleButton();
 		}

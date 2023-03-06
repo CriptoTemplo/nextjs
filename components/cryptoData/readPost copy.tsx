@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { IEmpty, IPost, IMediaPost } from '../../definitions/mediaPost'; // TODO esto habra que mejorarlo
+import { IEmpty, IPost, IMediaPost } from '../../definitions/definitions'; // TODO esto habra que mejorarlo
 import DOMPurify from 'isomorphic-dompurify';
 import Global from "../../definitions/global";
 import Utils from "../../utils/utils";
 
 // TODO pls FIXME
-class Auxiliar extends Component<IPost, IEmpty> {
+class Auxiliar extends Component<any, IEmpty> {
 
     public constructor(props: IPost) {
         super(props);
@@ -27,7 +27,7 @@ class Auxiliar extends Component<IPost, IEmpty> {
     }
 
     private upperPost(): JSX.Element {
-        const post: IMediaPost = this.props.Post;
+        const post: any = this.props.Post;
         return (
             <div>
                 <h1 className="title">

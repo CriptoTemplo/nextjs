@@ -1,10 +1,9 @@
-import { ICrypto, IStrapiCrypto } from "@/definitions/crypto";
-import { ILanding, IMediaPost, IPost } from "@/definitions/mediaPost";
+import { IStrapiCrypto } from "@/definitions/crypto";
+import { IGuia, ILanding, IPost } from "@/definitions/definitions";
 import { GetServerSideProps } from 'next';
 import { ParsedUrlQuery } from "querystring";
 import { getHead, IMetaTags } from "@/utils/helmet";
 import CryptoStore from "@/stores/CryptoStore";
-import PostStore from "@/stores/PostStore";
 import Utils from "@/utils/utils";
 import CryptoCard, { ICryptoCardProps } from "@/components/cryptoCard/cryptoCard";
 import MediaPost, { IMediaPostProps } from "@/containers/mediaPost";
@@ -12,10 +11,11 @@ import SectionWrapper, { ISectionWrapperProps } from "@/components/SectionWrappe
 import DOMPurify from 'isomorphic-dompurify';
 import GlobalCache from "@/definitions/cache";
 import { useRouter } from 'next/router'
+import GuiaStore from "@/stores/GuiaStore";
 
 interface ICriptomonedaProps {
 	crypto: IStrapiCrypto;
-	relationedPosts: IMediaPost[];
+	relationedPosts: IGuia[];
 	slug: string;
 	template: ILanding;
 }
@@ -53,7 +53,7 @@ export default function Criptomoneda(props: ICriptomonedaProps) {
 			description: convertLiteral(coin, props.template.MetaTags.description),
 			canonical: router.asPath,
 			published_time: props.crypto.published_at,
-			modified_time: props.crypto.published_at
+			modified_time: props.crypto.updatedAt
 		}
 	};
 
@@ -68,19 +68,18 @@ export default function Criptomoneda(props: ICriptomonedaProps) {
 	};
 
 	const getMediaPostProps = (): IMediaPostProps => {
-		let cryptoPost: IPost = {} as IPost;
-		cryptoPost.Post = {} as IMediaPost;
+		let cryptoPost: IGuia = {} as IGuia;
+		cryptoPost.Post = {} as IPost;
 		cryptoPost.Post.content = convertMarkDownCrypto(coin, props.template.content);
 		return {
-			post: cryptoPost,
-			relationedPosts: props.relationedPosts
+			post: cryptoPost as any
 		}
 	}
 
 	const getSectionWrapperProps = (): ISectionWrapperProps => {
 		return {
 			title: "Últimas Publicaciones",
-			posts: props.relationedPosts
+			guias: props.relationedPosts
 		}
 	}
 
@@ -109,27 +108,18 @@ export default function Criptomoneda(props: ICriptomonedaProps) {
 
 export const getServerSideProps: GetServerSideProps<ICriptomonedaProps> = async (context) => {
 
-	const formatPosts = (posts: IPost[]): IMediaPost[] => {
-		return posts.map((post: IPost) => {
-			const aux: IMediaPost = post.Post;
-			aux.published_at = post.published_at;
-			aux.updatedAt = post.updatedAt;
-			return aux;
-		})
-	}
-
 	try {
 		// TODO aqui habra que hacer promise.all
 		const { slug } = context.params as ParsedUrlQuery;
-		if (!slug) throw new Error("Criptomoneda no existente");
+		if (!slug) throw new Error("Criptomoneda no existente"); // TODO ESTO NO TIENE SENTIDO
 		const slugString = slug.toString();
 		const crypto: IStrapiCrypto = await CryptoStore.getStrapiCrypto(slugString);
 		if (Utils.isObjectEmpty(crypto)) throw new Error("Criptomoneda no existente");
-		const posts: IPost[] = await PostStore.getCryptoPosts();
+		const posts: IGuia[] = await GuiaStore.getGuias(6, "DESC");
 		return {
 			props: {
 				crypto,
-				relationedPosts: formatPosts(posts),
+				relationedPosts: posts,
 				slug: slugString,
 				template: await GlobalCache.cryptoTemplate
 			}

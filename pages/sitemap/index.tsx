@@ -1,6 +1,6 @@
 import React from 'react';
 import DOMPurify from 'isomorphic-dompurify';
-import { ISitemap } from "@/definitions/mediaPost";
+import { ISitemap } from "@/definitions/definitions";
 import { GetStaticProps } from 'next';
 import GlobalStore from '@/stores/GlobalStore';
 

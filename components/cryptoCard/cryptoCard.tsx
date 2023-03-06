@@ -1,8 +1,6 @@
 import * as React from 'react';
-import { ICryptoDetailed, IStrapiCrypto } from "../../definitions/crypto";
-import CryptoStore from "../../stores/CryptoStore";
-import Utils from "../../utils/utils";
-import styles from "../../styles/cryptoCard.module.scss";
+import { ICryptoDetailed, IStrapiCrypto } from "@/definitions/crypto";
+import styles from "@/styles/cryptoCard.module.scss";
 import Image from 'next/image'
 
 export interface ICryptoCardProps {

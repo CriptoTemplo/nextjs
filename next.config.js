@@ -21,6 +21,12 @@ module.exports = {
         hostname: 'assets.coingecko.com',
         port: '',
         //pathname: '/account123/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '8082',
+        //pathname: '/account123/**',
       }
     ],
   },

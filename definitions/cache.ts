@@ -1,6 +1,6 @@
 import { Converter } from 'showdown';
 import GlobalStore from "../stores/GlobalStore";
-import { ILanding } from "./mediaPost";
+import { ILanding } from "./definitions";
 
 export default class GlobalCache {
     static converter = new Converter();

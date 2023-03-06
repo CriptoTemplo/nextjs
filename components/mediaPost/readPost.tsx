@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { IEmpty, IPost, IMediaPost } from '../../definitions/mediaPost'; // TODO esto habra que mejorarlo
-import createDOMPurify from 'dompurify';
-import Global from "../../definitions/global";
-import Utils from "../../utils/utils";
+import React, { Component } from "react";
+import { IEmpty, IPost } from "@/definitions/definitions"; // TODO esto habra que mejorarlo
+import DOMPurify from "isomorphic-dompurify";
+import Global from "@/definitions/global";
+import Utils from "@/utils/utils";
+import Image from "next/image";
 
-class ReadPost extends Component<IPost, IEmpty> {
+export default class ReadPost extends Component<IPost, IEmpty> {
 
     public constructor(props: IPost) {
         super(props);
@@ -31,7 +32,7 @@ class ReadPost extends Component<IPost, IEmpty> {
     }
 
     private upperPost(): JSX.Element {
-        const post: IMediaPost = this.props.Post;
+        const post: IPost = this.props;
         return (
             <div>
                 <h1 className="title">
@@ -55,9 +56,11 @@ class ReadPost extends Component<IPost, IEmpty> {
                     </div>
                 </div>
                 <div className="wrapperImage">
-                    <img className="coverImage"
+                    <Image className="coverImage"
                         src={Global.host + post.coverImage?.url}
                         alt={post.coverImage.alternativeText}
+                        width={500}
+                        height={500}
                     />
                 </div>
             </div>
@@ -85,7 +88,7 @@ class ReadPost extends Component<IPost, IEmpty> {
     private mountHtmlContent(): JSX.Element {
         return (
             <div>
-                {<div dangerouslySetInnerHTML={{ __html: createDOMPurify.sanitize(this.props.Post.content) }} />}
+                {<div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.props.content) }} />}
             </div>
         );
     }
@@ -100,5 +103,3 @@ class ReadPost extends Component<IPost, IEmpty> {
 		return (auxDate.getDate() + " " + month + "," + " " + auxDate.getFullYear())
 	}
 }
-
-export default ReadPost;
