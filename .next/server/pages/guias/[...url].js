@@ -699,7 +699,7 @@ class GuideWrapper extends external_react_.Component {
     constructor(props){
         super(props);
         this.state = {
-            collapsed: this.props.downsideHTML && this.props.guias.length > 2 ? true : false
+            collapsed: this.props.downsideHTML && this.props.guias.length > 3 ? true : false
         };
     }
     render() {
