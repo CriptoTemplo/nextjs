@@ -27,7 +27,7 @@ export default class Carousel extends React.Component<IGuia[], ICarouselState> {
 	}
 
 	private renderElements() {
-		const array: IGuia[] = Object.values(this.props)
+		const array: IGuia[] = Object.values(this.props);
 		return array.map((guia: IGuia, index: number) => {
             return (
                 <GuiaCard key={index} {...guia} />

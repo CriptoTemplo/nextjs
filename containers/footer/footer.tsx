@@ -53,18 +53,24 @@ export default class Footer extends React.Component<IFooterProps, IFooterState> 
 					<Image className="coverImage"
 						src={youtubeLogo}
 						alt="Link para ir al canal de Youtube de Empezar a Invertir"
+						width={48}
+						height={48}
 					/>
 				</div>
 				<div className="socialLogo">
 					<Image className="coverImage"
 						src={telegramLogo}
 						alt="Link para ir al canal de Telegram de Empezar a Invertir"
+						width={48}
+						height={48}	
 					/>
 				</div>
 				<div className="socialLogo">
 					<Image className="coverImage"
 						src={twitterLogo}
 						alt="Link para ir al Twitter de Empezar a Invertir"
+						width={48}
+						height={48}	
 					/>
 				</div>
 				<div className="socialLogo">
@@ -77,6 +83,8 @@ export default class Footer extends React.Component<IFooterProps, IFooterState> 
 					<Image className="coverImage"
 						src={tiktokLogo}
 						alt="Link para ir al canal de TikTok de Empezar a Invertir"
+						width={48}
+						height={48}	
 					/>
 
 				</div>
@@ -84,6 +92,8 @@ export default class Footer extends React.Component<IFooterProps, IFooterState> 
 					<Image className="coverImage"
 						src={mailLogo}
 						alt="Link para ir enviar un e-mail a Empezar a Invertir"
+						width={48}
+						height={48}	
 					/>
 				</div>
 			</>

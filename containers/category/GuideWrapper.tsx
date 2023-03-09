@@ -27,7 +27,7 @@ export default class GuideWrapper extends React.Component<ICategory, IGuideWrapp
         const showMore: JSX.Element = this.state.collapsed ? this.renderShowMoreButton() : <></>;
         return (
             <div className={global.wrapper}>
-                <h1>{this.props.name}</h1>
+                <h1>{category.name}</h1>
                 {this.renderUpSide()}
                 {this.renderGuides()}
                 {showMore}

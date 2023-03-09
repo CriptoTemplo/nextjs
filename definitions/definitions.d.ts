@@ -123,3 +123,27 @@ export interface ICategory {
     published_at: string;
     updatedAt: string;
 }
+
+export interface IAuthor {
+    name: string;
+    profilePic: IMedia;
+    biography: string;
+    education: string;
+    specialty: string;
+    abilities: string;
+    URL: string;
+    socialNetworks: ISocialNetworks;
+    MetaTags: IMetaTags;
+    createdAt: string;
+    published_at: string;
+    updatedAt: string;
+    quote: string;
+    job: string;
+}
+
+export interface ISocialNetworks {
+    twitter: string;
+    facebook: string;
+    instagram: string;
+    linkedin: string;
+}
