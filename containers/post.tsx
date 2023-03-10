@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import ReadPost from "@/components/mediaPost/readPost";
 import ReadIndex from "@/components/mediaPost/readIndex";
 import RelatedPosts, { IRelatedPostsProps } from "@/components/mediaPost/relatedPosts";
-import { IPost } from "@/definitions/definitions";
+import { IGuia, IPost } from "@/definitions/definitions";
 
 export interface IPostProps {
-    post: IPost;
+    guia: IGuia;
 	relationedPosts: IPost[];
 }
 
@@ -50,11 +50,11 @@ export default class Post extends Component <IPostProps, IPostState> {
     }
 
     private getPropsReadIndex (): IPost {
-        return this.props.post;
+        return this.props.guia.Post;
     }
 
-    private getPropsReadPost (): IPost {
-        return this.props.post;
+    private getPropsReadPost (): IGuia {
+        return this.props.guia;
     }
 
     private getPropsRelatedPosts (): IRelatedPostsProps {

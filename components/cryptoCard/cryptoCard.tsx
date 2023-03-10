@@ -28,7 +28,7 @@ export default class CryptoCard extends React.Component<ICryptoCardProps, ICrypt
 			<div className={styles.cryptoCard}>
 				<div className={styles.mainData}>
 					<div className={styles.imgRank}>
-						<Image src={crypto.image} 
+						<Image src={crypto.image}
 							alt={"Logo de la Criptomoneda " + crypto.name}
 							width={50}
 							height={50}

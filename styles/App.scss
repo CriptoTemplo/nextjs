@@ -220,15 +220,64 @@ body::-webkit-scrollbar-thumb {
 			// box-shadow: $card-shadow;
 			font-weight: $font-weight-post-content;
 
-			.extraInfo {
-				// position: absolute;
-				padding: 1rem 0;
-				bottom: 1rem;
+			.authorsWrapper {
 				display: grid;
-				grid-template-columns: 1fr 1fr 2fr 2fr;
-				// width: 100%;
-				grid-gap: 2rem;
+				grid-template-columns: auto auto;
+				grid-gap: 1rem;
 				overflow: hidden;
+				padding: 0.7rem 0;
+				a {
+					text-decoration: none;
+					-webkit-user-drag: none;
+					user-select: none;
+					color: $text-hover-link;	
+				}
+				.authors {
+					display: flex;
+					align-items: center;
+					.profilePic:not(:first-child) {
+						position: relative;
+						margin-left: -0.5rem;
+						z-index: -1;
+					}
+					.authorsHrefs {
+						margin-left: 0.7rem;
+					}
+				}
+				.reviewer {
+					display: flex;
+					justify-content: flex-end;
+					align-items: center;
+					.reviewerHref{
+						margin-right: 0.7rem;
+					}
+					.icon {
+						background-image: url("../public/blue-check.svg");
+						background-size: cover;
+						background-position: center;
+						height: 2rem;
+						width: 2rem;
+						margin-right: 0.2rem;
+						filter: invert(100%) sepia(70%) saturate(100%) hue-rotate(20deg) brightness(150%) contrast(200%)					}
+				}
+				.profilePic {
+					position: relative;
+	
+					img {
+						height: 2rem;
+						width: 2rem;
+						border: 1.5px solid whitesmoke;
+						//padding-right: $padding-crypto-card;
+					}
+				}
+			}
+
+			.extraInfo {
+				display: grid;
+				grid-template-columns: auto 1fr auto;
+				grid-gap: 1rem;
+				overflow: hidden;
+				padding-top: 0.7rem;
 
 				.difficulty {
 					display: flex;
@@ -243,11 +292,32 @@ body::-webkit-scrollbar-thumb {
 					}
 				}
 
-				.publishedDate, .updatedDate {
+				.publishedDate, .updatedDate, .readTimeLong {
 					white-space: nowrap;
 					overflow: hidden;
 					text-overflow: ellipsis;
+					text-align: start;
+					font-weight: 400;
+				}
+
+				.readTimeLong {
 					text-align-last: end;
+					font-weight: 400;
+				}
+
+				.dataCenter {
+					display: flex;
+					margin: auto;
+
+					.icon {
+						background-image: url("../public/views.svg");
+						fill: whitesmoke;
+						background-size: cover;
+						background-position: center;
+						width: 24px;
+						filter: invert(80%) sepia(6%) saturate(25%) hue-rotate(20deg) brightness(108%) contrast(86%);
+						margin-right: 0.2rem;
+					}
 				}
 
 				.readTime {
@@ -301,7 +371,7 @@ body::-webkit-scrollbar-thumb {
 			}
 
 			p {
-				font-size: 1.1rem;
+				font-size: 1rem;
 				letter-spacing: .3px;
 				font-weight: 300;
 				color: $text-content-post-color;
@@ -318,12 +388,14 @@ body::-webkit-scrollbar-thumb {
 			.wrapperImage {
 				// padding: 1.7rem;
 				pointer-events: none;
+				max-height: 18rem;
 
 				.coverImage {
 					border-radius: $border-radius;
 					width: 100%;
 					height: 100%;
 					object-fit: cover;
+					max-height: 18rem;
 				}
 			}
 		}
@@ -459,10 +531,18 @@ body::-webkit-scrollbar-thumb {
 	}
 
 	@media only screen and (max-width: 768px) {
+		.authorsWrapper {
+			grid-template-columns: auto !important;
+    		grid-gap: 0 !important;
+		}
 		.midColumnPost .readPost .extraInfo {
 			display: grid;
-			grid-template-columns: 1fr 3fr;
-			.difficulty, .publishedDate {
+			grid-template-columns: auto auto;
+			.dataCenter {
+				justify-content: end;
+				margin: 0;
+			}
+			.readTimeLong {
 				display: none;
 			}
 		}
@@ -471,7 +551,8 @@ body::-webkit-scrollbar-thumb {
 
 	@media only screen and (max-width: 480px) {
 		.readPost {
-			padding: $padding-default $padding-default !important;
+			background: none !important;
+			padding: 0 !important;
 			h1 {
 				font-size: 1.8rem !important;
 			}

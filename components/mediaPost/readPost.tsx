@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import { IEmpty, IPost } from "@/definitions/definitions"; // TODO esto habra que mejorarlo
+import { IAuthor, IEmpty, IGuia, IPost } from "@/definitions/definitions"; // TODO esto habra que mejorarlo
 import DOMPurify from "isomorphic-dompurify";
 import Global from "@/definitions/global";
 import Utils from "@/utils/utils";
 import Image from "next/image";
+import Link from "next/link";
 
-export default class ReadPost extends Component<IPost, IEmpty> {
+export default class ReadPost extends Component<IGuia, IEmpty> {
 
-    public constructor(props: IPost) {
+    public constructor(props: IGuia) {
         super(props);
     }
 
@@ -32,29 +33,14 @@ export default class ReadPost extends Component<IPost, IEmpty> {
     }
 
     private upperPost(): JSX.Element {
-        const post: IPost = this.props;
+        const guia: IGuia = this.props;
+        const post: IPost = guia.Post;
         return (
             <div>
                 <h1 className="title">
                     {post.title}
                 </h1>
-                <div className="extraInfo">
-                    <div className="difficulty">
-                        <span>
-                            {post.difficulty}
-                        </span>
-                    </div>
-                    <div className="readTime">
-                        <i className="icon" />
-                        <span> {post.readTime + "min."} </span>
-                    </div>
-                    <div className="publishedDate">
-                        {"Publicación: " + this.formatDate(this.props.published_at)}
-                    </div>
-                    <div className="updatedDate">
-                        {"Actualización: " + this.formatDate(this.props.updatedAt)}
-                    </div>
-                </div>
+                {this.renderAuthorsWrappers(guia.authors, guia.reviewer)}
                 <div className="wrapperImage">
                     <Image className="coverImage"
                         src={Global.host + post.coverImage?.url}
@@ -63,8 +49,70 @@ export default class ReadPost extends Component<IPost, IEmpty> {
                         height={500}
                     />
                 </div>
+                <div className="extraInfo">
+                    <span className="updatedDate">
+                        {"Actualización: " + this.formatDate(this.props.updatedAt)}
+                    </span>
+                    <div className="dataCenter">
+                        <i className="icon" />
+                        <span> {"3,3k"} </span>
+                    </div>
+                    <span className="readTimeLong">
+                        {"Tiempo de lectura: " + post.readTime + "min."}
+                    </span>
+                </div>
+                <hr style={{marginBottom: "2rem"}}/>
             </div>
         );
+    }
+
+    private renderAuthorsWrappers(authors: IAuthor[], reviewer: IAuthor): JSX.Element {
+        return (
+            <div className="authorsWrapper">
+                <div className="authors">
+                    {authors.map((author: IAuthor, index: number) => {
+                        return (
+                            <>
+                                <div key={index} className="profilePic">
+                                    <Image src={Global.host + author.profilePic.url}
+                                        alt={"Foto de perfil de " + author.name}
+                                        width={50}
+                                        height={50}
+                                    />
+                                </div>
+                            </>
+                        )
+                    })}
+                {this.constructAuthorsString(authors)}
+                </div>
+                <div className="reviewer">
+                    <i className="icon" />
+                    <span className="reviewerHref">Revisado por: <Link href={"/sobre-nosotros/" + reviewer.URL}>{reviewer.name}</Link></span>
+                    <div className="profilePic">
+                        <Image src={Global.host + reviewer.profilePic.url}
+                            alt={"Foto de perfil de " + reviewer.name}
+                            width={50}
+                            height={50}
+                        />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    private constructAuthorsString(authors: IAuthor[]): JSX.Element {
+        let aux: string = "Escrito por: ";
+        const authorsHrefs: JSX.Element[] = authors.map((author: IAuthor, index: number) => {
+            return (
+                <>
+                    <Link key={index} href={"/sobre-nosotros/" + author.URL}>{author.name}</Link>
+                    {index < authors.length - 1 ? <span> y </span> : ""}
+                </>
+            )
+        })
+        return (
+            <span className="authorsHrefs">{aux}{authorsHrefs}</span>
+        )
     }
 
     private midPost(): JSX.Element {
@@ -88,18 +136,18 @@ export default class ReadPost extends Component<IPost, IEmpty> {
     private mountHtmlContent(): JSX.Element {
         return (
             <div>
-                {<div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.props.content) }} />}
+                {<div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.props.Post.content) }} />}
             </div>
         );
     }
-    
+
     private formatDate(date: string): string {
-		const auxDate: Date = new Date(date);
-		const options: Intl.DateTimeFormatOptions = {
-			month: "short"
-		}
-		let month:string = auxDate.toLocaleDateString("es-ES", options);
-		month = month.charAt(0).toUpperCase() + month.slice(1);
-		return (auxDate.getDate() + " " + month + "," + " " + auxDate.getFullYear())
-	}
+        const auxDate: Date = new Date(date);
+        const options: Intl.DateTimeFormatOptions = {
+            month: "short"
+        }
+        let month: string = auxDate.toLocaleDateString("es-ES", options);
+        month = month.charAt(0).toUpperCase() + month.slice(1);
+        return (auxDate.getDate() + " " + month + "," + " " + auxDate.getFullYear())
+    }
 }

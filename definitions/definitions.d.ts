@@ -32,6 +32,8 @@ export interface IGuia {
     createdAt: string;
     crypto: IStrapiCrypto;
     categories: ICategory[];
+    authors: IAuthor[];
+    reviewer: IAuthor;
     //TODO habra que anyadir aqui las empresas cuando esten
 }
 
