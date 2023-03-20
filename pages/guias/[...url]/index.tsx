@@ -26,18 +26,15 @@ export default function Guia(props: IGuiaProps) {
 	const router = useRouter()
 
 	const getPostProps = (): IPostProps => {
-		let post: IPost = props.guia.Post;
-		post.content = GlobalCache.converter.makeHtml(post.content);
-		post.published_at = props.guia.published_at;
-		post.updatedAt = props.guia.updatedAt;
+		let guia: IGuia = props.guia;
+		guia.Post.content = GlobalCache.converter.makeHtml(guia.Post.content);
 		const relationedPosts: IPost[] = props.relationedGuias.map((guia: IGuia) => {
 			const aux: IPost = guia.Post;
 			aux.url = "guias/" + guia.URL;
 			return aux;
-		}
-		)
+		});
 		return {
-			post: post,
+			guia,
 			relationedPosts: relationedPosts
 		}
 	};
@@ -73,7 +70,7 @@ export default function Guia(props: IGuiaProps) {
 			if (props.guia.crypto) header = <CryptoCard {...getCryptoCardProps()} />
 			return (
 				<>
-					{getHead(getMetaTags(), true)}
+					{getHead(getMetaTags())}
 					<div className="post">
 						{header}
 						<div className="mediaPostWrapper">
@@ -92,7 +89,7 @@ export default function Guia(props: IGuiaProps) {
 		case "category":
 			return (
 				<>
-					{getHead(getMetaTags(), true)}
+					{getHead(getMetaTags())}
 					<div className="category">
 						{props.category.categories.length ? <CategoryWrapper {...props.category} /> : <GuideWrapper {...props.category} />}
 					</div>

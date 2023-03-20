@@ -2,16 +2,12 @@ import React, { Component } from 'react';
 import Auxiliar from "@/components/cryptoData/readPost copy";
 import { IPost } from '@/definitions/definitions';
 
-export interface IMediaPostProps {
-    post: IPost;
-}
-
 export interface IMediaPostState {
 }
 
-class MediaPost extends Component <IMediaPostProps, IMediaPostState> {
+class MediaPost extends Component <IPost, IMediaPostState> {
 
-    constructor(props: IMediaPostProps) {
+    constructor(props: IPost) {
 		super(props);
 
 		this.state = {
@@ -37,7 +33,7 @@ class MediaPost extends Component <IMediaPostProps, IMediaPostState> {
     }
 
     private getPropsReadPost (): IPost {
-        return this.props.post;
+        return this.props;
     }
 }
 

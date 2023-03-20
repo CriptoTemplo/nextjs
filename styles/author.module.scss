@@ -1,0 +1,35 @@
+.authorWrapper {
+    display: grid;
+    row-gap: $padding-default;
+}
+
+.authorWrapper > * {
+    background-color: rgb(32, 32, 32);
+    border-radius: $border-radius;
+    padding: $padding-default;
+}
+
+.authorWrapper > *:last-child {
+    background-color: inherit;
+    border-radius: 0;
+    padding: 0;
+}
+
+.lowWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: $padding-default;
+    row-gap: $padding-default;
+}
+
+.lowWrapper > * {
+    background-color: rgb(32, 32, 32);
+    border-radius: $border-radius;
+    padding: $padding-default;
+}
+
+@media only screen and (max-width: 768px) {
+    .lowWrapper {
+        grid-template-columns: 1fr;
+    }
+}

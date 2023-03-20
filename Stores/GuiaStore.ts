@@ -70,4 +70,13 @@ export default class GuiaStore {
 
         return BasicStore.baseFetch(urlString, "GET", "");
     }
+
+    public static async getGuiasFromAuthor(authorUrl: string): Promise<IGuia[]> {
+        let url = new URL(GuiaStore.host + "/guias/findFromAuthor");
+        url.searchParams.append('authorUrl', authorUrl);
+        
+        const urlString = url.toString();
+
+        return BasicStore.baseFetch(urlString, "GET", "");
+    }
 }

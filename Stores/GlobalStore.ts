@@ -39,6 +39,13 @@ export default class GlobalStore {
         return BasicStore.baseFetch(urlString, "GET", "");
     }
 
+    public static async getLandingAboutUs(): Promise<ILanding> {
+        let url = new URL(Global.host + "/landing-about-us");
+        const urlString = url.toString();
+
+        return BasicStore.baseFetch(urlString, "GET", "");
+    }
+
     public static async getCryptoTemplate(): Promise<ILanding> {
         let url = new URL(Global.host + "/crypto-template");
         const urlString = url.toString();

@@ -32,7 +32,14 @@ export interface IGuia {
     createdAt: string;
     crypto: IStrapiCrypto;
     categories: ICategory[];
+    authors: IAuthor[];
+    reviewer: IAuthor;
     //TODO habra que anyadir aqui las empresas cuando esten
+}
+
+export interface IReference {
+    URL: string;
+    displayText: string;
 }
 
 export interface IMediaPost {
@@ -122,4 +129,28 @@ export interface ICategory {
     createdAt: string;
     published_at: string;
     updatedAt: string;
+}
+
+export interface IAuthor {
+    name: string;
+    profilePic: IMedia;
+    biography: string;
+    education: string;
+    specialty: string;
+    abilities: string;
+    URL: string;
+    socialNetworks: ISocialNetworks;
+    MetaTags: IMetaTags;
+    createdAt: string;
+    published_at: string;
+    updatedAt: string;
+    quote: string;
+    job: string;
+}
+
+export interface ISocialNetworks {
+    twitter: string;
+    facebook: string;
+    instagram: string;
+    linkedin: string;
 }

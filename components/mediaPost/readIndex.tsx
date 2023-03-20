@@ -9,12 +9,6 @@ type HeadingType = { id: string; text: string; level: number };
 
 class ReadIndex extends Component<IPost, IEmpty> {
 
-	public shouldComponentUpdate(nextProps: Readonly<IPost>, nextState: Readonly<IEmpty>, nextContext: any): boolean {
-		if (nextProps.id === this.props?.id) return false;
-
-		return true;
-	}
-
 	public render() {
         if (Utils.isObjectEmpty(this.props)) return "";
 
@@ -23,10 +17,13 @@ class ReadIndex extends Component<IPost, IEmpty> {
 
 		return (
 			<div className="readIndex">
+				<div className="title">
+                    Tabla de Contenidos
+                </div>
 				<nav>
 					<ul>
-						{headings.map((heading: HeadingType) => (
-							<li key={heading.id} style={{ marginLeft: `${heading.level - 2}em` }} onClick={() => this.scrollMediaPost(heading.id)}>
+						{headings.map((heading: HeadingType, index: number) => (
+							<li key={index} style={{ marginLeft: `${heading.level - 2}em` }} onClick={() => this.scrollMediaPost(heading.id)}>
 								<div>
 									<span className="leftSide">
 										{(heading.level === 2 ? countH1++ + "." : "")}
@@ -44,7 +41,6 @@ class ReadIndex extends Component<IPost, IEmpty> {
 	}
 
 	private construct(): HeadingType[] {
-
 		const { document } = new JSDOM('<!DOCTYPE html>').window;
 		const element = document.createElement('div');
 	  
@@ -52,7 +48,7 @@ class ReadIndex extends Component<IPost, IEmpty> {
 
 		const headings = Array.from(element.querySelectorAll("h2, h3"))
 			.map((element) => ({
-				id: element.id,
+				id: element.textContent ? Utils.idGeneratorFromString(element.textContent) : "",
 				text: element.textContent ?? "",
 				level: Number(element.tagName.substring(1))
 			}));

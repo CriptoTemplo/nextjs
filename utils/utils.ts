@@ -45,4 +45,14 @@ export default class Utils {
     public static roundToOne(number: number) {
         return +(Math.round((number + "e+2") as unknown as number) + "e-1");
     }
+
+    public static idGeneratorFromString(string: string): string {
+        // Replace spaces with "-"
+        string = string.replace(/\s+/g, "-");
+
+        // Remove Spanish accents
+        string = string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+        return string;
+    }
 }

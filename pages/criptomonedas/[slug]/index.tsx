@@ -6,7 +6,7 @@ import { getHead, IMetaTags } from "@/utils/helmet";
 import CryptoStore from "@/stores/CryptoStore";
 import Utils from "@/utils/utils";
 import CryptoCard, { ICryptoCardProps } from "@/components/cryptoCard/cryptoCard";
-import MediaPost, { IMediaPostProps } from "@/containers/mediaPost";
+import MediaPost from "@/containers/mediaPost";
 import SectionWrapper, { ISectionWrapperProps } from "@/components/sectionWrapper";
 import DOMPurify from 'isomorphic-dompurify';
 import GlobalCache from "@/definitions/cache";
@@ -67,13 +67,10 @@ export default function Criptomoneda(props: ICriptomonedaProps) {
 		return convertLiteral(coin, content);
 	};
 
-	const getMediaPostProps = (): IMediaPostProps => {
-		let cryptoPost: IGuia = {} as IGuia;
-		cryptoPost.Post = {} as IPost;
-		cryptoPost.Post.content = convertMarkDownCrypto(coin, props.template.content);
-		return {
-			post: cryptoPost as any
-		}
+	const getMediaPostProps = (): IPost => {
+		let cryptoPost = {} as IPost;
+		cryptoPost.content = convertMarkDownCrypto(coin, props.template.content);
+		return cryptoPost as any;
 	}
 
 	const getSectionWrapperProps = (): ISectionWrapperProps => {
