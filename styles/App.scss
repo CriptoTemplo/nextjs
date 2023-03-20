@@ -91,10 +91,10 @@ body::-webkit-scrollbar-thumb {
 	.mediaPostWrapper {
 		margin-bottom: $margin-components-default;
 	}
-	
+
 	.sectionWrapper {
-	margin-bottom: $margin-components-default;
-	}	
+		margin-bottom: $margin-components-default;
+	}
 }
 
 .mediaPost {
@@ -153,6 +153,13 @@ body::-webkit-scrollbar-thumb {
 			border-radius: $border-radius;
 			background: $content-background-linear;
 			z-index: -3;
+
+			.title {
+				font-weight: 500;
+				color: $text-detail-title;
+				font-size: 1.2rem;
+				//text-transform: capitalize;
+			}
 
 			nav {
 				height: fit-content;
@@ -226,31 +233,38 @@ body::-webkit-scrollbar-thumb {
 				grid-gap: 1rem;
 				overflow: hidden;
 				padding: 0.7rem 0;
+
 				a {
 					text-decoration: none;
 					-webkit-user-drag: none;
 					user-select: none;
-					color: $text-hover-link;	
+					color: $text-hover-link;
 				}
+
 				.authors {
 					display: flex;
 					align-items: center;
+
 					.profilePic:not(:first-child) {
 						position: relative;
 						margin-left: -0.5rem;
 						z-index: -1;
 					}
+
 					.authorsHrefs {
 						margin-left: 0.7rem;
 					}
 				}
+
 				.reviewer {
 					display: flex;
 					justify-content: flex-end;
 					align-items: center;
-					.reviewerHref{
+
+					.reviewerHref {
 						margin-right: 0.7rem;
 					}
+
 					.icon {
 						background-image: url("../public/blue-check.svg");
 						background-size: cover;
@@ -258,11 +272,13 @@ body::-webkit-scrollbar-thumb {
 						height: 2rem;
 						width: 2rem;
 						margin-right: 0.2rem;
-						filter: invert(100%) sepia(70%) saturate(100%) hue-rotate(20deg) brightness(150%) contrast(200%)					}
+						filter: invert(100%) sepia(70%) saturate(100%) hue-rotate(20deg) brightness(150%) contrast(200%)
+					}
 				}
+
 				.profilePic {
 					position: relative;
-	
+
 					img {
 						height: 2rem;
 						width: 2rem;
@@ -292,7 +308,9 @@ body::-webkit-scrollbar-thumb {
 					}
 				}
 
-				.publishedDate, .updatedDate, .readTimeLong {
+				.publishedDate,
+				.updatedDate,
+				.readTimeLong {
 					white-space: nowrap;
 					overflow: hidden;
 					text-overflow: ellipsis;
@@ -377,12 +395,41 @@ body::-webkit-scrollbar-thumb {
 				color: $text-content-post-color;
 			}
 
+			figure.image {
+				margin: 0;
+
+				figcaption {
+					background: #cda4398f;
+					color: lightgrey;
+					margin: 0;
+					border-radius: $border-radius;
+					padding: 0.5rem 0.7rem;
+				}
+			}
+
 			img {
 				border-radius: 1.5rem;
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
 				height: auto;
+			}
+
+			.crossReference {
+				cursor: pointer;
+				color: $text-hover-link;
+				display: inline-flex;
+				align-items: baseline;
+				justify-content: center;
+				position: inherit;
+				margin-left: 2px;
+				padding-bottom: 0;
+				vertical-align: baseline;
+				font-size: .875rem;
+				font-weight: 400;
+				letter-spacing: .07em;
+				line-height: 1;
+				text-indent: 0;
 			}
 
 			.wrapperImage {
@@ -396,6 +443,39 @@ body::-webkit-scrollbar-thumb {
 					height: 100%;
 					object-fit: cover;
 					max-height: 18rem;
+				}
+			}
+
+			.bibliography {
+				text-align: left;
+				scroll-margin-top: $padding-top;
+
+				.dropdownMobilePlaceholder:hover {
+					color: $text-hover-link;
+				}
+
+				.dropdownMobileMenu {
+					cursor: auto;
+					padding: $padding-default;
+					padding-top: 2rem;
+					background-color: #363636;
+					word-break: break-word;
+				}
+
+				.externalLink {
+					display: block;
+					width: 100%;
+					//height: 2rem;
+					margin-top: 1rem;
+					padding: 0.5rem;
+					color: whitesmoke;
+					user-select: text;
+				}
+
+				&.active .dropdownMobileMenu {
+					// HACK esto de aqui es para que la animacion funcion, sin max-height: fixed no va
+					max-height: 1000vh;
+					transition: max-height ease-out 25s;
 				}
 			}
 		}
@@ -533,15 +613,18 @@ body::-webkit-scrollbar-thumb {
 	@media only screen and (max-width: 768px) {
 		.authorsWrapper {
 			grid-template-columns: auto !important;
-    		grid-gap: 0 !important;
+			grid-gap: 0 !important;
 		}
+
 		.midColumnPost .readPost .extraInfo {
 			display: grid;
 			grid-template-columns: auto auto;
+
 			.dataCenter {
 				justify-content: end;
 				margin: 0;
 			}
+
 			.readTimeLong {
 				display: none;
 			}
@@ -553,6 +636,7 @@ body::-webkit-scrollbar-thumb {
 		.readPost {
 			background: none !important;
 			padding: 0 !important;
+
 			h1 {
 				font-size: 1.8rem !important;
 			}
@@ -579,6 +663,7 @@ body::-webkit-scrollbar-thumb {
 	.sectionWrapper {
 
 		margin-bottom: $margin-components-default;
+
 		// padding: 0 2.4rem;
 		.latestPosts {
 			margin-top: 6rem;

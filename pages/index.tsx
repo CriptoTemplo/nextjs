@@ -3,7 +3,7 @@ import Article from '@/components/Article';
 import SectionWrapper from '@/components/sectionWrapper';
 import GlobalStore from "@/stores/GlobalStore";
 import { IMetaTags, getHead } from "@/utils/helmet";
-import { IGuia, ILanding, IMediaPost, IPost } from "@/definitions/definitions";
+import { IGuia, ILanding } from "@/definitions/definitions";
 import GuiaStore from "@/stores/GuiaStore";
 
 interface IProps {

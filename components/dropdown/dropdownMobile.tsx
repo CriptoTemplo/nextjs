@@ -1,3 +1,4 @@
+import Link from "next/link";
 import * as React from 'react';
 import Global from "../../definitions/global";
 import { IDropdownOptions, IDropdownProps } from "./dropdown";
@@ -35,9 +36,9 @@ export default class DropdownMobile extends React.Component<IDropdownProps, IDro
 		return this.props.actions.map((option: IDropdownOptions, index: number) => {
 			return (
 				<div className="dropdownMobileItem" onClick={() => this.onClickOption(option.action)} key={index} >
-					<a href={Global.hostFront + option.url} onClick={(e) => e.preventDefault()}>
+					<Link href={Global.hostFront + option.url} onClick={(e) => e.preventDefault()}>
 						{"🔹 " + option.title}
-					</a>
+					</Link>
 				</div>
 			)
 		})

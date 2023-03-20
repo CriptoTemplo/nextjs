@@ -37,6 +37,11 @@ export interface IGuia {
     //TODO habra que anyadir aqui las empresas cuando esten
 }
 
+export interface IReference {
+    URL: string;
+    displayText: string;
+}
+
 export interface IMediaPost {
     id: number;
     URL: string;

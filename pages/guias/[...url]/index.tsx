@@ -70,7 +70,7 @@ export default function Guia(props: IGuiaProps) {
 			if (props.guia.crypto) header = <CryptoCard {...getCryptoCardProps()} />
 			return (
 				<>
-					{getHead(getMetaTags(), true)}
+					{getHead(getMetaTags())}
 					<div className="post">
 						{header}
 						<div className="mediaPostWrapper">
@@ -89,7 +89,7 @@ export default function Guia(props: IGuiaProps) {
 		case "category":
 			return (
 				<>
-					{getHead(getMetaTags(), true)}
+					{getHead(getMetaTags())}
 					<div className="category">
 						{props.category.categories.length ? <CategoryWrapper {...props.category} /> : <GuideWrapper {...props.category} />}
 					</div>
