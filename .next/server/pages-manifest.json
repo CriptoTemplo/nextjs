@@ -4,11 +4,11 @@
   "/_document": "pages/_document.js",
   "/exchanges": "pages/exchanges.html",
   "/criptomonedas/[slug]": "pages/criptomonedas/[slug].js",
-  "/guias": "pages/guias.js",
-  "/criptomonedas": "pages/criptomonedas.js",
   "/guias/[...url]": "pages/guias/[...url].js",
-  "/": "pages/index.js",
-  "/sobre-nosotros": "pages/sobre-nosotros.js",
   "/sitemap": "pages/sitemap.js",
-  "/sobre-nosotros/[URL]": "pages/sobre-nosotros/[URL].js"
+  "/sobre-nosotros/[URL]": "pages/sobre-nosotros/[URL].js",
+  "/sobre-nosotros": "pages/sobre-nosotros.js",
+  "/criptomonedas": "pages/criptomonedas.js",
+  "/": "pages/index.js",
+  "/guias": "pages/guias.js"
 }

@@ -255,7 +255,7 @@ class ReadPost extends external_react_.Component {
                     className: "dropdownMobileMenu",
                     children: [
                         /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                            children: "Empezar a Invertir exige a sus redactores que utilicen fuentes primarias para respaldar su trabajo. Entre ellas se incluyen libros blancos, datos gubernamentales, informes originales y entrevistas con expertos del sector. Cuando procede, tambi\xe9n hacemos referencia a investigaciones originales de otras editoriales de prestigio. Puede obtener m\xe1s informaci\xf3n sobre las normas que seguimos para producir contenidos precisos e imparciales en nuestra pol\xedtica editorial."
+                            children: "Empezar a Invertir exige a sus redactores que utilicen fuentes fiables para respaldar los articulos. Entre ellas se incluyen informes oficiales, white papers, entrevistas, articulos acad\xe9micos y otros datos de expertos en la materia. En caso de que sea necesario, tambi\xe9n hacemos referencia a investigaciones originales de otras editoriales de prestigio. Si quieres obtener m\xe1s informaci\xf3n sobre las normas que seguimos para producir los articulos y su contenido puedes consultar nuestra pol\xedtica de editorial."
                         }),
                         collapsed ? "" : referencesHTML
                     ]
