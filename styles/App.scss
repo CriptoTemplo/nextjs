@@ -226,6 +226,7 @@ body::-webkit-scrollbar-thumb {
 			color: $text-title-post-color;
 			// box-shadow: $card-shadow;
 			font-weight: $font-weight-post-content;
+			word-break: break-word;
 
 			.authorsWrapper {
 				display: grid;

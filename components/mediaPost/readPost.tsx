@@ -149,7 +149,7 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
                     <span className="arrow" />
                 </div>
                 <div className="dropdownMobileMenu">
-                    <span>Empezar a Invertir exige a sus redactores que utilicen fuentes primarias para respaldar su trabajo. Entre ellas se incluyen libros blancos, datos gubernamentales, informes originales y entrevistas con expertos del sector. Cuando procede, también hacemos referencia a investigaciones originales de otras editoriales de prestigio. Puede obtener más información sobre las normas que seguimos para producir contenidos precisos e imparciales en nuestra política editorial.</span>
+                    <span>Empezar a Invertir exige a sus redactores que utilicen fuentes fiables para respaldar los articulos. Entre ellas se incluyen informes oficiales, white papers, entrevistas, articulos académicos y otros datos de expertos en la materia. En caso de que sea necesario, también hacemos referencia a investigaciones originales de otras editoriales de prestigio. Si quieres obtener más información sobre las normas que seguimos para producir los articulos y su contenido puedes consultar nuestra política de editorial.</span>
                     {collapsed  ? "" : referencesHTML}
                 </div>
             </div>
