@@ -1,0 +1,14 @@
+{
+  "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js",
+  "/exchanges": "pages/exchanges.html",
+  "/_error": "pages/_error.js",
+  "/guias": "pages/guias.js",
+  "/": "pages/index.js",
+  "/criptomonedas/[slug]": "pages/criptomonedas/[slug].js",
+  "/sobre-nosotros/[URL]": "pages/sobre-nosotros/[URL].js",
+  "/guias/[...url]": "pages/guias/[...url].js",
+  "/sobre-nosotros": "pages/sobre-nosotros.js",
+  "/sitemap": "pages/sitemap.js",
+  "/criptomonedas": "pages/criptomonedas.js"
+}
