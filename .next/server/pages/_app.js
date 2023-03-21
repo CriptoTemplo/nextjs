@@ -550,7 +550,7 @@ class ReturnTop extends external_react_.Component {
         document.addEventListener("scroll", ()=>this.checkScrollPosition()); // NO HACE FALTA DESTRUIRLO PORQUE SIEMPRE ESTA ACTIVO
     }
     toggleButton() {
-        this.element.current.classList.toggle("show");
+        if (this.element && this.element.current) this.element.current.classList.toggle("show");
     }
     // 200 = Numero de pixeles desde el top del document
     checkScrollPosition() {

@@ -16,7 +16,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 1467:
+/***/ 7057:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -464,7 +464,161 @@ class RelatedPosts extends external_react_.Component {
 }
 /* harmony default export */ const relatedPosts = ((0,withRouter/* default */.Z)(RelatedPosts));
 
+;// CONCATENATED MODULE: ./public/share_icon.svg
+/* harmony default export */ const share_icon = ({"src":"/_next/static/media/share_icon.7312b8b2.svg","height":48,"width":48});
+;// CONCATENATED MODULE: ./components/mobileTOC.tsx
+
+
+
+
+
+
+class MobileTOC extends external_react_.Component {
+    element = /*#__PURE__*/ external_react_.createRef();
+    active = false;
+    constructor(props){
+        super(props);
+        this.state = {
+            isCollapsed: true
+        };
+    }
+    componentDidMount() {
+        this.initScrollEvent();
+    }
+    render() {
+        return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+            className: "mobileTOC",
+            ref: this.element,
+            children: [
+                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    className: "toc",
+                    children: this.renderDropdownTOC()
+                }),
+                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    className: "share",
+                    onClick: this.share,
+                    children: /*#__PURE__*/ jsx_runtime_.jsx((image_default()), {
+                        className: "coverImage",
+                        src: share_icon,
+                        alt: "Link para ir al canal de Youtube de Empezar a Invertir",
+                        width: 32,
+                        height: 32
+                    })
+                })
+            ]
+        });
+    }
+    renderDropdownTOC() {
+        const content = this.props.post.content;
+        const headings = this.construct(content);
+        const navHeading = this.renderNavHeadings(headings);
+        const collapsed = this.state.isCollapsed;
+        return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+            className: "dropdownMobile",
+            id: "mobileTOC",
+            children: [
+                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                    className: "dropdownMobilePlaceholder",
+                    id: "mobileTOCPlaceholder",
+                    onClick: (event)=>this.setVisibility(event),
+                    children: [
+                        /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                            className: "text",
+                            children: "TABLA DE CONTENIDOS"
+                        }),
+                        /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                            className: "arrow"
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    className: "dropdownMobileMenu",
+                    children: collapsed ? "" : navHeading
+                })
+            ]
+        });
+    }
+    renderNavHeadings(headings) {
+        let countH1 = 1;
+        return /*#__PURE__*/ jsx_runtime_.jsx("nav", {
+            children: /*#__PURE__*/ jsx_runtime_.jsx("ul", {
+                children: headings.map((heading, index)=>/*#__PURE__*/ jsx_runtime_.jsx("li", {
+                        style: {
+                            marginLeft: `${heading.level - 2}em`
+                        },
+                        onClick: ()=>this.scrollMediaPost(heading.id),
+                        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                            children: [
+                                /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                    className: "leftSide",
+                                    children: heading.level === 2 ? countH1++ + "." : ""
+                                }),
+                                /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                    className: "rightSide",
+                                    children: heading.text
+                                })
+                            ]
+                        })
+                    }, index))
+            })
+        });
+    }
+    setVisibility(event) {
+        event.currentTarget.parentElement?.classList.toggle("active");
+        const aux = this.state.isCollapsed;
+        this.setState({
+            isCollapsed: !aux
+        });
+    }
+    construct(content) {
+        const { document: document1  } = new external_jsdom_namespaceObject.JSDOM("<!DOCTYPE html>").window;
+        const element = document1.createElement("div");
+        element.innerHTML = content;
+        const headings = Array.from(element.querySelectorAll("h2, h3")).map((element)=>({
+                id: element.textContent ? utils/* default.idGeneratorFromString */.Z.idGeneratorFromString(element.textContent) : "",
+                text: element.textContent ?? "",
+                level: Number(element.tagName.substring(1))
+            }));
+        return headings;
+    }
+    initScrollEvent() {
+        document.addEventListener("scroll", ()=>this.checkScrollPosition()); // NO HACE FALTA DESTRUIRLO PORQUE SIEMPRE ESTA ACTIVO
+    }
+    toggleButton() {
+        if (this.element && this.element.current && this.element.current.classList) this.element.current.classList.toggle("show");
+    }
+    // 200 = Numero de pixeles desde el top del document
+    checkScrollPosition() {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if (!this.active && scrollTop > 200) {
+            this.active = true;
+            return this.toggleButton();
+        }
+        if (this.active && scrollTop < 200) {
+            this.active = false;
+            return this.toggleButton();
+        }
+    }
+    scrollMediaPost(id) {
+        document.getElementById("mobileTOCPlaceholder")?.click();
+        const element = document.getElementById(id);
+        element?.scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+    share = ()=>{
+        if (navigator.share) {
+            navigator.share({
+                title: this.props.metaTags.title,
+                text: this.props.metaTags.description,
+                url: window.location.href
+            }).then(()=>console.log("Successful share")).catch((error)=>console.log("Error sharing", error));
+        }
+    };
+}
+
 ;// CONCATENATED MODULE: ./containers/post.tsx
+
 
 
 
@@ -473,13 +627,36 @@ class RelatedPosts extends external_react_.Component {
 class Post extends external_react_.Component {
     constructor(props){
         super(props);
-        this.state = {};
+        this.state = {
+            isMobile: false
+        };
     }
+    componentDidMount() {
+        window.addEventListener("resize", this.handleWindowResize);
+        this.handleWindowResize();
+    }
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.handleWindowResize);
+    }
+    handleWindowResize = ()=>{
+        const isMobile = this.isMobile();
+        if (isMobile !== this.state.isMobile) {
+            this.setState({
+                isMobile: isMobile
+            });
+        }
+    };
+    isMobile = ()=>{
+        return window.matchMedia("(max-width: 768px)").matches;
+    };
     render() {
+        const isMobile = this.state.isMobile;
         return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
             className: "mediaPost",
             children: [
-                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                isMobile ? /*#__PURE__*/ jsx_runtime_.jsx(MobileTOC, {
+                    ...this.getPropsMobileToc()
+                }) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
                     className: "leftColumnPost",
                     children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
                         className: "stickyWrapper",
@@ -512,6 +689,12 @@ class Post extends external_react_.Component {
     getPropsRelatedPosts() {
         return {
             relatedPosts: this.props.relationedPosts
+        };
+    }
+    getPropsMobileToc() {
+        return {
+            post: this.props.guia.Post,
+            metaTags: this.props.guia.MetaTags
         };
     }
 }
@@ -1263,7 +1446,7 @@ module.exports = require("showdown");
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [398,675,505,664,553,927,337,441,366,3,295], () => (__webpack_exec__(1467)));
+var __webpack_exports__ = __webpack_require__.X(0, [398,675,505,664,553,927,337,441,366,3,295], () => (__webpack_exec__(7057)));
 module.exports = __webpack_exports__;
 
 })();
