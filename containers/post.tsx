@@ -45,7 +45,7 @@ export default class Post extends Component<IPostProps, IPostState> {
     }
 
     private isMobile = (): boolean => {
-        return window.matchMedia('(max-width: 768px)').matches;
+        return window.matchMedia('(max-width: 1024px)').matches;
     }
 
     public render() {

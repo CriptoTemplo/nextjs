@@ -124,8 +124,12 @@ body::-webkit-scrollbar-thumb {
 				}
 				.text {
 					height: 100%;
-    				line-height: 2.4rem;
-					font-weight: 500;
+					line-height: 2.3rem;
+					font-family: Cabin-semi-bold,Cabin-fallback,sans-serif;
+					font-size: .875rem;
+					font-weight: 600;
+					letter-spacing: .07rem;
+					text-transform: uppercase;
 				}
 			}
 
