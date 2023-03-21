@@ -647,7 +647,7 @@ class Post extends external_react_.Component {
         }
     };
     isMobile = ()=>{
-        return window.matchMedia("(max-width: 768px)").matches;
+        return window.matchMedia("(max-width: 1024px)").matches;
     };
     render() {
         const isMobile = this.state.isMobile;

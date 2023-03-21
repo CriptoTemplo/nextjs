@@ -1,14 +1,14 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/exchanges": "pages/exchanges.html",
   "/_document": "pages/_document.js",
-  "/criptomonedas": "pages/criptomonedas.js",
-  "/criptomonedas/[slug]": "pages/criptomonedas/[slug].js",
+  "/exchanges": "pages/exchanges.html",
   "/guias/[...url]": "pages/guias/[...url].js",
-  "/guias": "pages/guias.js",
+  "/criptomonedas/[slug]": "pages/criptomonedas/[slug].js",
   "/sitemap": "pages/sitemap.js",
   "/": "pages/index.js",
-  "/sobre-nosotros": "pages/sobre-nosotros.js",
-  "/sobre-nosotros/[URL]": "pages/sobre-nosotros/[URL].js"
+  "/sobre-nosotros/[URL]": "pages/sobre-nosotros/[URL].js",
+  "/guias": "pages/guias.js",
+  "/criptomonedas": "pages/criptomonedas.js",
+  "/sobre-nosotros": "pages/sobre-nosotros.js"
 }
