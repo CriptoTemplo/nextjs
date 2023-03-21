@@ -4,7 +4,7 @@
 	visibility: visible;
 	font-family: 'Outfit', sans-serif;
 	//height: auto;
-	height: 5rem;
+	height: $header-height;
 	opacity: 1;
 	width: 100%;
 	position: fixed;
@@ -93,7 +93,7 @@
 	height: 100%;
 	max-height: 0;
 	background-color: #3b3838;
-	z-index: 2;
+	z-index: 3;
 	overflow: auto;
 	overflow-y: hidden;
 

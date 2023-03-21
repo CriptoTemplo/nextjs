@@ -81,6 +81,133 @@ body::-webkit-scrollbar-thumb {
 	cursor: pointer;
 }
 
+.mobileTOC {
+	cursor: pointer;
+	display: hidden;
+	position: fixed;
+	top: $header-height;
+	right: 0;
+	width: 100%;
+	height: 2.3rem;
+	background-color: #292727;
+	z-index: 2;
+	opacity: 0;
+	box-sizing: border-box;
+	border-top: 1px solid #545454;
+    border-bottom: 1px solid #545454;
+    /* background-color: #f8f8f8; */
+    background-position: bottom left;
+    background-repeat: no-repeat;
+    background-size: 100% 2px;
+    //text-transform: uppercase;
+	&.show {
+		display: flex;
+		align-items: center;
+	}
+	.toc {
+		font-weight: 700;
+		width: calc(100% - 32px);
+		height: 100%;
+		position: absolute;
+		top: 0;
+
+		.dropdownMobile {
+			width: 100%;
+			height: 100%;
+
+			.dropdownMobilePlaceholder {
+				height: inherit;
+				background-color: inherit;
+				font-size: 1rem;
+				&:hover {
+					color: inherit;
+				}
+				.text {
+					height: 100%;
+    				line-height: 2.4rem;
+					font-weight: 500;
+				}
+			}
+
+			.dropdownMobileMenu {
+				cursor: auto;
+				margin-top: 0;
+    			padding-top: 0;
+				background-color: #363636;
+				word-break: break-word;
+				border-top: 1px solid #545454;
+				padding-top: 0.4rem;
+			}
+
+			&.active .dropdownMobileMenu {
+				// HACK esto de aqui es para que la animacion funcion, sin max-height: fixed no va
+				max-height: 1000vh;
+				transition: max-height ease-out 25s;
+			}
+
+			nav {
+				height: fit-content;
+
+				ul {
+					list-style: none;
+					margin: 0;
+					padding: 0;
+
+					li {
+						margin: 0;
+						padding: 0;
+						cursor: pointer;
+						color: rgb(235, 235, 235);
+						align-items: center;
+						display: flex;
+						padding: 0.3rem 0.7rem;
+						border-radius: $border-radius;
+						margin-bottom: 0.4rem;
+						text-align: left;
+						font-weight: 300;
+						font-size: 0.95rem;
+
+						-webkit-transition: color 0.2s ease-out;
+						-moz-transition: color 0.2s ease-out;
+						-o-transition: color 0.2s ease-out;
+						-ms-transition: color 0.2s ease-out;
+						transition: color 0.2s ease-out;
+
+						div {
+							display: flex;
+
+							.leftSide {
+								display: flex;
+								min-width: 24px;
+								height: 24px;
+								justify-content: center;
+							}
+
+							.rightSide {
+								margin-left: 0.7rem;
+							}
+						}
+					}
+					li:hover,
+					li:focus-visible {
+						color: rgb(255, 187, 1);
+					}
+				}
+			}
+		}
+	}
+	.share {
+		display: flex;
+		margin-left: auto;
+		border-left: 1px solid #989898;
+		img {
+			height: 26px;
+			filter: invert(100%) sepia(100%) saturate(100%) brightness(70%) contrast(200%);
+			//filter: invert(40%) sepia(100%) saturate(200%) hue-rotate(1deg) brightness(140%) contrast(220%);
+		}
+	}
+}
+
 .show {
 	display: block;
 	opacity: 100;
@@ -629,6 +756,9 @@ body::-webkit-scrollbar-thumb {
 			.readTimeLong {
 				display: none;
 			}
+		}
+		h2 {
+			scroll-margin-top: 8.4rem !important;
 		}
 	}
 

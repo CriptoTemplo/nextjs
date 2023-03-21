@@ -33,7 +33,7 @@ export default class ReturnTop extends React.Component<IReturnTopProps, IReturnT
 	}
 
 	private toggleButton(): void {
-		(this.element.current as HTMLDivElement).classList.toggle("show");
+		if (this.element && this.element.current) (this.element.current as HTMLDivElement).classList.toggle("show");
 	}
 
 	// 200 = Numero de pixeles desde el top del document

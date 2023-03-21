@@ -3,7 +3,7 @@ import { IEmpty, IPost } from "@/definitions/definitions"; // TODO esto habra qu
 import Utils from "@/utils/utils";
 import { JSDOM } from "jsdom";
 
-type HeadingType = { id: string; text: string; level: number };
+export type HeadingType = { id: string; text: string; level: number };
 
 // TODO se puede hacer que conforme vayas bajando el dom se vaya ilumando en que seccion estas
 
