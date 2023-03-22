@@ -11,6 +11,7 @@ import SectionWrapper, { ISectionWrapperProps } from "@/components/sectionWrappe
 import CategoryWrapper from "@/containers/category/CategoryWrapper";
 import GuideWrapper from "@/containers/category/GuideWrapper";
 import { useEffect } from "react";
+import Global from "@/definitions/global";
 
 type GuiaOrCategory = "guia" | "category" | "";
 
@@ -46,7 +47,7 @@ export default function Guia(props: IGuiaProps) {
 		return {
 			guia,
 			relationedPosts: relationedPosts,
-			url: router.asPath
+			url: Global.hostFront + router.asPath
 		}
 	};
 
