@@ -2,12 +2,12 @@ import { ISocialNetworks } from "@/definitions/definitions";
 import * as React from 'react';
 import Image from 'next/image';
 import styles from "@/styles/socialNetworks.module.scss";
-import youtubeLogo from '../../public/highlights-youtube.svg'
-//import telegramLogo from '../../public/highlights-telegram.svg'
-import twitterLogo from '../../public/highlights-twitter.svg'
-//import tiktokLogo from '../../public/highlights-tiktok.svg'
-import mailLogo from '../../public/highlights-mail.svg'
-import instagramLogo from '../../public/highlights-instagram.svg'
+import youtubeLogo from '@/public/highlights-youtube.svg'
+//import telegramLogo from '@/public/highlights-telegram.svg'
+import twitterLogo from '@/public/highlights-twitter.svg'
+//import tiktokLogo from '@/public/highlights-tiktok.svg'
+import mailLogo from '@/public/highlights-mail.svg'
+import instagramLogo from '@/public/highlights-instagram.svg'
 
 export interface ISocialNetworksProps {
 }

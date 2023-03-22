@@ -1,24 +1,24 @@
-import AuthorCard from "@/components/author/authorCard";
-import { IAuthor } from "@/definitions/definitions";
 import styles from "@/styles/authorCarousel.module.scss";
 import * as React from 'react';
 
-export interface IAuthorCarouselProps {
+export interface ICarouselButtonsProps {
+    elements: JSX.Element[];
+    resizeDangerous?: boolean;
+    hideButtons?: boolean;
 }
 
-export interface IAuthorCarouselState {
+export interface ICarouselButtonsState {
 	canGoNext: boolean;
 	canGoPrev: boolean;
 }
 
 type TDirection = "next" | "previous";
 
-// TODO rename de esto a carouselButton
-export default class AuthorCarousel extends React.Component<IAuthor[], IAuthorCarouselState> {
+export default class CarouselButtons extends React.Component<ICarouselButtonsProps, ICarouselButtonsState> {
 	private carouselRef: React.RefObject<HTMLDivElement> = React.createRef();
 	private carouselContainerRef: React.RefObject<HTMLDivElement> = React.createRef();
 
-	constructor(props: IAuthor[]) {
+	constructor(props: ICarouselButtonsProps) {
 		super(props);
 
 		this.state = {
@@ -27,49 +27,42 @@ export default class AuthorCarousel extends React.Component<IAuthor[], IAuthorCa
 		}
 	}
 
+    public componentDidUpdate(prevProps: Readonly<ICarouselButtonsProps>, prevState: Readonly<ICarouselButtonsState>, snapshot?: any): void {
+        if (this.props.hideButtons) {
+            const buttons = Array.from((this.carouselContainerRef.current as HTMLDivElement).querySelectorAll("button"));
+            buttons[0].style.display = !this.state.canGoPrev ? "none" : ""; // Left Button
+            buttons[1].style.display = !this.state.canGoNext ? "none" : ""; // Right Button
+        }
+    }
+
 	public componentDidMount(): void {
-		window.addEventListener('resize', this.handleResize);
+        if (this.props.resizeDangerous) window.addEventListener('resize', this.handleResize);
 		if (this.elementsHidden(this.carouselRef.current as HTMLDivElement)) {
 			this.setState({
 				canGoNext: true
 			})
 		}
-
 	}
 
 	public componentWillUnmount(): void {
-		window.removeEventListener('resize', this.handleResize);
+		if (this.props.resizeDangerous) window.removeEventListener('resize', this.handleResize);
 	}
 
 	public render() {
-		const authors: IAuthor[] = Object.values(this.props);
-		const authorCards: JSX.Element[] = this.renderAuthorCars(authors);
+		const elements: JSX.Element[] = this.props.elements;
 		return (
-			<>
-			<h2 className={styles.h2}>Nuestro equipo</h2>
 			<div className={styles.carouselContainer} ref={this.carouselContainerRef}>
 				<button className={styles.button} onClick={() => this.handleNavigation("previous")} disabled={!this.state.canGoPrev}>
 					<i className={styles.left} />
 				</button>
 				<div className={styles.carousel} ref={this.carouselRef}>
-					{authorCards}
+					{elements.map((element: JSX.Element, index: number) => <React.Fragment key={index}>{element}</React.Fragment>)}
 				</div>
 				<button className={styles.button} onClick={() => this.handleNavigation("next")} disabled={!this.state.canGoNext} >
 					<i className={styles.right} />
 				</button>
 			</div>
-			</>
 		);
-	}
-
-	private renderAuthorCars(authors: IAuthor[]): JSX.Element[] {
-		return authors.map((author: IAuthor, index: number) => {
-			return (
-				<div key={index} className={styles.card}>
-					<AuthorCard key={index} {...author} />
-				</div>
-			)
-		})
 	}
 
 	private handleNavigation(direction: TDirection): void {

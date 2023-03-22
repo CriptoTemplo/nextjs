@@ -45,7 +45,8 @@ export default function Guia(props: IGuiaProps) {
 		});
 		return {
 			guia,
-			relationedPosts: relationedPosts
+			relationedPosts: relationedPosts,
+			url: router.asPath
 		}
 	};
 

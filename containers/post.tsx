@@ -3,13 +3,13 @@ import ReadPost from "@/components/mediaPost/readPost";
 import ReadIndex from "@/components/mediaPost/readIndex";
 import RelatedPosts, { IRelatedPostsProps } from "@/components/mediaPost/relatedPosts";
 import { IGuia, IPost } from "@/definitions/definitions";
-import SocialShare from "@/components/socialShare";
+import SocialShare, { ISocialShareProps } from "@/components/socialShare";
 import MobileTOC, { IMobileTOCProps } from "@/components/mobileTOC";
-import { IMetaTags } from "@/utils/helmet";
 
 export interface IPostProps {
     guia: IGuia;
     relationedPosts: IPost[];
+    url: string;
 }
 
 export interface IPostState {
@@ -56,7 +56,7 @@ export default class Post extends Component<IPostProps, IPostState> {
                     <div className="leftColumnPost">
                         <div className="stickyWrapper">
                             <ReadIndex {...this.getPropsReadIndex()} />
-                            {/*<SocialShare {...this.getPropsReadIndex()} />*/}
+                            <SocialShare {...this.getPropsSocialShare()} />
                         </div>
                     </div>
                 }
@@ -88,7 +88,15 @@ export default class Post extends Component<IPostProps, IPostState> {
     private getPropsMobileToc(): IMobileTOCProps {
         return {
             post: this.props.guia.Post,
-            metaTags: this.props.guia.MetaTags
+            metaTags: this.props.guia.MetaTags,
+            url: this.props.url
+        };
+    }
+
+    private getPropsSocialShare(): ISocialShareProps {
+        return {
+            metaTags: this.props.guia.MetaTags,
+            url: this.props.url
         };
     }
 }
