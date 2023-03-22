@@ -34,6 +34,7 @@ export interface IGuia {
     categories: ICategory[];
     authors: IAuthor[];
     reviewer: IAuthor;
+    views: number;
     //TODO habra que anyadir aqui las empresas cuando esten
 }
 

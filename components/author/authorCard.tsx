@@ -24,7 +24,7 @@ export default class AuthorCard extends React.Component<IAuthor, IAuthorCardStat
         const image: IMedia = author.profilePic;
         return (
             <div className={styles.authorCard}>
-                <Link href={Global.hostFront + "/sobre-nosotros/" + author.URL}>
+                <Link href={Global.hostFront + "/nuestro-equipo/" + author.URL}>
                 <div className={styles.imageWrapper}>
                     <Image className={styles.coverImage}
                         src={Global.host + image.formats.small.url}

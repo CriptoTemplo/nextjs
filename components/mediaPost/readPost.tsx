@@ -71,7 +71,7 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
                     </span>
                     <div className="dataCenter">
                         <i className="icon" />
-                        <span> {"3,3k"} </span>
+                        <span>{guia.views ?? "1"}</span>
                     </div>
                     <span className="readTimeLong">
                         {"Tiempo de lectura: " + post.readTime + "min."}
@@ -102,7 +102,7 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
                 </div>
                 <div className="reviewer">
                     <i className="icon" />
-                    <span className="reviewerHref">Revisado por: <Link href={"/sobre-nosotros/" + reviewer.URL}>{reviewer.name}</Link></span>
+                    <span className="reviewerHref">Revisado por: <Link href={"/nuestro-equipo/" + reviewer.URL}>{reviewer.name}</Link></span>
                     <div className="profilePic">
                         <Image src={Global.host + reviewer.profilePic.url}
                             alt={"Foto de perfil de " + reviewer.name}
@@ -120,7 +120,7 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
         const authorsHrefs: JSX.Element[] = authors.map((author: IAuthor, index: number) => {
             return (
                 <React.Fragment key={index}>
-                    <Link href={"/sobre-nosotros/" + author.URL}>{author.name}</Link>
+                    <Link href={"/nuestro-equipo/" + author.URL}>{author.name}</Link>
                     {index < authors.length - 1 ? <span> y </span> : ""}
                 </React.Fragment>
             )

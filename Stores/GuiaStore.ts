@@ -79,4 +79,11 @@ export default class GuiaStore {
 
         return BasicStore.baseFetch(urlString, "GET", "");
     }
+
+    public static async incrementViews(id: string): Promise<number> {
+        let url = new URL(GuiaStore.host + "/guias/" + id + "/views");
+        const urlString = url.toString();
+
+        return BasicStore.baseFetch(urlString, "PUT", "");
+    }
 }

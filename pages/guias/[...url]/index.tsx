@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import SectionWrapper, { ISectionWrapperProps } from "@/components/sectionWrapper";
 import CategoryWrapper from "@/containers/category/CategoryWrapper";
 import GuideWrapper from "@/containers/category/GuideWrapper";
+import { useEffect } from "react";
 
 type GuiaOrCategory = "guia" | "category" | "";
 
@@ -23,7 +24,16 @@ interface IGuiaProps {
 
 export default function Guia(props: IGuiaProps) {
 
-	const router = useRouter()
+	useEffect(() => {
+		try {
+			GuiaStore.incrementViews(props.guia._id);
+		}
+		catch (error) {
+			console.error('Failed to increment views:', error);
+		}
+	}, [props.guia._id]);
+
+	const router = useRouter();
 
 	const getPostProps = (): IPostProps => {
 		let guia: IGuia = props.guia;

@@ -18,7 +18,7 @@ export default function AuthorServer(props: IProps) {
 		return {
 			title: props.author.MetaTags.title,
 			description: props.author.MetaTags.description,
-			canonical: "sobre-nosotros/" + props.author.URL,
+			canonical: "/nuestro-equipo/" + props.author.URL,
 			published_time: props.author.published_at,
 			modified_time: props.author.updatedAt
 		}
