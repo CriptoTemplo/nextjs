@@ -299,7 +299,7 @@ body::-webkit-scrollbar-thumb {
 			max-height: calc(100vh - 13.2rem); // Toda la altura del dispositivo menos los elementos que esten en interfaz, margenes, header y socialButtons
     		box-sizing: border-box;
 			scrollbar-width: thin;
-			padding: $padding-default 0;
+			padding: $padding-default 0 0 0;
 
 			.title {
 				font-weight: 500;
@@ -314,7 +314,7 @@ body::-webkit-scrollbar-thumb {
 				position: relative;
 				overflow: auto;
 				//border-radius: $border-radius;
-				padding: 0 $padding-default;
+				padding: 0 $padding-default 0.7rem;
 				z-index: -3;
 				box-sizing: border-box;
 				scrollbar-width: thin;
