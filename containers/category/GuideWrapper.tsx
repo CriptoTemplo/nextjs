@@ -58,16 +58,12 @@ export default class GuideWrapper extends React.Component<ICategory, IGuideWrapp
     private renderUpSide(): JSX.Element {
         const content: string = this.props.upsideHTML;
         if (!content) return <></>
-        return <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.convertMarkDown(content)) }}></div>
+        return <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}></div>
     }
 
     private renderDownSide(): JSX.Element {
         const content: string = this.props.downsideHTML;
         if (!content) return <></>
-        return <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.convertMarkDown(content)) }}></div>
+        return <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}></div>
     }
-
-    private convertMarkDown(content: string): string {
-		return GlobalCache.converter.makeHtml(content);
-	};
 }

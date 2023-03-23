@@ -30,7 +30,7 @@ export default class Article extends React.Component<IArticleProps, IArticleStat
 	}
 
 	private mountHtmlContent(): JSX.Element {
-		const content = this.convertMarkDown(this.props.content);
+		const content = this.props.content;
 
         return (
             <>
@@ -38,8 +38,4 @@ export default class Article extends React.Component<IArticleProps, IArticleStat
             </>
         );
     }
-
-	private convertMarkDown(content: string): string {
-		return GlobalCache.converter.makeHtml(content);
-	}
 }

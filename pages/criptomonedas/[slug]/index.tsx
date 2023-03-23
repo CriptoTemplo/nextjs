@@ -62,14 +62,14 @@ export default function Criptomoneda(props: ICriptomonedaProps) {
 		return eval('`' + literal + '`');
 	};
 
-	const convertMarkDownCrypto = (coin: any, aux: string) => {
-		let content: string = GlobalCache.converter.makeHtml(aux);
+	const convertCrypto = (coin: any, aux: string) => {
+		let content: string = aux;
 		return convertLiteral(coin, content);
 	};
 
 	const getMediaPostProps = (): IPost => {
 		let cryptoPost = {} as IPost;
-		cryptoPost.content = convertMarkDownCrypto(coin, props.template.content);
+		cryptoPost.content = convertCrypto(coin, props.template.content);
 		return cryptoPost as any;
 	}
 

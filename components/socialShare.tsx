@@ -38,6 +38,7 @@ export default class SocialShare extends React.Component<ISocialShareProps, ISoc
         );
     }
 
+    // TODO meter el copiar url y definir orden
     private renderAllElements(): JSX.Element[] {
         const metaTags: IMetaTags = this.props.metaTags;
         const url: string = this.props.url;

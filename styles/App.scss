@@ -292,40 +292,52 @@ body::-webkit-scrollbar-thumb {
 
 		.readIndex {
 			position: relative;
-			overflow: auto;
+			overflow: hidden;
 			border-radius: $border-radius;
 			background: $content-background-linear;
 			z-index: -3;
 			max-height: calc(100vh - 13.2rem); // Toda la altura del dispositivo menos los elementos que esten en interfaz, margenes, header y socialButtons
     		box-sizing: border-box;
 			scrollbar-width: thin;
-
-			&::-webkit-scrollbar-track {
-				-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-				background-color: transparent;
-			}
-			
-			&::-webkit-scrollbar {
-				width: 6px;
-				background-color: transparent;
-			}
-			
-			&::-webkit-scrollbar-thumb {
-				-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-				border-radius: $border-radius;
-				background-color: #575757;
-			}
+			padding: $padding-default 0;
 
 			.title {
 				font-weight: 500;
 				color: $text-detail-title;
 				font-size: 1.2rem;
-				//text-transform: capitalize;
+				margin-bottom: 0.7rem;
+				padding: 0 $padding-default;
+				height: 2rem;
+			}
+
+			.navWrapper {
+				position: relative;
+				overflow: auto;
+				//border-radius: $border-radius;
+				padding: 0 $padding-default;
+				z-index: -3;
+				box-sizing: border-box;
+				scrollbar-width: thin;
+				max-height: calc(100vh - 17.3rem); // La altura maxima de readIndex - readIndex.padding y padding, height y marginBottom del title 
+				&::-webkit-scrollbar-track {
+					-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+					background-color: transparent;
+				}
+				
+				&::-webkit-scrollbar {
+					width: 6px;
+					background-color: transparent;
+				}
+				
+				&::-webkit-scrollbar-thumb {
+					-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+					border-radius: $border-radius;
+					background-color: #575757;
+				}	
 			}
 
 			nav {
 				height: fit-content;
-				margin-top: 0.7rem;
 
 				ul {
 					list-style: none;
