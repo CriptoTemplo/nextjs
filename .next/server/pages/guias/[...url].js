@@ -137,7 +137,8 @@ class ReadPost extends external_react_.Component {
                         src: global/* default.host */.ZP.host + post.coverImage?.url,
                         alt: post.coverImage.alternativeText,
                         width: 500,
-                        height: 500
+                        height: 500,
+                        priority: true
                     })
                 }),
                 /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
@@ -165,9 +166,7 @@ class ReadPost extends external_react_.Component {
                     ]
                 }),
                 /*#__PURE__*/ jsx_runtime_.jsx("hr", {
-                    style: {
-                        marginBottom: "2rem"
-                    }
+                    className: "headerSeparator"
                 })
             ]
         });
@@ -316,7 +315,7 @@ class ReadPost extends external_react_.Component {
         return element.innerHTML;
     }
     transformImg(element) {
-        Array.from(element.querySelectorAll("img")).map((element)=>element.outerHTML = `<Image alt="${element.getAttribute("alt")}"
+        Array.from(element.querySelectorAll("img")).map((element)=>element.outerHTML = `<Image alt="${element.getAttribute("alt") ?? ""}"
                 src="${element.getAttribute("src")}"
                 width=500 height=500 decoding="async" data-nimg="1"
                 class="coverImage" loading="lazy" style="color:transparent" />`);
@@ -572,12 +571,12 @@ class CarouselButtons extends external_react_.Component {
         const absoluteScrollNumber = container.scrollWidth / container.children.length;
         const scrollNumber = direction === "next" ? absoluteScrollNumber : -absoluteScrollNumber;
         container.scrollBy({
-            left: scrollNumber,
+            left: scrollNumber * (this.props.positionChangesOnTick ?? 1),
             behavior: "smooth"
         });
         // HACK hacemos la suma de scrollLeft porque no tenemos este dato en tiempo real
         // como esta behavior: "smooth", este valor no lo vemos reflejado hasta que vuelve a hacer un setState
-        const containerScrollLeft = container.scrollLeft + scrollNumber;
+        const containerScrollLeft = container.scrollLeft + scrollNumber * (this.props.positionChangesOnTick ?? 1);
         this.setState({
             canGoPrev: this.canScrollLeft(containerScrollLeft),
             canGoNext: this.canScrollRight(container, containerScrollLeft)
@@ -662,7 +661,8 @@ class SocialShare extends external_react_.Component {
     getCarouselProps() {
         return {
             elements: this.renderAllElements(),
-            hideButtons: true
+            hideButtons: true,
+            positionChangesOnTick: 4
         };
     }
     copyToClipboard = ()=>{

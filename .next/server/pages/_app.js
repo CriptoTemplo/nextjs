@@ -84,7 +84,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 9767:
+/***/ 4637:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -181,7 +181,10 @@ class SearchBar extends external_react_.Component {
 // EXTERNAL MODULE: ./node_modules/next/image.js
 var next_image = __webpack_require__(5675);
 var image_default = /*#__PURE__*/__webpack_require__.n(next_image);
+;// CONCATENATED MODULE: ./public/logo_thumbnail.webp
+/* harmony default export */ const logo_thumbnail = ({"src":"/_next/static/media/logo_thumbnail.2580b602.webp","height":156,"width":86,"blurDataURL":"data:image/webp;base64,UklGRnQAAABXRUJQVlA4WAoAAAAQAAAAAwAABwAAQUxQSCEAAAAAAJV1NBidoJ97TX50nKvTUbqPNJ2+WGKomKyqlhdOQCIAVlA4ICwAAADwAQCdASoEAAgAAkA4JZwCdH8AGBvawQAA/v2UHDuBFLC9yNxGYjwoZYOAAA==","blurWidth":4,"blurHeight":8});
 ;// CONCATENATED MODULE: ./containers/header/header.tsx
+
 
 
 
@@ -210,7 +213,7 @@ class Header extends external_react_.Component {
                                     className: "imgLogo",
                                     children: /*#__PURE__*/ jsx_runtime_.jsx((image_default()), {
                                         className: "coverImage",
-                                        src: global/* default.host */.ZP.host + "/uploads/thumbnail_logo_fe6e7fe36f.png",
+                                        src: logo_thumbnail,
                                         alt: "Toca para volver al incio",
                                         width: 150,
                                         height: 150
@@ -707,7 +710,7 @@ class Footer extends external_react_.Component {
                     className: "imgLogo",
                     children: /*#__PURE__*/ jsx_runtime_.jsx((image_default()), {
                         className: "coverImage",
-                        src: global/* default.host */.ZP.host + "/uploads/thumbnail_logo_fe6e7fe36f.png",
+                        src: logo_thumbnail,
                         alt: "Logo en grande de Empezar a Invertir",
                         width: 300,
                         height: 300
@@ -879,7 +882,7 @@ function _app_App({ Component , pageProps  }) {
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx("meta", {
                         property: "og:image",
-                        content: "https://empezarainvertir.com/api/uploads/logo_fe6e7fe36f.png"
+                        content: "https://empezarainvertir.com/logo.png"
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx("meta", {
                         property: "og:locale",
@@ -1321,7 +1324,7 @@ module.exports = require("react/jsx-runtime");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [398,675,505,664,553,927], () => (__webpack_exec__(9767)));
+var __webpack_exports__ = __webpack_require__.X(0, [398,675,505,664,553,927], () => (__webpack_exec__(4637)));
 module.exports = __webpack_exports__;
 
 })();
