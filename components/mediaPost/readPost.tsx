@@ -78,7 +78,7 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
                         {"Tiempo de lectura: " + post.readTime + "min."}
                     </span>
                 </div>
-                <hr className="headerSeparator"/>
+                <hr className="headerSeparator" />
             </div>
         );
     }
@@ -151,19 +151,19 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
                 </div>
                 <div className="dropdownMobileMenu">
                     <span>Empezar a Invertir exige a sus redactores que utilicen fuentes fiables para respaldar los articulos. Entre ellas se incluyen informes oficiales, white papers, entrevistas, articulos académicos y otros datos de expertos en la materia. En caso de que sea necesario, también hacemos referencia a investigaciones originales de otras editoriales de prestigio. Si quieres obtener más información sobre las normas que seguimos para producir los articulos y su contenido puedes consultar nuestra política de editorial.</span>
-                    {collapsed  ? "" : referencesHTML}
+                    {collapsed ? "" : referencesHTML}
                 </div>
             </div>
         )
     }
 
     private setVisibility(event: React.MouseEvent<HTMLElement>): void {
-		event.currentTarget.parentElement?.classList.toggle("active");
-		const aux: boolean = this.state.referencesCollapsed;
-		this.setState({
-			referencesCollapsed: !aux
-		})
-	}
+        event.currentTarget.parentElement?.classList.toggle("active");
+        const aux: boolean = this.state.referencesCollapsed;
+        this.setState({
+            referencesCollapsed: !aux
+        })
+    }
 
     private formatDate(date: string): string {
         const auxDate: Date = new Date(date);
@@ -188,6 +188,7 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
         element = this.transformImg(element);
         element = this.transformSpan(element);
         element = this.transfromHeadings(element);
+        element = this.transfromTables(element);
 
         return element.innerHTML;
     }
@@ -217,6 +218,20 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
         return element;
     }
 
+    private transfromTables(element: Element): Element {
+        const figureTables = element.querySelectorAll("figure.table");
+        figureTables.forEach((figure: Element) => {
+            const { document } = new JSDOM('<!DOCTYPE html>').window;
+            const wrapperTable = document.createElement('div');    
+            wrapperTable.classList.add("wrapperTable");
+
+            figure.parentNode?.insertBefore(wrapperTable, figure);
+            wrapperTable.appendChild(figure);
+        });
+
+        return element;
+    }
+
     private constructReferences(element: Element): IReference[] {
         const references = Array.from(element.querySelectorAll("span.editableSpan"))
             .map((element: Element) => ({
@@ -234,7 +249,7 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
 
     private handleCrossReferenceClick = (): void => {
         const element = document.getElementById("bibliography") as Element;
-		element?.scrollIntoView({ behavior: "smooth" });
+        element?.scrollIntoView({ behavior: "smooth" });
         if (this.state.referencesCollapsed) {
             document.getElementById("dropdownMobilePlaceholder")?.click();
         }
