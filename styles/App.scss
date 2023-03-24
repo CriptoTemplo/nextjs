@@ -588,7 +588,7 @@ body::-webkit-scrollbar-thumb {
 			h4,
 			h5,
 			h6,
-			p {
+			p, ul {
 				// padding: 0 1.7rem;
 				scroll-margin-top: $padding-top;
 				user-select: text;
@@ -638,7 +638,7 @@ body::-webkit-scrollbar-thumb {
 				margin-top: 0.75rem;
 			}
 
-			p {
+			p, ul {
 				font-size: 1rem;
 				letter-spacing: .3px;
 				font-weight: 300;
