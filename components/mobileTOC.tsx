@@ -9,7 +9,8 @@ import { IMetaTags } from "@/utils/helmet";
 
 export interface IMobileTOCProps {
     post: IPost,
-    metaTags: IMetaTags
+    metaTags: IMetaTags,
+    url: string;
 }
 
 export interface IMobileTOCState {
@@ -147,7 +148,7 @@ export default class MobileTOC extends React.Component<IMobileTOCProps, IMobileT
             navigator.share({
                 title: this.props.metaTags.title,
                 text: this.props.metaTags.description,
-                url: window.location.href
+                url: this.props.url
             })
                 .then(() => console.log('Successful share'))
                 .catch((error) => console.log('Error sharing', error));

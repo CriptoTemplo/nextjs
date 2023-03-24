@@ -19,7 +19,7 @@ export default function SobreNosotros(props: IProps) {
 		return {
 			title: props.landing.MetaTags.title,
 			description: props.landing.MetaTags.description,
-			canonical: "sobre-nosotros",
+			canonical: "/nuestro-equipo",
 			published_time: props.landing.published_at,
 			modified_time: props.landing.updatedAt
 		}

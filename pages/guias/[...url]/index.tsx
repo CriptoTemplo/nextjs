@@ -4,12 +4,13 @@ import GuiaStore from "@/stores/GuiaStore";
 import { ICategory, IGuia, IPost } from "@/definitions/definitions";
 import Utils from "@/utils/utils";
 import Post, { IPostProps } from "@/containers/post";
-import GlobalCache from "@/definitions/cache";
 import CryptoCard, { ICryptoCardProps } from "@/components/cryptoCard/cryptoCard";
 import { useRouter } from "next/router";
 import SectionWrapper, { ISectionWrapperProps } from "@/components/sectionWrapper";
 import CategoryWrapper from "@/containers/category/CategoryWrapper";
 import GuideWrapper from "@/containers/category/GuideWrapper";
+import { useEffect } from "react";
+import Global from "@/definitions/global";
 
 type GuiaOrCategory = "guia" | "category" | "";
 
@@ -23,11 +24,21 @@ interface IGuiaProps {
 
 export default function Guia(props: IGuiaProps) {
 
-	const router = useRouter()
+	useEffect(() => {
+		if (!Utils.isObjectEmpty(props.guia)) {
+			try {
+				GuiaStore.incrementViews(props.guia._id);
+			}
+			catch (error) {
+				console.error('Failed to increment views:', error);
+			}
+		}
+	}, [props]);
+
+	const router = useRouter();
 
 	const getPostProps = (): IPostProps => {
 		let guia: IGuia = props.guia;
-		guia.Post.content = GlobalCache.converter.makeHtml(guia.Post.content);
 		const relationedPosts: IPost[] = props.relationedGuias.map((guia: IGuia) => {
 			const aux: IPost = guia.Post;
 			aux.url = "guias/" + guia.URL;
@@ -35,7 +46,8 @@ export default function Guia(props: IGuiaProps) {
 		});
 		return {
 			guia,
-			relationedPosts: relationedPosts
+			relationedPosts: relationedPosts,
+			url: Global.hostFront + router.asPath
 		}
 	};
 
