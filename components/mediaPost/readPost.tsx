@@ -63,6 +63,7 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
                         alt={post.coverImage.alternativeText}
                         width={500}
                         height={500}
+                        priority
                     />
                 </div>
                 <div className="extraInfo">
@@ -77,7 +78,7 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
                         {"Tiempo de lectura: " + post.readTime + "min."}
                     </span>
                 </div>
-                <hr style={{ marginBottom: "2rem" }} />
+                <hr className="headerSeparator"/>
             </div>
         );
     }
@@ -193,7 +194,7 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
 
     private transformImg(element: Element): Element {
         Array.from(element.querySelectorAll("img")).map((element: Element) => (
-            element.outerHTML = `<Image alt="${element.getAttribute("alt")}"
+            element.outerHTML = `<Image alt="${element.getAttribute("alt") ?? ""}"
                 src="${element.getAttribute("src")}"
                 width=500 height=500 decoding="async" data-nimg="1"
                 class="coverImage" loading="lazy" style="color:transparent" />`

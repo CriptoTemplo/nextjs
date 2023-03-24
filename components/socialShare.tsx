@@ -70,7 +70,8 @@ export default class SocialShare extends React.Component<ISocialShareProps, ISoc
     private getCarouselProps(): ICarouselButtonsProps {
         return {
             elements: this.renderAllElements(),
-            hideButtons: true
+            hideButtons: true,
+            positionChangesOnTick: 4
         }
     }
 

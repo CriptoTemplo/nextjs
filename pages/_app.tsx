@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
 			<meta property="og:description" content="¿Quieres empezar a invertir? Encontrarás todo lo que necesitas sobre criptomonedas, trading, bolsa y mucho más ✅" />
 			<meta property="og:site_name" content="Empezar a Invertir" />
 			<meta property="og:url" content="https://empezarainvertir.com" />
-			<meta property="og:image" content="https://empezarainvertir.com/api/uploads/logo_fe6e7fe36f.png" />
+			<meta property="og:image" content="https://empezarainvertir.com/logo.png"/>
 			<meta property="og:locale" content="es_ES" />
 
 			<meta name="viewport" content="width=device-width, initial-scale=1" />

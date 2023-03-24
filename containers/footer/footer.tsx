@@ -7,6 +7,7 @@ import twitterLogo from '../../public/highlights-twitter.svg'
 import tiktokLogo from '../../public/highlights-tiktok.svg'
 import mailLogo from '../../public/highlights-mail.svg'
 import instagramLogo from '../../public/highlights-instagram.svg'
+import logo_thumbnail from '@/public/logo_thumbnail.webp'
 import Link from "next/link";
 
 export interface IFooterProps {
@@ -104,7 +105,7 @@ export default class Footer extends React.Component<IFooterProps, IFooterState> 
 		return (
 			<>
 				<div className="imgLogo">
-					<Image className="coverImage" src={Global.host + "/uploads/thumbnail_logo_fe6e7fe36f.png" }
+					<Image className="coverImage" src={logo_thumbnail}
 						alt="Logo en grande de Empezar a Invertir"
 						width={300}
 						height={300}
