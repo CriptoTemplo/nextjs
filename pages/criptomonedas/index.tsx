@@ -1,5 +1,5 @@
 import React from 'react';
-import Article, { IArticleProps } from "@/components/Article";
+import Article, { IArticleProps } from "@/components/article";
 import RankingCrypto, { IRankingCryptoProps } from "@/containers/rankingCrypto/rankingCrypto";
 import SectionWrapper, { ISectionWrapperProps } from "@/components/sectionWrapper";
 import { IRow, IStrapiCrypto } from "@/definitions/crypto";

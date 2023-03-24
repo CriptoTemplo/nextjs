@@ -3,10 +3,9 @@ import { IMetaTags, getHead } from "@/utils/helmet";
 import { IAuthor, ILanding } from "@/definitions/definitions";
 import AuthorStore from "@/stores/AuthorStore";
 import global from "@/styles/global.module.scss";
-import Author from "@/containers/author/author";
 import GlobalStore from "@/stores/GlobalStore";
 import AuthorCarousel from "@/containers/author/authorCarousel";
-import Article from "@/components/Article";
+import Article from "@/components/article";
 
 interface IProps {
 	authors: IAuthor[];

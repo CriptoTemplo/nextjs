@@ -23,6 +23,26 @@ body {
 	margin: 0;
 }
 
+/* For Chrome, Safari, and Opera */
+::-webkit-selection {
+	background-color: #553b00;
+}
+
+/* For Firefox */
+::-moz-selection {
+	background-color: #553b00;
+}
+
+/* For Internet Explorer and Edge */
+::-ms-selection {
+	background-color: #553b00;
+}
+
+::selection {
+	background-color: rgba(112, 112, 86, 0.494);
+	;
+}
+
 body::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 	background-color: #575757;
@@ -81,6 +101,12 @@ body::-webkit-scrollbar-thumb {
 	cursor: pointer;
 }
 
+@media only screen and (max-width: 1024px) {
+	.bibliography {
+		scroll-margin-top: calc($padding-top + 2rem) !important;
+	}
+}
+
 .mobileTOC {
 	cursor: pointer;
 	display: hidden;
@@ -94,16 +120,18 @@ body::-webkit-scrollbar-thumb {
 	opacity: 0;
 	box-sizing: border-box;
 	border-top: 1px solid #545454;
-    border-bottom: 1px solid #545454;
-    /* background-color: #f8f8f8; */
-    background-position: bottom left;
-    background-repeat: no-repeat;
-    background-size: 100% 2px;
-    //text-transform: uppercase;
+	border-bottom: 1px solid #545454;
+	/* background-color: #f8f8f8; */
+	background-position: bottom left;
+	background-repeat: no-repeat;
+	background-size: 100% 2px;
+
+	//text-transform: uppercase;
 	&.show {
 		display: flex;
 		align-items: center;
 	}
+
 	.toc {
 		font-weight: 700;
 		width: calc(100% - 32px);
@@ -119,13 +147,15 @@ body::-webkit-scrollbar-thumb {
 				height: inherit;
 				background-color: inherit;
 				font-size: 1rem;
+
 				&:hover {
 					color: inherit;
 				}
+
 				.text {
 					height: 100%;
 					line-height: 2.3rem;
-					font-family: Cabin-semi-bold,Cabin-fallback,sans-serif;
+					font-family: Cabin-semi-bold, Cabin-fallback, sans-serif;
 					font-size: .875rem;
 					font-weight: 600;
 					letter-spacing: .07rem;
@@ -136,21 +166,42 @@ body::-webkit-scrollbar-thumb {
 			.dropdownMobileMenu {
 				cursor: auto;
 				margin-top: 0;
-    			padding-top: 0;
+				padding-top: 0;
 				background-color: #363636;
 				word-break: break-word;
 				border-top: 1px solid #545454;
-				padding-top: 0.4rem;
+				padding: 0.4rem 0;
 			}
 
 			&.active .dropdownMobileMenu {
 				// HACK esto de aqui es para que la animacion funcion, sin max-height: fixed no va
-				max-height: 1000vh;
-				transition: max-height ease-out 25s;
+				max-height: calc(100vh - 12.3rem); // 7.3 rem = header.height + toc.height + 5 rem arbitrario
+				transition: max-height ease-out 1.5s;
 			}
 
 			nav {
-				height: fit-content;
+				height: inherit;
+				max-height: calc(100vh - 12.8rem); // Max- height de arriba - valor de paddingTop de arriba (parent)
+				overflow: auto;
+				scrollbar-width: thin;
+
+				&::-webkit-scrollbar-track {
+					-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+					background-color: transparent;
+				}
+
+				&::-webkit-scrollbar {
+					width: 6px;
+					background-color: transparent;
+					background-color: rgb(42, 42, 42);
+					border-radius: $border-radius;
+				}
+
+				&::-webkit-scrollbar-thumb {
+					-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+					border-radius: $border-radius;
+					background-color: #575757;
+				}
 
 				ul {
 					list-style: none;
@@ -192,6 +243,7 @@ body::-webkit-scrollbar-thumb {
 							}
 						}
 					}
+
 					li:hover,
 					li:focus-visible {
 						color: rgb(255, 187, 1);
@@ -200,10 +252,12 @@ body::-webkit-scrollbar-thumb {
 			}
 		}
 	}
+
 	.share {
 		display: flex;
 		margin-left: auto;
 		border-left: 1px solid #989898;
+
 		img {
 			height: 26px;
 			filter: invert(100%) sepia(100%) saturate(100%) brightness(70%) contrast(200%);
@@ -287,7 +341,7 @@ body::-webkit-scrollbar-thumb {
 			background: linear-gradient(90deg, hsla(0, 0%, 42%, 0.1), rgba(38, 38, 38, 0.3));
 			z-index: -3;
 			box-sizing: border-box;
-    		padding: 0 0.4rem;
+			padding: 0 0.4rem;
 		}
 
 		.readIndex {
@@ -297,7 +351,7 @@ body::-webkit-scrollbar-thumb {
 			background: $content-background-linear;
 			z-index: -3;
 			max-height: calc(100vh - 13.2rem); // Toda la altura del dispositivo menos los elementos que esten en interfaz, margenes, header y socialButtons
-    		box-sizing: border-box;
+			box-sizing: border-box;
 			scrollbar-width: thin;
 			padding: $padding-default 0 0 0;
 
@@ -319,23 +373,24 @@ body::-webkit-scrollbar-thumb {
 				box-sizing: border-box;
 				scrollbar-width: thin;
 				max-height: calc(100vh - 17.3rem); // La altura maxima de readIndex - readIndex.padding y padding, height y marginBottom del title 
+
 				&::-webkit-scrollbar-track {
 					-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 					background-color: transparent;
 				}
-				
+
 				&::-webkit-scrollbar {
 					width: 6px;
 					background-color: transparent;
 					background-color: rgb(42, 42, 42);
-					border-radius: $border-radius;	
+					border-radius: $border-radius;
 				}
-				
+
 				&::-webkit-scrollbar-thumb {
 					-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
 					border-radius: $border-radius;
 					background-color: #575757;
-				}	
+				}
 			}
 
 			nav {
@@ -447,8 +502,8 @@ body::-webkit-scrollbar-thumb {
 						background-image: url("../public/blue-check.svg");
 						background-size: cover;
 						background-position: center;
-						height: 2rem;
-						width: 2rem;
+						height: 1.6rem;
+						width: 1.6rem;
 						margin-right: 0.2rem;
 						filter: invert(100%) sepia(70%) saturate(100%) hue-rotate(20deg) brightness(150%) contrast(200%)
 					}
@@ -469,7 +524,7 @@ body::-webkit-scrollbar-thumb {
 
 			.extraInfo {
 				display: grid;
-				grid-template-columns: auto 1fr auto;
+				grid-template-columns: auto auto auto;
 				grid-gap: 1rem;
 				overflow: hidden;
 				padding-top: 0.7rem;
@@ -494,12 +549,12 @@ body::-webkit-scrollbar-thumb {
 					overflow: hidden;
 					text-overflow: ellipsis;
 					text-align: start;
-					font-weight: 400;
+					font-weight: 300;
 				}
 
 				.readTimeLong {
 					text-align-last: end;
-					font-weight: 400;
+					font-weight: 300;
 				}
 
 				.dataCenter {
@@ -512,26 +567,21 @@ body::-webkit-scrollbar-thumb {
 						background-size: cover;
 						background-position: center;
 						width: 24px;
-						filter: invert(80%) sepia(6%) saturate(25%) hue-rotate(20deg) brightness(108%) contrast(86%);
+						height: 24px;
+						filter: invert(80%) sepia(6%) saturate(25%) hue-rotate(20deg) brightness(88%) contrast(86%);
 						margin-right: 0.2rem;
+						scale: 0.9;
 					}
 				}
 
 				.readTime {
 					display: flex;
-
-					.icon {
-						background-image: url("https://empezarainvertir.com/api" + "/uploads/schedule_FILL_0_wght400_GRAD_0_opsz48_60a9db770e.svg");
-						fill: whitesmoke;
-						background-size: cover;
-						background-position: center;
-						width: 24px;
-						filter: invert(80%) sepia(6%) saturate(25%) hue-rotate(20deg) brightness(108%) contrast(86%);
-						margin-right: 0.2rem;
-					}
 				}
 			}
 
+			hr.headerSeparator {
+				margin-bottom: 2rem;
+			}
 
 			h2,
 			h3,
@@ -541,6 +591,13 @@ body::-webkit-scrollbar-thumb {
 			p {
 				// padding: 0 1.7rem;
 				scroll-margin-top: $padding-top;
+				user-select: text;
+				a {
+					cursor: pointer;
+					color: #cda439;
+					font-weight: 300;
+					text-decoration: none;
+				}
 			}
 
 			h1 {
@@ -590,40 +647,42 @@ body::-webkit-scrollbar-thumb {
 			}
 
 			figure.image {
-				margin: 0;
+				margin: 0.7rem 0;
+				border-radius: $border-radius;
+				overflow: hidden;
+
+				img {
+					border-radius: 0;
+				}
 
 				figcaption {
-					background: #cda4398f;
-					color: lightgrey;
-					margin: 0;
-					border-radius: $border-radius;
+					background: #9a9365;
+					color: black;
+									margin: 0;
+					//border-radius: $border-radius;
 					padding: 0.5rem 0.7rem;
 				}
 			}
 
 			img {
+				display: block;
 				border-radius: 1.5rem;
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
 				height: auto;
+				pointer-events: none;
 			}
 
 			.crossReference {
 				cursor: pointer;
-				color: $text-hover-link;
-				display: inline-flex;
-				align-items: baseline;
-				justify-content: center;
-				position: inherit;
-				margin-left: 2px;
-				padding-bottom: 0;
-				vertical-align: baseline;
-				font-size: .875rem;
+				color: #cda439;
+				margin-left: 0.15rem;
+				font-size: 0.825rem;
 				font-weight: 400;
-				letter-spacing: .07em;
-				line-height: 1;
-				text-indent: 0;
+				letter-spacing: 0.05rem;
+				top: -0.25rem;
+				position: relative;
 			}
 
 			.wrapperImage {
@@ -643,6 +702,7 @@ body::-webkit-scrollbar-thumb {
 			.bibliography {
 				text-align: left;
 				scroll-margin-top: $padding-top;
+				margin-top: 2.6rem;
 
 				.dropdownMobilePlaceholder:hover {
 					color: $text-hover-link;
@@ -668,8 +728,8 @@ body::-webkit-scrollbar-thumb {
 
 				&.active .dropdownMobileMenu {
 					// HACK esto de aqui es para que la animacion funcion, sin max-height: fixed no va
-					max-height: 1000vh;
-					transition: max-height ease-out 25s;
+					transition: max-height ease-out 10s;
+					max-height: 5000px;
 				}
 			}
 		}
@@ -823,6 +883,7 @@ body::-webkit-scrollbar-thumb {
 				display: none;
 			}
 		}
+
 		h2 {
 			scroll-margin-top: 8.4rem !important;
 		}
@@ -982,7 +1043,7 @@ body::-webkit-scrollbar-thumb {
 						display: flex;
 
 						.icon {
-							background-image: url("https://empezarainvertir.com/api" + "/uploads/schedule_FILL_0_wght400_GRAD_0_opsz48_60a9db770e.svg");
+							background-image: url("../public/clock_icon.svg");
 							fill: whitesmoke;
 							background-size: cover;
 							background-position: center;

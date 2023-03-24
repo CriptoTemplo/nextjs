@@ -5,6 +5,7 @@ export interface ICarouselButtonsProps {
     elements: JSX.Element[];
     resizeDangerous?: boolean;
     hideButtons?: boolean;
+	positionChangesOnTick?: number;
 }
 
 export interface ICarouselButtonsState {
@@ -70,13 +71,13 @@ export default class CarouselButtons extends React.Component<ICarouselButtonsPro
 		const absoluteScrollNumber: number = container.scrollWidth / container.children.length;
 		const scrollNumber = direction === "next" ? absoluteScrollNumber : -absoluteScrollNumber;
 		container.scrollBy({
-			left: scrollNumber,
+			left: scrollNumber * (this.props.positionChangesOnTick ?? 1), // TODO AQUI
 			behavior: "smooth"
 		})
 
 		// HACK hacemos la suma de scrollLeft porque no tenemos este dato en tiempo real
 		// como esta behavior: "smooth", este valor no lo vemos reflejado hasta que vuelve a hacer un setState
-		const containerScrollLeft = container.scrollLeft + scrollNumber;
+		const containerScrollLeft = container.scrollLeft + scrollNumber * (this.props.positionChangesOnTick ?? 1);
 		this.setState({
 			canGoPrev: this.canScrollLeft(containerScrollLeft),
 			canGoNext: this.canScrollRight(container, containerScrollLeft)
