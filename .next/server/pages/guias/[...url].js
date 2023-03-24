@@ -312,6 +312,7 @@ class ReadPost extends external_react_.Component {
         element = this.transformImg(element);
         element = this.transformSpan(element);
         element = this.transfromHeadings(element);
+        element = this.transfromTables(element);
         return element.innerHTML;
     }
     transformImg(element) {
@@ -328,6 +329,17 @@ class ReadPost extends external_react_.Component {
     }
     transfromHeadings(element) {
         Array.from(element.querySelectorAll("h2,h3")).map((element)=>element.id = element.textContent ? utils/* default.idGeneratorFromString */.Z.idGeneratorFromString(element.textContent) : "");
+        return element;
+    }
+    transfromTables(element) {
+        const figureTables = element.querySelectorAll("figure.table");
+        figureTables.forEach((figure)=>{
+            const { document: document1  } = new external_jsdom_namespaceObject.JSDOM("<!DOCTYPE html>").window;
+            const wrapperTable = document1.createElement("div");
+            wrapperTable.classList.add("wrapperTable");
+            figure.parentNode?.insertBefore(wrapperTable, figure);
+            wrapperTable.appendChild(figure);
+        });
         return element;
     }
     constructReferences(element) {
