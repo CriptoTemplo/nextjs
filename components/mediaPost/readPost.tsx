@@ -194,7 +194,7 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
     private transformImg(element: Element): Element {
         Array.from(element.querySelectorAll("img")).map((element: Element) => (
             element.outerHTML = `<Image alt="${element.getAttribute("alt")}"
-                src="${Global.host + element.getAttribute("src")}"
+                src="${element.getAttribute("src")}"
                 width=500 height=500 decoding="async" data-nimg="1"
                 class="coverImage" loading="lazy" style="color:transparent" />`
         ));
