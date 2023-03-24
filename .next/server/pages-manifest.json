@@ -3,12 +3,12 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/exchanges": "pages/exchanges.html",
-  "/guias/[...url]": "pages/guias/[...url].js",
   "/criptomonedas/[slug]": "pages/criptomonedas/[slug].js",
-  "/sitemap": "pages/sitemap.js",
-  "/": "pages/index.js",
-  "/sobre-nosotros/[URL]": "pages/sobre-nosotros/[URL].js",
+  "/guias/[...url]": "pages/guias/[...url].js",
   "/guias": "pages/guias.js",
   "/criptomonedas": "pages/criptomonedas.js",
-  "/sobre-nosotros": "pages/sobre-nosotros.js"
+  "/": "pages/index.js",
+  "/sitemap": "pages/sitemap.js",
+  "/nuestro-equipo": "pages/nuestro-equipo.js",
+  "/nuestro-equipo/[URL]": "pages/nuestro-equipo/[URL].js"
 }

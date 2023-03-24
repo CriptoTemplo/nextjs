@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import Article from '@/components/Article';
+import Article from '@/components/article';
 import SectionWrapper from '@/components/sectionWrapper';
 import GlobalStore from "@/stores/GlobalStore";
 import { IMetaTags, getHead } from "@/utils/helmet";

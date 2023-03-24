@@ -66,6 +66,11 @@ class GuiaStore {
         const urlString = url.toString();
         return _BasicStore__WEBPACK_IMPORTED_MODULE_1__/* ["default"].baseFetch */ .Z.baseFetch(urlString, "GET", "");
     }
+    static async incrementViews(id) {
+        let url = new URL(GuiaStore.host + "/guias/" + id + "/views");
+        const urlString = url.toString();
+        return _BasicStore__WEBPACK_IMPORTED_MODULE_1__/* ["default"].baseFetch */ .Z.baseFetch(urlString, "PUT", "");
+    }
 }
 
 

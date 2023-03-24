@@ -51,6 +51,17 @@ module.exports = {
 
 /***/ }),
 
+/***/ 2806:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/highlights-telegram.ae453e96.svg","height":371,"width":416});
+
+/***/ }),
+
 /***/ 2892:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -73,7 +84,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 3777:
+/***/ 9767:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -574,8 +585,8 @@ class ReturnTop extends external_react_.Component {
 
 // EXTERNAL MODULE: ./public/highlights-youtube.svg
 var highlights_youtube = __webpack_require__(6389);
-;// CONCATENATED MODULE: ./public/highlights-telegram.svg
-/* harmony default export */ const highlights_telegram = ({"src":"/_next/static/media/highlights-telegram.ae453e96.svg","height":371,"width":416});
+// EXTERNAL MODULE: ./public/highlights-telegram.svg
+var highlights_telegram = __webpack_require__(2806);
 // EXTERNAL MODULE: ./public/highlights-twitter.svg
 var highlights_twitter = __webpack_require__(2892);
 ;// CONCATENATED MODULE: ./public/highlights-tiktok.svg
@@ -642,7 +653,7 @@ class Footer extends external_react_.Component {
                     className: "socialLogo",
                     children: /*#__PURE__*/ jsx_runtime_.jsx((image_default()), {
                         className: "coverImage",
-                        src: highlights_telegram,
+                        src: highlights_telegram/* default */.Z,
                         alt: "Link para ir al canal de Telegram de Empezar a Invertir",
                         width: 48,
                         height: 48
@@ -1301,14 +1312,6 @@ module.exports = require("react-dom");
 "use strict";
 module.exports = require("react/jsx-runtime");
 
-/***/ }),
-
-/***/ 5165:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("showdown");
-
 /***/ })
 
 };
@@ -1318,7 +1321,7 @@ module.exports = require("showdown");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [398,675,505,664,553,927], () => (__webpack_exec__(3777)));
+var __webpack_exports__ = __webpack_require__.X(0, [398,675,505,664,553,927], () => (__webpack_exec__(9767)));
 module.exports = __webpack_exports__;
 
 })();

@@ -9,13 +9,9 @@ exports.modules = {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ GlobalCache)
 /* harmony export */ });
-/* harmony import */ var showdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5165);
-/* harmony import */ var showdown__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(showdown__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _stores_GlobalStore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5553);
-
+/* harmony import */ var _stores_GlobalStore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5553);
 
 class GlobalCache {
-    static converter = new showdown__WEBPACK_IMPORTED_MODULE_0__.Converter();
     static numberFormatter = new Intl.NumberFormat("es-ES");
     static numberFormatter2decimals = new Intl.NumberFormat("es-ES", {
         minimumFractionDigits: 2,
@@ -25,7 +21,7 @@ class GlobalCache {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0
     });
-    static cryptoTemplate = _stores_GlobalStore__WEBPACK_IMPORTED_MODULE_1__/* ["default"].getCryptoTemplate */ .Z.getCryptoTemplate();
+    static cryptoTemplate = _stores_GlobalStore__WEBPACK_IMPORTED_MODULE_0__/* ["default"].getCryptoTemplate */ .Z.getCryptoTemplate();
     static dateFormatter = new Intl.DateTimeFormat("es-ES");
 }
 

@@ -1,4 +1,4 @@
-import Article from "@/components/Article";
+import Article from "@/components/article";
 import AuthorBanner from "@/components/author/authorBanner";
 import { IAuthor } from "@/definitions/definitions";
 import styles from "@/styles/author.module.scss";

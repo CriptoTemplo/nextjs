@@ -163,13 +163,13 @@ function Criptomoneda(props) {
         literal = isomorphic_dompurify__WEBPACK_IMPORTED_MODULE_7___default().sanitize(literal);
         return eval("`" + literal + "`");
     };
-    const convertMarkDownCrypto = (coin, aux)=>{
-        let content = _definitions_cache__WEBPACK_IMPORTED_MODULE_8__/* ["default"].converter.makeHtml */ .Z.converter.makeHtml(aux);
+    const convertCrypto = (coin, aux)=>{
+        let content = aux;
         return convertLiteral(coin, content);
     };
     const getMediaPostProps = ()=>{
         let cryptoPost = {};
-        cryptoPost.content = convertMarkDownCrypto(coin, props.template.content);
+        cryptoPost.content = convertCrypto(coin, props.template.content);
         return cryptoPost;
     };
     const getSectionWrapperProps = ()=>{
@@ -325,13 +325,6 @@ module.exports = require("react");
 /***/ ((module) => {
 
 module.exports = require("react/jsx-runtime");
-
-/***/ }),
-
-/***/ 5165:
-/***/ ((module) => {
-
-module.exports = require("showdown");
 
 /***/ })
 
