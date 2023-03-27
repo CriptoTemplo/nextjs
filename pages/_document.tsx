@@ -20,11 +20,16 @@ export default function Document() {
 				<meta name="msapplication-config" content="/browserconfig.xml" />
 				<meta name="theme-color" content="#ffffff" />
 
+				{/*Google Fonts*/}
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+				<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;500;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+
 				<Script async strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-Z3D5DH5P3F" />
 				<Script async strategy="afterInteractive" id="googleTag"
 					dangerouslySetInnerHTML={{
-						__html: 
-						`
+						__html:
+							`
 							window.dataLayer = window.dataLayer || [];
 							function gtag(){dataLayer.push(arguments);}
 							gtag('js', new Date());
