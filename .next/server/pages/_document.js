@@ -81,6 +81,19 @@ function Document() {
                         name: "theme-color",
                         content: "#ffffff"
                     }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("link", {
+                        rel: "preconnect",
+                        href: "https://fonts.googleapis.com"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("link", {
+                        rel: "preconnect",
+                        href: "https://fonts.gstatic.com",
+                        crossOrigin: ""
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("link", {
+                        href: "https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;500;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap",
+                        rel: "stylesheet"
+                    }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_script__WEBPACK_IMPORTED_MODULE_2___default()), {
                         async: true,
                         strategy: "afterInteractive",
