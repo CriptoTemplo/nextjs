@@ -97,20 +97,23 @@ class ReadPost extends external_react_.Component {
             referencesCollapsed: true
         };
     }
-    // After the component did mount
+    // TODO comprobar si al desmontarse el eventListener se borra o no
     componentDidMount() {
         const references = Array.from(document.querySelectorAll("span.crossReference"));
         references.map((element)=>element.addEventListener("click", this.handleCrossReferenceClick));
     }
     render() {
         if (utils/* default.isObjectEmpty */.Z.isObjectEmpty(this.props)) return "";
-        const rawContent = this.props.Post.content;
+        const guia = this.props;
+        const rawContent = guia.Post.content;
         const elementContent = this.constructFakeElement(rawContent);
         let lowerPost = this.lowerPost(elementContent);
+        const oembedUrl = this.getIframes(elementContent);
         const editedContent = this.constructContent(elementContent);
-        const purifiedcontent = external_isomorphic_dompurify_default().sanitize(editedContent);
+        elementContent.innerHTML = external_isomorphic_dompurify_default().sanitize(elementContent.innerHTML);
+        const finalContent = this.transformIframes(editedContent, oembedUrl);
         let upperPost = this.upperPost();
-        let midPost = this.midPost(purifiedcontent);
+        let midPost = this.midPost(finalContent);
         return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
             className: "readPost",
             children: [
@@ -146,7 +149,7 @@ class ReadPost extends external_react_.Component {
                     children: [
                         /*#__PURE__*/ jsx_runtime_.jsx("span", {
                             className: "updatedDate",
-                            children: "Actualizaci\xf3n: " + this.formatDate(this.props.updatedAt)
+                            children: "Actualizaci\xf3n: " + this.formatDate(guia.updatedAt)
                         }),
                         /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                             className: "dataCenter",
@@ -313,7 +316,8 @@ class ReadPost extends external_react_.Component {
         element = this.transformSpan(element);
         element = this.transfromHeadings(element);
         element = this.transfromTables(element);
-        return element.innerHTML;
+        element = this.transformLinks(element);
+        return element;
     }
     transformImg(element) {
         Array.from(element.querySelectorAll("img")).map((element)=>element.outerHTML = `<Image alt="${element.getAttribute("alt") ?? ""}"
@@ -333,14 +337,43 @@ class ReadPost extends external_react_.Component {
     }
     transfromTables(element) {
         const figureTables = element.querySelectorAll("figure.table");
+        const { document: document1  } = new external_jsdom_namespaceObject.JSDOM("<!DOCTYPE html>").window;
         figureTables.forEach((figure)=>{
-            const { document: document1  } = new external_jsdom_namespaceObject.JSDOM("<!DOCTYPE html>").window;
             const wrapperTable = document1.createElement("div");
             wrapperTable.classList.add("wrapperTable");
             figure.parentNode?.insertBefore(wrapperTable, figure);
             wrapperTable.appendChild(figure);
         });
         return element;
+    }
+    transformLinks(element) {
+        Array.from(element.querySelectorAll("a")).map((element)=>{
+            const href = element.getAttribute("href") ?? "";
+            const isInternal = href.startsWith(global/* default.hostFront */.ZP.hostFront);
+            if (isInternal) return;
+            const follow = element.hasAttribute("follow");
+            const sponsored = element.hasAttribute("sponsored");
+            const ugc = element.hasAttribute("ugc");
+            const rel = "noopener noreferrer" + (follow ? "" : " nofollow") + (ugc ? " ugc" : "") + (sponsored ? " sponsored" : "");
+            element.setAttribute("target", "_blank");
+            element.setAttribute("rel", rel);
+        });
+        return element;
+    }
+    transformIframes(element, oembedUrl) {
+        const { document: document1  } = new external_jsdom_namespaceObject.JSDOM("<!DOCTYPE html>").window;
+        element.querySelectorAll("figure.media").forEach((figure, index)=>{
+            if (oembedUrl[index].includes("youtu.be")) figure.classList.add("youtube");
+            const iframe = this.createIframe(oembedUrl[index], document1);
+            if (iframe) figure.innerHTML = iframe;
+            else figure.remove();
+        });
+        return element.innerHTML;
+    }
+    getIframes(element) {
+        return Array.from(element.querySelectorAll("figure.media")).map((figure)=>{
+            return figure.children.item(0)?.getAttribute("url") ?? "";
+        });
     }
     constructReferences(element) {
         const references = Array.from(element.querySelectorAll("span.editableSpan")).map((element)=>({
@@ -368,6 +401,40 @@ class ReadPost extends external_react_.Component {
             document.getElementById("dropdownMobilePlaceholder")?.click();
         }
     };
+    createIframe(url, documentTemp) {
+        if (url.startsWith("https://youtu.be/")) {
+            const pattern = /^https:\/\/youtu\.be\/([A-Za-z0-9_-]{11})$/;
+            const match = url.match(pattern);
+            if (match) {
+                const src = `https://www.youtube.com/embed/${match[1]}`;
+                return `<iframe width="100%" height="100%" frameborder="0"
+                            allowfullscreen="" title="YouTube video player"
+                            src="${src}"
+                        />`;
+            }
+        }
+        if (url.startsWith("https://twitter.com/")) {
+            const pattern = /https:\/\/twitter\.com\/([^\/]+)\/status\/(\d+)/;
+            const match = url.match(pattern);
+            if (match) {
+                utils/* default.loadTwitterScript */.Z.loadTwitterScript();
+                return `<blockquote class="twitter-tweet" data-theme="dark" data-lang="es" data-dnt="false" data-width="550">
+                            <a href="${url}" target="_blank" rel="noopener noreferrer nofollow"></a>
+                        </blockquote>`;
+            }
+        }
+        if (url.startsWith("https://www.instagram.com/")) {
+            const pattern = /https:\/\/www\.instagram\.com\/p\/([\w-]+)/;
+            const match = url.match(pattern);
+            if (match) {
+                const src = `https://www.instagram.com/p/${match[1]}/embed`;
+                return `<iframe width="100%" height="600" frameborder="1" allowfullscreen=""
+                            src="${src}"
+                        />`;
+            }
+        }
+        return "";
+    }
 }
 
 ;// CONCATENATED MODULE: ./components/mediaPost/readIndex.tsx
@@ -521,6 +588,8 @@ var authorCarousel_module_default = /*#__PURE__*/__webpack_require__.n(authorCar
 class CarouselButtons extends external_react_.Component {
     carouselRef = /*#__PURE__*/ external_react_.createRef();
     carouselContainerRef = /*#__PURE__*/ external_react_.createRef();
+    leftButtonRef = /*#__PURE__*/ external_react_.createRef();
+    rightButtonRef = /*#__PURE__*/ external_react_.createRef();
     constructor(props){
         super(props);
         this.state = {
@@ -529,10 +598,9 @@ class CarouselButtons extends external_react_.Component {
         };
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.hideButtons) {
-            const buttons = Array.from(this.carouselContainerRef.current.querySelectorAll("button"));
-            buttons[0].style.display = !this.state.canGoPrev ? "none" : ""; // Left Button
-            buttons[1].style.display = !this.state.canGoNext ? "none" : ""; // Right Button
+        if (this.props.hideButtons && this.leftButtonRef.current && this.rightButtonRef.current) {
+            this.leftButtonRef.current.style.display = !this.state.canGoPrev ? "none" : ""; // Left Button
+            this.rightButtonRef.current.style.display = !this.state.canGoNext ? "none" : ""; // Right Button
         }
     }
     componentDidMount() {
@@ -554,6 +622,7 @@ class CarouselButtons extends external_react_.Component {
             children: [
                 /*#__PURE__*/ jsx_runtime_.jsx("button", {
                     className: (authorCarousel_module_default()).button,
+                    ref: this.leftButtonRef,
                     onClick: ()=>this.handleNavigation("previous"),
                     disabled: !this.state.canGoPrev,
                     children: /*#__PURE__*/ jsx_runtime_.jsx("i", {
@@ -569,6 +638,7 @@ class CarouselButtons extends external_react_.Component {
                 }),
                 /*#__PURE__*/ jsx_runtime_.jsx("button", {
                     className: (authorCarousel_module_default()).button,
+                    ref: this.rightButtonRef,
                     onClick: ()=>this.handleNavigation("next"),
                     disabled: !this.state.canGoNext,
                     children: /*#__PURE__*/ jsx_runtime_.jsx("i", {
@@ -620,6 +690,8 @@ class CarouselButtons extends external_react_.Component {
     }
 }
 
+// EXTERNAL MODULE: ./definitions/cache.ts
+var cache = __webpack_require__(2545);
 ;// CONCATENATED MODULE: ./components/socialShare.tsx
 
 
@@ -630,12 +702,11 @@ class CarouselButtons extends external_react_.Component {
 //import tiktokLogo from '../../public/highlights-tiktok.svg'
 
 
+
 class SocialShare extends external_react_.Component {
     constructor(props){
         super(props);
-        this.state = {
-            copySuccess: ""
-        };
+        this.state = {};
     }
     render() {
         return /*#__PURE__*/ jsx_runtime_.jsx("div", {
@@ -645,7 +716,7 @@ class SocialShare extends external_react_.Component {
             })
         });
     }
-    // TODO meter el copiar url y definir orden
+    // TODO definir orden
     renderAllElements() {
         const metaTags = this.props.metaTags;
         const url = this.props.url;
@@ -660,6 +731,7 @@ class SocialShare extends external_react_.Component {
         const emailHref = `mailto:?subject=${encodedText}&body=${encodedUrl}`;
         const pinterestHref = `https://pinterest.com/pin/create/button/?url=${encodedUrl}&description=${encodedText}`;
         let elements = [];
+        elements.push(this.renderCopyUrl(highlights_twitter/* default */.Z, "Copiar el Enlace"));
         elements.push(this.renderImageElement(twitterHref, highlights_twitter/* default */.Z, "Compartir en Twitter"));
         elements.push(this.renderImageElement(facebookHref, highlights_twitter/* default */.Z, "Compartir en Facebook"));
         elements.push(this.renderImageElement(whatsappHref, highlights_twitter/* default */.Z, "Compartir en WhatsApp"));
@@ -679,12 +751,7 @@ class SocialShare extends external_react_.Component {
     }
     copyToClipboard = ()=>{
         navigator.clipboard.writeText(this.props.url);
-        this.setState({
-            copySuccess: "Copied to clipboard!"
-        });
-        setTimeout(()=>this.setState({
-                copySuccess: ""
-            }), 2000);
+        cache/* default.toast.current */.Z.toast.current?.showToast("El enlace se ha copiado en el portapapeles", "Informational");
     };
     renderImageElement(href, src, alt) {
         return /*#__PURE__*/ jsx_runtime_.jsx("a", {
@@ -701,82 +768,20 @@ class SocialShare extends external_react_.Component {
             })
         });
     }
-} /*
-                <button onClick={this.copyToClipboard}>Copiar URL</button>
-                {this.state.copySuccess && <span>{this.state.copySuccess}</span>}
-
-{this.renderImageElement(`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}`, twitterLogo, "Compartir en Twitter")}
-<a
-    href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share on Twitter
-</a>
-
-{this.renderImageElement(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, twitterLogo, "Compartir en Facebook")}
-<a
-    href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share on Facebook
-</a>
-
-{this.renderImageElement(`https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`, twitterLogo, "Compartir en WhatsApp")}
-<a
-    href={`https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share on WhatsApp
-</a>
-
-{this.renderImageElement(`https://telegram.me/share/url?url=${encodedUrl}&text=${encodedText}`, telegramLogo, "Compartir en Telegram")}
-<a
-    href={`https://telegram.me/share/url?url=${encodedUrl}&text=${encodedText}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share on Telegram
-</a>
-
-{this.renderImageElement(`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`, telegramLogo, "Compartir en LinkedIn")}
-<a
-    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share on LinkedIn
-</a>
-
-{this.renderImageElement(`https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedText}`, telegramLogo, "Compartir en Reddit")}
-<a
-    href={`https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedText}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share on Reddit
-</a>
-
-{this.renderImageElement(`mailto:?subject=${encodedText}&body=${encodedUrl}`, telegramLogo, "Compartir por Correo Electrónico")}
-<a
-    href={`mailto:?subject=${encodedText}&body=${encodedUrl}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share via Email
-</a>
-
-{this.renderImageElement(`https://pinterest.com/pin/create/button/?url=${encodedUrl}&description=${encodedText}`, telegramLogo, "Compartir en Pinterest")}
-<a
-    href={`https://pinterest.com/pin/create/button/?url=${encodedUrl}&description=${encodedText}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share on Pinterest
-</a>
-*/ 
+    renderCopyUrl(src, alt) {
+        return /*#__PURE__*/ jsx_runtime_.jsx("button", {
+            onClick: this.copyToClipboard,
+            className: (socialNetworks_module_default()).href,
+            children: /*#__PURE__*/ jsx_runtime_.jsx((image_default()), {
+                className: (socialNetworks_module_default()).socialLogo,
+                src: src,
+                alt: alt ?? "Copiar el Enlace",
+                width: 48,
+                height: 48
+            })
+        });
+    }
+}
 
 ;// CONCATENATED MODULE: ./public/share_icon.svg
 /* harmony default export */ const share_icon = ({"src":"/_next/static/media/share_icon.7312b8b2.svg","height":48,"width":48});
@@ -1295,6 +1300,7 @@ class GuideWrapper extends external_react_.Component {
 
 function Guia(props) {
     (0,external_react_.useEffect)(()=>{
+        if (false) {}
         if (!utils/* default.isObjectEmpty */.Z.isObjectEmpty(props.guia)) {
             try {
                 GuiaStore/* default.incrementViews */.Z.incrementViews(props.guia._id);

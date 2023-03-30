@@ -10,6 +10,9 @@ exports.modules = {
 /* harmony export */   "Z": () => (/* binding */ GlobalCache)
 /* harmony export */ });
 /* harmony import */ var _stores_GlobalStore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5553);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
 
 class GlobalCache {
     static numberFormatter = new Intl.NumberFormat("es-ES");
@@ -23,6 +26,7 @@ class GlobalCache {
     });
     static cryptoTemplate = _stores_GlobalStore__WEBPACK_IMPORTED_MODULE_0__/* ["default"].getCryptoTemplate */ .Z.getCryptoTemplate();
     static dateFormatter = new Intl.DateTimeFormat("es-ES");
+    static toast = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
 }
 
 
@@ -78,6 +82,9 @@ class Utils {
         // Remove Spanish accents
         string = string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         return string;
+    }
+    static loadTwitterScript() {
+        if (false) {}
     }
 }
 

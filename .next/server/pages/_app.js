@@ -29,6 +29,21 @@ module.exports = {
 
 /***/ }),
 
+/***/ 376:
+/***/ ((module) => {
+
+// Exports
+module.exports = {
+	"toast": "toast_toast__2HPQR",
+	"informational": "toast_informational__mgakw",
+	"sucess": "toast_sucess__eJxhi",
+	"warning": "toast_warning__KmzN6",
+	"error": "toast_error__MZuvV"
+};
+
+
+/***/ }),
+
 /***/ 2182:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -84,7 +99,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 4637:
+/***/ 7796:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -804,6 +819,76 @@ class Footer extends external_react_.Component {
     }
 }
 
+// EXTERNAL MODULE: ./styles/toast.module.scss
+var toast_module = __webpack_require__(376);
+var toast_module_default = /*#__PURE__*/__webpack_require__.n(toast_module);
+;// CONCATENATED MODULE: ./components/toast.tsx
+
+
+
+class Toast extends external_react_.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            text: "",
+            type: "Informational",
+            isRendering: false
+        };
+    }
+    componentWillUnmount() {
+        if (this.timeoutId) clearTimeout(this.timeoutId);
+    }
+    render() {
+        const displayStyle = this.state.isRendering ? "block" : "block";
+        const opacity = this.state.isRendering ? "1" : "0";
+        const className = `${(toast_module_default()).toast} ${this.getClassname(this.state.type)}`;
+        return /*#__PURE__*/ jsx_runtime_.jsx("div", {
+            className: className,
+            style: {
+                display: displayStyle,
+                opacity: opacity
+            },
+            children: this.state.text
+        });
+    }
+    showToast(text, type) {
+        if (text === this.state.text && type === this.state.type && this.timeoutId) return;
+        this.setState({
+            text,
+            type,
+            isRendering: true
+        });
+        // Clear the existing timeout before setting a new one
+        if (this.timeoutId) {
+            clearTimeout(this.timeoutId);
+            this.timeoutId = undefined;
+        }
+        // Set a new timeout to hide the toast after 3 seconds
+        this.timeoutId = setTimeout(()=>{
+            this.setState({
+                isRendering: false
+            });
+            this.timeoutId = undefined;
+        }, 3000);
+    }
+    getClassname(type) {
+        switch(type){
+            case "Informational":
+                return (toast_module_default()).informational;
+            case "Sucess":
+                return (toast_module_default()).sucess;
+            case "Warning":
+                return (toast_module_default()).warning;
+            case "Error":
+                return (toast_module_default()).error;
+            default:
+                return "";
+        }
+    }
+}
+
+// EXTERNAL MODULE: ./definitions/cache.ts
+var cache = __webpack_require__(2545);
 ;// CONCATENATED MODULE: external "react-ga4"
 const external_react_ga4_namespaceObject = require("react-ga4");
 var external_react_ga4_default = /*#__PURE__*/__webpack_require__.n(external_react_ga4_namespaceObject);
@@ -822,7 +907,12 @@ var footer = __webpack_require__(2266);
 var table = __webpack_require__(8676);
 // EXTERNAL MODULE: ./styles/sitemap.scss
 var sitemap = __webpack_require__(7031);
+// EXTERNAL MODULE: ./styles/ckeditor.scss
+var ckeditor = __webpack_require__(6688);
 ;// CONCATENATED MODULE: ./pages/_app.tsx
+
+
+
 
 
 
@@ -908,6 +998,9 @@ function _app_App({ Component , pageProps  }) {
                             ...pageProps
                         })
                     }),
+                    /*#__PURE__*/ jsx_runtime_.jsx(Toast, {
+                        ref: cache/* default.toast */.Z.toast
+                    }),
                     /*#__PURE__*/ jsx_runtime_.jsx(ReturnTop, {}),
                     /*#__PURE__*/ jsx_runtime_.jsx(Footer, {})
                 ]
@@ -980,6 +1073,13 @@ const withRouter = (Component)=>(props)=>{
 /***/ }),
 
 /***/ 8911:
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ 6688:
 /***/ (() => {
 
 
@@ -1324,7 +1424,7 @@ module.exports = require("react/jsx-runtime");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [398,675,505,664,553,927], () => (__webpack_exec__(4637)));
+var __webpack_exports__ = __webpack_require__.X(0, [398,675,505,664,553,927], () => (__webpack_exec__(7796)));
 module.exports = __webpack_exports__;
 
 })();

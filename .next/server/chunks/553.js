@@ -10,6 +10,7 @@ exports.modules = {
 /* harmony export */   "ZP": () => (/* binding */ Global)
 /* harmony export */ });
 /* unused harmony exports EHost, EHostFront */
+// TODO aqui hay definiciones que no deberian estar
 var EHost;
 (function(EHost) {
     EHost["develop"] = "http://localhost:8082";
