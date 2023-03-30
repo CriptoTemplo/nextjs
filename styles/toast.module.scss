@@ -1,0 +1,39 @@
+.toast {
+    position: fixed;
+    bottom: $padding-default;
+    right: $padding-default;
+    background-color: grey;
+    color: whitesmoke;
+    z-index: 3;
+    transition: opacity 0.5s ease-out;
+    padding: $padding-default;
+    border-radius: $border-radius;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+}
+
+.informational {
+    background-color: #424242;
+}
+
+.sucess {
+    background-color: greenyellow;
+    color: darkslategrey;
+}
+
+.warning {
+    background-color: yellow;
+    color: darkslategrey;
+}
+
+.error {
+    background-color: red;
+    color: whitesmoke;
+}
+
+@media only screen and (max-width: 768px) {
+    .toast {
+        left: $padding-default;
+    }
+}

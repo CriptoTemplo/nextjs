@@ -25,6 +25,10 @@ interface IGuiaProps {
 export default function Guia(props: IGuiaProps) {
 
 	useEffect(() => {
+		if (typeof window !== 'undefined' && window.twttr && window.twttr.widgets) {
+			window.twttr.widgets.load();
+		}
+
 		if (!Utils.isObjectEmpty(props.guia)) {
 			try {
 				GuiaStore.incrementViews(props.guia._id);

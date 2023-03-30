@@ -9,6 +9,7 @@ import twitterLogo from '@/public/highlights-twitter.svg'
 import mailLogo from '@/public/highlights-mail.svg'
 import instagramLogo from '@/public/highlights-instagram.svg'
 import CarouselButtons, { ICarouselButtonsProps } from "./carouselButtons";
+import GlobalCache from "@/definitions/cache";
 
 export interface ISocialShareProps {
     metaTags: IMetaTags;
@@ -16,7 +17,6 @@ export interface ISocialShareProps {
 }
 
 export interface ISocialShareState {
-    copySuccess: string;
 }
 
 export default class SocialShare extends React.Component<ISocialShareProps, ISocialShareState> {
@@ -24,7 +24,6 @@ export default class SocialShare extends React.Component<ISocialShareProps, ISoc
         super(props);
 
         this.state = {
-            copySuccess: ""
         }
     }
 
@@ -32,13 +31,12 @@ export default class SocialShare extends React.Component<ISocialShareProps, ISoc
 
         return (
             <div className="shareButtons">
-
                 <CarouselButtons {...this.getCarouselProps()} />
             </div>
         );
     }
 
-    // TODO meter el copiar url y definir orden
+    // TODO definir orden
     private renderAllElements(): JSX.Element[] {
         const metaTags: IMetaTags = this.props.metaTags;
         const url: string = this.props.url;
@@ -55,6 +53,7 @@ export default class SocialShare extends React.Component<ISocialShareProps, ISoc
         const pinterestHref: string = `https://pinterest.com/pin/create/button/?url=${encodedUrl}&description=${encodedText}`;
 
         let elements: JSX.Element [] = [];
+        elements.push(this.renderCopyUrl(twitterLogo, "Copiar el Enlace"));
         elements.push(this.renderImageElement(twitterHref, twitterLogo, "Compartir en Twitter"));
         elements.push(this.renderImageElement(facebookHref, twitterLogo, "Compartir en Facebook"));
         elements.push(this.renderImageElement(whatsappHref, twitterLogo, "Compartir en WhatsApp"));
@@ -77,8 +76,7 @@ export default class SocialShare extends React.Component<ISocialShareProps, ISoc
 
     private copyToClipboard = (): void => {
         navigator.clipboard.writeText(this.props.url);
-        this.setState({copySuccess: 'Copied to clipboard!' });
-        setTimeout(() => this.setState({copySuccess: '' }), 2000);    
+        GlobalCache.toast.current?.showToast("El enlace se ha copiado en el portapapeles", "Informational")
     }
 
     private renderImageElement(href:string, src: string, alt?: string): JSX.Element {
@@ -93,81 +91,17 @@ export default class SocialShare extends React.Component<ISocialShareProps, ISoc
             </a>
         )
     }
+
+    private renderCopyUrl(src: string, alt?: string): JSX.Element {
+        return (
+            <button onClick={this.copyToClipboard} className={styles.href}>
+                <Image className={styles.socialLogo}
+                    src={src}
+                    alt={alt ?? "Copiar el Enlace"}
+                    width={48}
+                    height={48}
+                />
+            </button>
+        )
+    }
 }
-
-/*
-                <button onClick={this.copyToClipboard}>Copiar URL</button>
-                {this.state.copySuccess && <span>{this.state.copySuccess}</span>}
-
-{this.renderImageElement(`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}`, twitterLogo, "Compartir en Twitter")}
-<a
-    href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share on Twitter
-</a>
-
-{this.renderImageElement(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, twitterLogo, "Compartir en Facebook")}
-<a
-    href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share on Facebook
-</a>
-
-{this.renderImageElement(`https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`, twitterLogo, "Compartir en WhatsApp")}
-<a
-    href={`https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share on WhatsApp
-</a>
-
-{this.renderImageElement(`https://telegram.me/share/url?url=${encodedUrl}&text=${encodedText}`, telegramLogo, "Compartir en Telegram")}
-<a
-    href={`https://telegram.me/share/url?url=${encodedUrl}&text=${encodedText}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share on Telegram
-</a>
-
-{this.renderImageElement(`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`, telegramLogo, "Compartir en LinkedIn")}
-<a
-    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share on LinkedIn
-</a>
-
-{this.renderImageElement(`https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedText}`, telegramLogo, "Compartir en Reddit")}
-<a
-    href={`https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedText}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share on Reddit
-</a>
-
-{this.renderImageElement(`mailto:?subject=${encodedText}&body=${encodedUrl}`, telegramLogo, "Compartir por Correo Electrónico")}
-<a
-    href={`mailto:?subject=${encodedText}&body=${encodedUrl}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share via Email
-</a>
-
-{this.renderImageElement(`https://pinterest.com/pin/create/button/?url=${encodedUrl}&description=${encodedText}`, telegramLogo, "Compartir en Pinterest")}
-<a
-    href={`https://pinterest.com/pin/create/button/?url=${encodedUrl}&description=${encodedText}`}
-    target="_blank"
-    rel="noopener noreferrer nofollow"
->
-    Share on Pinterest
-</a>
-*/

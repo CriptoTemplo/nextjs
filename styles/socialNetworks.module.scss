@@ -2,6 +2,14 @@
     display: flex;
 }
 
+button.href {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+}
+
 .href {
     width: 3rem;
     height: 3rem;

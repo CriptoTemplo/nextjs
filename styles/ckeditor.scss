@@ -1,0 +1,92 @@
+.marker-yellow {
+    background-color: #ffff00;
+}
+
+.marker-red {
+    background-color: #e71313;
+}
+
+.marker-green {
+    background-color: #62f962;
+}
+
+.marker-pink {
+    background-color: #fc7899;
+}
+
+.marker-blue {
+    background-color: #72ccfd;
+}
+
+.pen-red {
+    color: #e71313;
+    background: none;
+}
+
+.pen-green {
+    color: #128a00;
+    background: none;
+}
+
+.todo-list {
+    list-style: none;
+    margin-left: -1rem !important;
+
+    li {
+        margin-bottom: 5px;
+
+        label {
+            display: inline-flex;
+            gap: 0.4rem;
+
+            input[type="checkbox"]:disabled {
+                appearance: none;
+                outline: none;
+                position: relative;
+
+                &:disabled {
+                    &::before {
+                        content: "";
+                        display: block;
+                        width: 1rem;
+                        height: 1rem;
+                        border: 1px solid #ccc;
+                        background-color: #f0f0f0;
+                        border-radius: 100%;
+                    }
+
+                    &:checked {
+                        &::before {
+                            border-radius: $border-radius;
+                            background-color: #6c5bff;
+                            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='18px' height='18px'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M9 16.2l-3.5-3.5a.996.996 0 1 0-1.41 1.41l4.24 4.24c.39.39 1.02.39 1.41 0l8.08-8.08a.996.996 0 1 0-1.41-1.41L9 16.2z'/%3E%3C/svg%3E");
+                            background-repeat: no-repeat;
+                            background-position: center;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+figure.media {
+    box-sizing: border-box;
+    border-radius: $border-radius;
+    margin: 1rem 0;
+    overflow: hidden;
+    display: flex;
+
+    &.youtube {
+        height: 300px;
+    }
+
+    .twitter-tweet {
+        margin: 2px !important;
+        box-sizing: border-box;
+        overflow: hidden;
+        border-radius: $border-radius;
+        border: 2px solid #ffffff6b;
+    }
+}

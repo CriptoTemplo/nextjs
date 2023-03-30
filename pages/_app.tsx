@@ -2,6 +2,8 @@ import type { AppProps } from 'next/app'
 import HeaderWrapper from "containers/header/headerWrapper";
 import ReturnTop from "@/components/returnTop";
 import Footer from "containers/footer/footer";
+import Toast from "@/components/toast";
+import GlobalCache from "@/definitions/cache";
 import ReactGA from 'react-ga4';
 import React from "react";
 import Head from "next/head";
@@ -11,6 +13,7 @@ import '@/styles/dropdownMobile.scss';
 import '@/styles/footer.scss';
 import "@/styles/table.scss"
 import '@/styles/sitemap.scss';
+import '@/styles/ckeditor.scss';
 
 export default function App({ Component, pageProps }: AppProps) {
 	React.useEffect(() => {
@@ -41,6 +44,7 @@ export default function App({ Component, pageProps }: AppProps) {
 			<div className="wrapperMain">
 				<Component {...pageProps} />
 			</div>
+			<Toast ref={GlobalCache.toast}/>
 			<ReturnTop />
 			<Footer />
 		</div>

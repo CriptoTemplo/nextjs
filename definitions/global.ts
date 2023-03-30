@@ -1,18 +1,19 @@
+// TODO aqui hay definiciones que no deberian estar
+
 export enum EHost {
     develop = "http://localhost:8082",
-    deploy = "https://empezarainvertir.com/api" 
+    deploy = "https://empezarainvertir.com/api"
 }
 
 export enum EHostFront {
     develop = "http://localhost:3000",
-    deploy = "https://empezarainvertir.com" 
+    deploy = "https://empezarainvertir.com"
 }
 
 export default class Global {
     static host = EHost.deploy;
     static hostFront = EHostFront.deploy;
 }
-
 export interface IHeader {
     Header: IHeaderDropdown[];
 }
