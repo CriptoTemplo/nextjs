@@ -18,6 +18,8 @@ type TDirection = "next" | "previous";
 export default class CarouselButtons extends React.Component<ICarouselButtonsProps, ICarouselButtonsState> {
 	private carouselRef: React.RefObject<HTMLDivElement> = React.createRef();
 	private carouselContainerRef: React.RefObject<HTMLDivElement> = React.createRef();
+	private leftButtonRef: React.RefObject<HTMLButtonElement> = React.createRef();
+	private rightButtonRef: React.RefObject<HTMLButtonElement> = React.createRef();
 
 	constructor(props: ICarouselButtonsProps) {
 		super(props);
@@ -29,10 +31,9 @@ export default class CarouselButtons extends React.Component<ICarouselButtonsPro
 	}
 
     public componentDidUpdate(prevProps: Readonly<ICarouselButtonsProps>, prevState: Readonly<ICarouselButtonsState>, snapshot?: any): void {
-        if (this.props.hideButtons) {
-            const buttons = Array.from((this.carouselContainerRef.current as HTMLDivElement).querySelectorAll("button"));
-            buttons[0].style.display = !this.state.canGoPrev ? "none" : ""; // Left Button
-            buttons[1].style.display = !this.state.canGoNext ? "none" : ""; // Right Button
+        if (this.props.hideButtons && this.leftButtonRef.current && this.rightButtonRef.current) {
+            this.leftButtonRef.current.style.display = !this.state.canGoPrev ? "none" : ""; // Left Button
+            this.rightButtonRef.current.style.display = !this.state.canGoNext ? "none" : ""; // Right Button
         }
     }
 
@@ -53,13 +54,13 @@ export default class CarouselButtons extends React.Component<ICarouselButtonsPro
 		const elements: JSX.Element[] = this.props.elements;
 		return (
 			<div className={styles.carouselContainer} ref={this.carouselContainerRef}>
-				<button className={styles.button} onClick={() => this.handleNavigation("previous")} disabled={!this.state.canGoPrev}>
+				<button className={styles.button} ref={this.leftButtonRef} onClick={() => this.handleNavigation("previous")} disabled={!this.state.canGoPrev}>
 					<i className={styles.left} />
 				</button>
 				<div className={styles.carousel} ref={this.carouselRef}>
 					{elements.map((element: JSX.Element, index: number) => <React.Fragment key={index}>{element}</React.Fragment>)}
 				</div>
-				<button className={styles.button} onClick={() => this.handleNavigation("next")} disabled={!this.state.canGoNext} >
+				<button className={styles.button} ref={this.rightButtonRef} onClick={() => this.handleNavigation("next")} disabled={!this.state.canGoNext} >
 					<i className={styles.right} />
 				</button>
 			</div>
@@ -71,7 +72,7 @@ export default class CarouselButtons extends React.Component<ICarouselButtonsPro
 		const absoluteScrollNumber: number = container.scrollWidth / container.children.length;
 		const scrollNumber = direction === "next" ? absoluteScrollNumber : -absoluteScrollNumber;
 		container.scrollBy({
-			left: scrollNumber * (this.props.positionChangesOnTick ?? 1), // TODO AQUI
+			left: scrollNumber * (this.props.positionChangesOnTick ?? 1),
 			behavior: "smooth"
 		})
 

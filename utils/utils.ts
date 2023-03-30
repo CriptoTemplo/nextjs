@@ -55,4 +55,21 @@ export default class Utils {
 
         return string;
     }
+
+    public static loadTwitterScript(): void {
+        if (typeof window !== 'undefined') {
+            const scriptId = 'twitter-widgets';
+
+            if (document.getElementById(scriptId)) {
+                return; // The script is already loaded
+            }
+
+            const script = document.createElement('script');
+            script.id = scriptId;
+            script.src = 'https://platform.twitter.com/widgets.js';
+            script.async = true;
+            script.charset = 'utf-8';
+            document.body.appendChild(script);
+        }
+    }
 }

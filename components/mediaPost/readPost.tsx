@@ -21,7 +21,7 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
         }
     }
 
-    // After the component did mount
+    // TODO comprobar si al desmontarse el eventListener se borra o no
     public componentDidMount() {
         const references = Array.from(document.querySelectorAll("span.crossReference"));
         references.map((element: Element) => element.addEventListener("click", this.handleCrossReferenceClick));
@@ -29,15 +29,20 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
 
     public render() {
         if (Utils.isObjectEmpty(this.props)) return "";
-        const rawContent: string = this.props.Post.content;
+        const guia: IGuia = this.props;
+        const rawContent: string = guia.Post.content;
         const elementContent: Element = this.constructFakeElement(rawContent);
         let lowerPost: JSX.Element = this.lowerPost(elementContent);
 
-        const editedContent: string = this.constructContent(elementContent);
-        const purifiedcontent: string = DOMPurify.sanitize(editedContent);
+        const oembedUrl: string[] = this.getIframes(elementContent);
+
+        const editedContent: Element = this.constructContent(elementContent);
+        elementContent.innerHTML = DOMPurify.sanitize(elementContent.innerHTML);
+
+        const finalContent: string = this.transformIframes(editedContent, oembedUrl);
 
         let upperPost: JSX.Element = this.upperPost();
-        let midPost: JSX.Element = this.midPost(purifiedcontent);
+        let midPost: JSX.Element = this.midPost(finalContent);
 
         return (
             <div className="readPost">
@@ -68,7 +73,7 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
                 </div>
                 <div className="extraInfo">
                     <span className="updatedDate">
-                        {"Actualización: " + this.formatDate(this.props.updatedAt)}
+                        {"Actualización: " + this.formatDate(guia.updatedAt)}
                     </span>
                     <div className="dataCenter">
                         <i className="icon" />
@@ -184,13 +189,14 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
         return element;
     }
 
-    private constructContent(element: Element): string {
+    private constructContent(element: Element): Element {
         element = this.transformImg(element);
         element = this.transformSpan(element);
         element = this.transfromHeadings(element);
         element = this.transfromTables(element);
+        element = this.transformLinks(element);
 
-        return element.innerHTML;
+        return element;
     }
 
     private transformImg(element: Element): Element {
@@ -220,9 +226,9 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
 
     private transfromTables(element: Element): Element {
         const figureTables = element.querySelectorAll("figure.table");
+        const { document } = new JSDOM('<!DOCTYPE html>').window;
         figureTables.forEach((figure: Element) => {
-            const { document } = new JSDOM('<!DOCTYPE html>').window;
-            const wrapperTable = document.createElement('div');    
+            const wrapperTable = document.createElement('div');
             wrapperTable.classList.add("wrapperTable");
 
             figure.parentNode?.insertBefore(wrapperTable, figure);
@@ -230,6 +236,43 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
         });
 
         return element;
+    }
+
+    private transformLinks(element: Element): Element {
+        Array.from(element.querySelectorAll("a")).map((element: Element) => {
+            const href: string = element.getAttribute("href") ?? "";
+            const isInternal: boolean = href.startsWith(Global.hostFront);
+            if (isInternal) return;
+
+            const follow: boolean = element.hasAttribute("follow");
+            const sponsored: boolean = element.hasAttribute("sponsored");
+            const ugc: boolean = element.hasAttribute("ugc");
+
+            const rel: string = "noopener noreferrer" + (follow ? "" : " nofollow") + (ugc ? " ugc" : "") + (sponsored ? " sponsored" : "");
+
+            element.setAttribute("target", "_blank");
+            element.setAttribute("rel", rel);
+        });
+        return element;
+    }
+
+    private transformIframes(element: Element, oembedUrl: string[]): string {
+        const { document } = new JSDOM('<!DOCTYPE html>').window;
+        element.querySelectorAll("figure.media").forEach((figure: Element, index: number) => {
+            if (oembedUrl[index].includes("youtu.be")) figure.classList.add("youtube");
+
+            const iframe = this.createIframe(oembedUrl[index], document);
+            if (iframe) figure.innerHTML = iframe;
+            else figure.remove();
+        });
+
+        return element.innerHTML;
+    }
+
+    private getIframes(element: Element): string[] {
+        return Array.from(element.querySelectorAll("figure.media")).map((figure: Element) => {
+            return figure.children.item(0)?.getAttribute("url") ?? "";
+        });
     }
 
     private constructReferences(element: Element): IReference[] {
@@ -253,5 +296,44 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
         if (this.state.referencesCollapsed) {
             document.getElementById("dropdownMobilePlaceholder")?.click();
         }
+    }
+
+    private createIframe(url: string, documentTemp: Document): string {
+        if (url.startsWith('https://youtu.be/')) {
+            const pattern = /^https:\/\/youtu\.be\/([A-Za-z0-9_-]{11})$/;
+            const match = url.match(pattern);
+
+            if (match) {
+                const src: string = `https://www.youtube.com/embed/${match[1]}`;
+                return `<iframe width="100%" height="100%" frameborder="0"
+                            allowfullscreen="" title="YouTube video player"
+                            src="${src}"
+                        />`
+            }
+        }
+
+        if (url.startsWith('https://twitter.com/')) {
+            const pattern = /https:\/\/twitter\.com\/([^\/]+)\/status\/(\d+)/;
+            const match = url.match(pattern);
+            if (match) {
+                Utils.loadTwitterScript();
+                return `<blockquote class="twitter-tweet" data-theme="dark" data-lang="es" data-dnt="false" data-width="550">
+                            <a href="${url}" target="_blank" rel="noopener noreferrer nofollow"></a>
+                        </blockquote>`;
+            }
+        }
+
+        if (url.startsWith('https://www.instagram.com/')) {
+            const pattern = /https:\/\/www\.instagram\.com\/p\/([\w-]+)/;
+            const match = url.match(pattern);
+            if (match) {
+                const src: string = `https://www.instagram.com/p/${match[1]}/embed`;
+                return `<iframe width="100%" height="600" frameborder="1" allowfullscreen=""
+                            src="${src}"
+                        />`
+            }
+        }
+
+        return "";
     }
 }

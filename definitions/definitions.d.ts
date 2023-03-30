@@ -1,7 +1,7 @@
 import { IMetaTags } from "../utils/helmet";
 import { ICrypto, IStrapiCrypto } from "./crypto";
 
-export interface IEmpty {};
+export interface IEmpty { };
 
 export type IMediaPostType = "Article" | "Tutorial" | "News";
 
@@ -154,4 +154,18 @@ export interface ISocialNetworks {
     facebook: string;
     instagram: string;
     linkedin: string;
+}
+
+declare namespace twttr {
+    export interface Widgets {
+        load: (element?: HTMLElement | null) => void;
+    }
+}
+
+declare global {
+    interface Window {
+        twttr: {
+            widgets: twttr.Widgets;
+        };
+    }
 }
