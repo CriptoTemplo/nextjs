@@ -930,6 +930,7 @@ function _app_App({ Component , pageProps  }) {
     external_react_default().useEffect(()=>{
         external_react_ga4_default().initialize("G-Z3D5DH5P3F");
     });
+    cache/* default.addSanitizeHook */.Z.addSanitizeHook();
     // TODO revisar el return TOP
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
         children: [
@@ -1118,6 +1119,14 @@ const withRouter = (Component)=>(props)=>{
 /***/ (() => {
 
 
+
+/***/ }),
+
+/***/ 3059:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("isomorphic-dompurify");
 
 /***/ }),
 

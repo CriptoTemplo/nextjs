@@ -5,8 +5,8 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/KIaMKcaaI1P3d61LDmUZa/_buildManifest.js",
-    "static/KIaMKcaaI1P3d61LDmUZa/_ssgManifest.js"
+    "static/MgJpyTzbJcXdhytWLZJKW/_buildManifest.js",
+    "static/MgJpyTzbJcXdhytWLZJKW/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
@@ -14,15 +14,14 @@
       "static/chunks/webpack-59c5c889f52620d6.js",
       "static/chunks/framework-73b8966a3c579ab0.js",
       "static/chunks/main-69a178ab7f70753f.js",
-      "static/chunks/238-1f12f92d4b616107.js",
-      "static/chunks/pages/index-3f5dfc4e663d29e8.js"
+      "static/chunks/pages/index-b2ff34867dd06f6f.js"
     ],
     "/_app": [
       "static/chunks/webpack-59c5c889f52620d6.js",
       "static/chunks/framework-73b8966a3c579ab0.js",
       "static/chunks/main-69a178ab7f70753f.js",
-      "static/css/cf049c2e8a394675.css",
-      "static/chunks/pages/_app-422d2769d70598ff.js"
+      "static/css/73d3f8301ec8fea9.css",
+      "static/chunks/pages/_app-4afd700f28e1572c.js"
     ],
     "/_error": [
       "static/chunks/webpack-59c5c889f52620d6.js",
@@ -34,23 +33,20 @@
       "static/chunks/webpack-59c5c889f52620d6.js",
       "static/chunks/framework-73b8966a3c579ab0.js",
       "static/chunks/main-69a178ab7f70753f.js",
-      "static/chunks/238-1f12f92d4b616107.js",
-      "static/chunks/pages/criptomonedas-1fd8a12fc7d16635.js"
+      "static/chunks/pages/criptomonedas-a5a1d21d877a6cfb.js"
     ],
     "/criptomonedas/[slug]": [
       "static/chunks/webpack-59c5c889f52620d6.js",
       "static/chunks/framework-73b8966a3c579ab0.js",
       "static/chunks/main-69a178ab7f70753f.js",
-      "static/chunks/238-1f12f92d4b616107.js",
       "static/css/4fd96e7bb72b5401.css",
-      "static/chunks/pages/criptomonedas/[slug]-62bc85af93b71910.js"
+      "static/chunks/pages/criptomonedas/[slug]-76bcd6982c13fea8.js"
     ],
     "/exchanges": [
       "static/chunks/webpack-59c5c889f52620d6.js",
       "static/chunks/framework-73b8966a3c579ab0.js",
       "static/chunks/main-69a178ab7f70753f.js",
-      "static/chunks/238-1f12f92d4b616107.js",
-      "static/chunks/pages/exchanges-d134d252de48cd7e.js"
+      "static/chunks/pages/exchanges-004a0e24ee66e9a2.js"
     ],
     "/guias": [
       "static/chunks/webpack-59c5c889f52620d6.js",
@@ -64,33 +60,29 @@
       "static/chunks/main-69a178ab7f70753f.js",
       "static/chunks/fec483df-21b74ba5e85140b9.js",
       "static/chunks/d848df63-fe627d5ee57c8fa0.js",
-      "static/chunks/238-1f12f92d4b616107.js",
-      "static/chunks/199-6dc712c88c82e560.js",
+      "static/chunks/473-70f1453e53899bbf.js",
       "static/css/9f91f1344ef049a1.css",
-      "static/chunks/pages/guias/[...url]-0b49b710d9ed7810.js"
+      "static/chunks/pages/guias/[...url]-d7b82c06463ecf12.js"
     ],
     "/nuestro-equipo": [
       "static/chunks/webpack-59c5c889f52620d6.js",
       "static/chunks/framework-73b8966a3c579ab0.js",
       "static/chunks/main-69a178ab7f70753f.js",
-      "static/chunks/238-1f12f92d4b616107.js",
       "static/css/22e6911018198fa1.css",
-      "static/chunks/pages/nuestro-equipo-4feb2a1e9fc4bb57.js"
+      "static/chunks/pages/nuestro-equipo-657731783029b885.js"
     ],
     "/nuestro-equipo/[URL]": [
       "static/chunks/webpack-59c5c889f52620d6.js",
       "static/chunks/framework-73b8966a3c579ab0.js",
       "static/chunks/main-69a178ab7f70753f.js",
-      "static/chunks/238-1f12f92d4b616107.js",
       "static/css/7078620b80fb2ecc.css",
-      "static/chunks/pages/nuestro-equipo/[URL]-6be21f8c872a021a.js"
+      "static/chunks/pages/nuestro-equipo/[URL]-8d6cdcfbda502914.js"
     ],
     "/sitemap": [
       "static/chunks/webpack-59c5c889f52620d6.js",
       "static/chunks/framework-73b8966a3c579ab0.js",
       "static/chunks/main-69a178ab7f70753f.js",
-      "static/chunks/238-1f12f92d4b616107.js",
-      "static/chunks/pages/sitemap-77d910fa45a4f901.js"
+      "static/chunks/pages/sitemap-5675c7e240cc74ee.js"
     ]
   },
   "ampFirstPages": []

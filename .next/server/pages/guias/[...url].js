@@ -81,7 +81,10 @@ var next_link = __webpack_require__(1664);
 var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 ;// CONCATENATED MODULE: external "jsdom"
 const external_jsdom_namespaceObject = require("jsdom");
+// EXTERNAL MODULE: ./definitions/cache.ts
+var cache = __webpack_require__(2545);
 ;// CONCATENATED MODULE: ./components/mediaPost/readPost.tsx
+
 
 
 
@@ -99,8 +102,12 @@ class ReadPost extends external_react_.Component {
     }
     // TODO comprobar si al desmontarse el eventListener se borra o no
     componentDidMount() {
-        const references = Array.from(document.querySelectorAll("span.crossReference"));
-        references.map((element)=>element.addEventListener("click", this.handleCrossReferenceClick));
+        this.setEventsListener();
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.id !== this.props.id) {
+            this.setEventsListener();
+        }
     }
     render() {
         if (utils/* default.isObjectEmpty */.Z.isObjectEmpty(this.props)) return "";
@@ -361,10 +368,9 @@ class ReadPost extends external_react_.Component {
         return element;
     }
     transformIframes(element, oembedUrl) {
-        const { document: document1  } = new external_jsdom_namespaceObject.JSDOM("<!DOCTYPE html>").window;
         element.querySelectorAll("figure.media").forEach((figure, index)=>{
             if (oembedUrl[index].includes("youtu.be")) figure.classList.add("youtube");
-            const iframe = this.createIframe(oembedUrl[index], document1);
+            const iframe = this.createIframe(oembedUrl[index]);
             if (iframe) figure.innerHTML = iframe;
             else figure.remove();
         });
@@ -401,7 +407,35 @@ class ReadPost extends external_react_.Component {
             document.getElementById("dropdownMobilePlaceholder")?.click();
         }
     };
-    createIframe(url, documentTemp) {
+    handleCopyMarkText(text) {
+        navigator.clipboard.writeText(text);
+        cache/* default.toast.current */.Z.toast.current?.showToast("El texto se ha copiado en el portapapeles", "Informational");
+    }
+    setEventsListener() {
+        const references = Array.from(document.querySelectorAll("span.crossReference"));
+        references.map((element)=>element.addEventListener("click", this.handleCrossReferenceClick));
+        const copyMarks = Array.from(document.querySelectorAll("mark.copyText"));
+        copyMarks.map((element)=>{
+            element.title = "Haz click para copiar el texto";
+            element.addEventListener("click", ()=>this.handleCopyMarkText(element.textContent ?? ""));
+        });
+        const preCopy = Array.from(document.querySelectorAll("pre > code.copyText"));
+        preCopy.map((element)=>{
+            const preElement = element.parentElement;
+            // Add class to the <pre> element
+            preElement?.classList.add("pre-with-copyText");
+            if (preElement?.children.length === 1) {
+                // Create the button
+                const button = document.createElement("button");
+                button.classList.add("copyText-button");
+                button.title = "Haz click para copiar el texto";
+                button.addEventListener("click", ()=>this.handleCopyMarkText(element.textContent ?? ""));
+                // Add the button to the <pre> element
+                preElement?.appendChild(button);
+            }
+        });
+    }
+    createIframe(url) {
         if (url.startsWith("https://youtu.be/")) {
             const pattern = /^https:\/\/youtu\.be\/([A-Za-z0-9_-]{11})$/;
             const match = url.match(pattern);
@@ -690,8 +724,6 @@ class CarouselButtons extends external_react_.Component {
     }
 }
 
-// EXTERNAL MODULE: ./definitions/cache.ts
-var cache = __webpack_require__(2545);
 ;// CONCATENATED MODULE: ./components/socialShare.tsx
 
 

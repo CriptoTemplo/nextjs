@@ -12,6 +12,11 @@ exports.modules = {
 /* harmony import */ var _stores_GlobalStore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5553);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var isomorphic_dompurify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3059);
+/* harmony import */ var isomorphic_dompurify__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(isomorphic_dompurify__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4862);
+
+
 
 
 class GlobalCache {
@@ -27,6 +32,23 @@ class GlobalCache {
     static cryptoTemplate = _stores_GlobalStore__WEBPACK_IMPORTED_MODULE_0__/* ["default"].getCryptoTemplate */ .Z.getCryptoTemplate();
     static dateFormatter = new Intl.DateTimeFormat("es-ES");
     static toast = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+    static addSanitizeHook = ()=>{
+        isomorphic_dompurify__WEBPACK_IMPORTED_MODULE_2___default().addHook("afterSanitizeAttributes", function(node) {
+            // set all elements owning target to target=_blank
+            if ("target" in node) {
+                const href = node.getAttribute("href") ?? "";
+                const isInternal = href.startsWith(_global__WEBPACK_IMPORTED_MODULE_3__/* ["default"].hostFront */ .ZP.hostFront);
+                if (isInternal) return;
+                let rel = node.getAttribute("rel") ?? "";
+                if (!rel) {
+                    node.setAttribute("rel", "noopener noreferrer nofollow");
+                } else if (!rel.includes("noopener noreferrer")) {
+                    node.setAttribute("rel", "noopener noreferrer nofollow");
+                }
+                node.setAttribute("target", "_blank");
+            }
+        });
+    };
 }
 
 
