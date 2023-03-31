@@ -28,6 +28,68 @@
     background: none;
 }
 
+mark.copyText {
+    cursor: pointer;
+    background: #6467dea8;
+    color: inherit;
+    font-family: monospace;
+    border-radius: 1.5rem;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.9rem;
+}
+
+pre {
+    display: block;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+    user-select: text;
+
+    code.language-plaintext {
+        display: block;
+        font-family: 'Roboto', sans-serif;
+        background-color: rgb(42, 42, 42);
+        color: $text-color;
+        margin: 0.5rem 0;
+        border-radius: 1.5rem;
+        padding: 0.5rem 0.7rem;
+    }
+}
+
+.pre-with-copyText {
+    background-color: rgb(42, 42, 42);
+    color: $text-color;
+    padding: 0.7rem;
+    border-radius: $border-radius;
+    position: relative;
+}
+
+.copyText-button {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.7rem;
+    border: none;
+    background-color: rgb(42, 42, 42);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+.copyText-button::before {
+    content: "";
+    display: block;
+    position: relative;
+    right: 0.4rem;
+    width: 24px;
+    height: 24px;
+    background-image: url("../public/copyContent.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: invert(80%) sepia(6%) saturate(25%) hue-rotate(20deg) brightness(108%) contrast(86%);
+}
+
+
 .todo-list {
     list-style: none;
     margin-left: -1rem !important;
@@ -88,5 +150,38 @@ figure.media {
         overflow: hidden;
         border-radius: $border-radius;
         border: 2px solid #ffffff6b;
+    }
+}
+
+blockquote {
+    position: relative;
+    padding: 2rem 3rem;
+    margin: 1rem 0;
+    margin-left: 0;
+    margin-right: 0;
+    line-height: 1.7;
+    font-size: 1.1rem;
+
+    &::before {
+        content: "";
+        left: 0;
+        top: 1rem;
+        height: 22px;
+        width: 22px;
+        background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 35'%3E%3Cpath d='M1.152 15.234V0H14.93v12.044c0 6.505-.782 11.247-2.303 14.143-1.975 3.903-5.141 6.84-9.46 8.813L0 29.88c2.632-1.091 4.565-2.77 5.8-4.994 1.233-2.224 1.932-5.414 2.056-9.652zm21.07 0V0H36v12.044c0 6.505-.781 11.247-2.303 14.143-1.974 3.903-5.141 6.84-9.46 8.813l-3.126-5.12c2.632-1.133 4.566-2.77 5.8-4.994 1.233-2.224 1.932-5.414 2.056-9.652z' fill='%23dfe0e1'/%3E%3C/svg%3E");
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: absolute;
+        transform: rotate(180deg);
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    blockquote {
+        padding: 2rem 1rem;
+        &::before { 
+            top: 0.7rem;
+        }
     }
 }

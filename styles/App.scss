@@ -578,6 +578,8 @@ body::-webkit-scrollbar-thumb {
 
 			hr.headerSeparator {
 				margin-bottom: 2rem;
+				border-width: 1px;
+				height: 0;
 			}
 
 			h2,
@@ -596,6 +598,10 @@ body::-webkit-scrollbar-thumb {
 					color: #cda439;
 					font-weight: 300;
 					text-decoration: none;
+				}
+
+				code {
+					font-size: 0.9rem;
 				}
 			}
 
@@ -637,6 +643,11 @@ body::-webkit-scrollbar-thumb {
 				margin-top: 0.75rem;
 			}
 
+			hr {
+				border-width: 0;
+				height: 1rem;
+			}
+
 			p,
 			ul {
 				font-size: 1rem;
@@ -658,6 +669,7 @@ body::-webkit-scrollbar-thumb {
 
 				figcaption {
 					font-style: italic;
+					//font-family: 'Outfit', sans-serif;
 					//background: #2e2e2e;
 					background-color: rgb(42, 42, 42);
 					color: #b0b0b0;
@@ -788,6 +800,7 @@ body::-webkit-scrollbar-thumb {
 						border-radius: $border-radius;
 						height: 100%;
 						min-width: 8rem;
+						//min-width: 10.67rem;
 
 						.coverImage {
 							aspect-ratio: 4/3;
