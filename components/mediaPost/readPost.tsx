@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { IAuthor, IEmpty, IGuia, IPost, IReference } from "@/definitions/definitions"; // TODO esto habra que mejorarlo
+import { IAuthor, IGuia, IPost, IReference } from "@/definitions/definitions"; // TODO esto habra que mejorarlo
 import DOMPurify from "isomorphic-dompurify";
 import Global from "@/definitions/global";
 import Utils from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { JSDOM } from "jsdom";
+import GlobalCache from "@/definitions/cache";
 
 interface IReadPostState {
     referencesCollapsed: boolean;
@@ -15,7 +16,7 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
 
     public constructor(props: IGuia) {
         super(props);
-
+      
         this.state = {
             referencesCollapsed: true
         }
@@ -23,8 +24,13 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
 
     // TODO comprobar si al desmontarse el eventListener se borra o no
     public componentDidMount() {
-        const references = Array.from(document.querySelectorAll("span.crossReference"));
-        references.map((element: Element) => element.addEventListener("click", this.handleCrossReferenceClick));
+        this.setEventsListener();
+    }
+
+    public componentDidUpdate(prevProps: Readonly<IGuia>, prevState: Readonly<IReadPostState>, snapshot?: any): void {
+        if (prevProps.id !== this.props.id) {
+            this.setEventsListener();
+        }
     }
 
     public render() {
@@ -257,11 +263,10 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
     }
 
     private transformIframes(element: Element, oembedUrl: string[]): string {
-        const { document } = new JSDOM('<!DOCTYPE html>').window;
         element.querySelectorAll("figure.media").forEach((figure: Element, index: number) => {
             if (oembedUrl[index].includes("youtu.be")) figure.classList.add("youtube");
 
-            const iframe = this.createIframe(oembedUrl[index], document);
+            const iframe = this.createIframe(oembedUrl[index]);
             if (iframe) figure.innerHTML = iframe;
             else figure.remove();
         });
@@ -298,7 +303,42 @@ export default class ReadPost extends Component<IGuia, IReadPostState> {
         }
     }
 
-    private createIframe(url: string, documentTemp: Document): string {
+    private handleCopyMarkText(text: string): void {
+        navigator.clipboard.writeText(text);
+        GlobalCache.toast.current?.showToast("El texto se ha copiado en el portapapeles", "Informational")
+    }
+
+    private setEventsListener(): void {
+        const references = Array.from(document.querySelectorAll("span.crossReference"));
+        references.map((element: Element) => element.addEventListener("click", this.handleCrossReferenceClick));
+        
+        const copyMarks = Array.from(document.querySelectorAll("mark.copyText"));
+        copyMarks.map((element: Element) => {
+            (element as HTMLElement).title = "Haz click para copiar el texto";
+            element.addEventListener("click", () => this.handleCopyMarkText(element.textContent ?? ""));
+        });
+        
+        const preCopy = Array.from(document.querySelectorAll("pre > code.copyText"));
+        preCopy.map((element: Element) => {
+            const preElement = element.parentElement;
+
+            // Add class to the <pre> element
+            preElement?.classList.add('pre-with-copyText');
+
+            if (preElement?.children.length === 1) {
+                // Create the button
+                const button = document.createElement('button');
+                button.classList.add('copyText-button');
+                button.title = "Haz click para copiar el texto";
+                button.addEventListener("click", () => this.handleCopyMarkText(element.textContent ?? ""));
+    
+                // Add the button to the <pre> element
+                preElement?.appendChild(button);
+            }
+        });
+    }
+
+    private createIframe(url: string): string {
         if (url.startsWith('https://youtu.be/')) {
             const pattern = /^https:\/\/youtu\.be\/([A-Za-z0-9_-]{11})$/;
             const match = url.match(pattern);

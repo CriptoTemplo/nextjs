@@ -19,7 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
 	React.useEffect(() => {
 		ReactGA.initialize('G-Z3D5DH5P3F');
 	  });
-	
+
+	GlobalCache.addSanitizeHook();
+
 	// TODO revisar el return TOP
 	return (
 		<>
