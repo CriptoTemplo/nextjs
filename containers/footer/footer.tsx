@@ -1,12 +1,11 @@
 import * as React from 'react';
-import Global from "../../definitions/global";
 import Image from 'next/image'
-import youtubeLogo from '../../public/highlights-youtube.svg'
-import telegramLogo from '../../public/highlights-telegram.svg'
-import twitterLogo from '../../public/highlights-twitter.svg'
-import tiktokLogo from '../../public/highlights-tiktok.svg'
-import mailLogo from '../../public/highlights-mail.svg'
-import instagramLogo from '../../public/highlights-instagram.svg'
+import youtubeLogo from '@/public/highlights-youtube.svg'
+import telegramLogo from '@/public/highlights-telegram.svg'
+import twitterLogo from '@/public/highlights-twitter.svg'
+import tiktokLogo from '@/public/highlights-tiktok.svg'
+import mailLogo from '@/public/highlights-mail.svg'
+import instagramLogo from '@/public/highlights-instagram.svg'
 import logo_thumbnail from '@/public/logo_thumbnail.webp'
 import Link from "next/link";
 

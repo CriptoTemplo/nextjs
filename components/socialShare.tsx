@@ -2,12 +2,15 @@ import { IMetaTags } from "@/utils/helmet";
 import * as React from 'react';
 import Image from 'next/image';
 import styles from "@/styles/socialNetworks.module.scss";
-import youtubeLogo from '@/public/highlights-youtube.svg'
 import telegramLogo from '@/public/highlights-telegram.svg'
 import twitterLogo from '@/public/highlights-twitter.svg'
-//import tiktokLogo from '../../public/highlights-tiktok.svg'
 import mailLogo from '@/public/highlights-mail.svg'
-import instagramLogo from '@/public/highlights-instagram.svg'
+import enlaceLogo from '@/public/highlights-enlace.svg'
+import facebookLogo from '@/public/highlights-facebook.svg'
+import linkedinLogo from '@/public/highlights-linkedin.svg'
+import pinterestLogo from '@/public/highlights-pinterest.svg'
+import redditLogo from '@/public/highlights-reddit.svg'
+import whatsappLogo from '@/public/highlights-whatsapp.svg'
 import CarouselButtons, { ICarouselButtonsProps } from "./carouselButtons";
 import GlobalCache from "@/definitions/cache";
 
@@ -53,15 +56,15 @@ export default class SocialShare extends React.Component<ISocialShareProps, ISoc
         const pinterestHref: string = `https://pinterest.com/pin/create/button/?url=${encodedUrl}&description=${encodedText}`;
 
         let elements: JSX.Element [] = [];
-        elements.push(this.renderCopyUrl(twitterLogo, "Copiar el Enlace"));
+        elements.push(this.renderCopyUrl(enlaceLogo, "Copiar el Enlace"));
         elements.push(this.renderImageElement(twitterHref, twitterLogo, "Compartir en Twitter"));
-        elements.push(this.renderImageElement(facebookHref, twitterLogo, "Compartir en Facebook"));
-        elements.push(this.renderImageElement(whatsappHref, twitterLogo, "Compartir en WhatsApp"));
+        elements.push(this.renderImageElement(facebookHref, facebookLogo, "Compartir en Facebook"));
+        elements.push(this.renderImageElement(whatsappHref, whatsappLogo, "Compartir en WhatsApp"));
         elements.push(this.renderImageElement(telegramHref, telegramLogo, "Compartir en Telegram"));
-        elements.push(this.renderImageElement(linkedinHref, telegramLogo, "Compartir en LinkedIn"));
-        elements.push(this.renderImageElement(redditHref, telegramLogo, "Compartir en Reddit"));
+        elements.push(this.renderImageElement(linkedinHref, linkedinLogo, "Compartir en LinkedIn"));
+        elements.push(this.renderImageElement(redditHref, redditLogo, "Compartir en Reddit"));
+        elements.push(this.renderImageElement(pinterestHref, pinterestLogo, "Compartir en Pinterest"));
         elements.push(this.renderImageElement(emailHref, mailLogo, "Compartir por Correo Electrónico"));
-        elements.push(this.renderImageElement(pinterestHref, telegramLogo, "Compartir en Pinterest"));
 
         return elements;
     }

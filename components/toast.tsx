@@ -31,7 +31,7 @@ export default class Toast extends React.Component<IToastProps, IToastState> {
     }
 
     public render() {
-        const displayStyle = this.state.isRendering ? 'block' : 'block';
+        const displayStyle = this.state.isRendering ? 'block' : 'none';
         const opacity = this.state.isRendering ? '1' : '0';
         const className = `${styles.toast} ${this.getClassname(this.state.type)}`;
         return (

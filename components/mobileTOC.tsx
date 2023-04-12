@@ -15,24 +15,41 @@ export interface IMobileTOCProps {
 
 export interface IMobileTOCState {
     isCollapsed: boolean;
+    activeHeading: string;
 }
 
 export default class MobileTOC extends React.Component<IMobileTOCProps, IMobileTOCState> {
 
     private element: React.RefObject<HTMLDivElement> = React.createRef();
     private active: boolean = false;
+    private observer: IntersectionObserver | null = null;
 
     constructor(props: IMobileTOCProps) {
         super(props);
 
         this.state = {
-            isCollapsed: true
+            isCollapsed: true,
+            activeHeading: ''
         }
     }
 
     public componentDidMount(): void {
         this.initScrollEvent();
+        this.setupObserver();
     }
+
+    public componentDidUpdate(prevProps: Readonly<IMobileTOCProps>, prevState: Readonly<IMobileTOCState>, snapshot?: any): void {
+        if (prevProps.post.id !== this.props.post.id) {
+            this.setupObserver();
+        }
+    }
+
+    public componentWillUnmount() {
+        if (this.observer) {
+            this.observer.disconnect();
+        }
+    }
+
 
     public render() {
         return (
@@ -43,7 +60,7 @@ export default class MobileTOC extends React.Component<IMobileTOCProps, IMobileT
                 <div className="share" onClick={this.share}>
                     <Image className="coverImage"
                         src={shareIcon}
-                        alt="Link para ir al canal de Youtube de Empezar a Invertir"
+                        alt="Botón para compartir este artículo"
                         width={32}
                         height={32}
                     />
@@ -76,7 +93,7 @@ export default class MobileTOC extends React.Component<IMobileTOCProps, IMobileT
             <nav>
                 <ul>
                     {headings.map((heading: HeadingType, index: number) => (
-                        <li key={index} style={{ marginLeft: `${heading.level - 2}em` }} onClick={() => this.scrollMediaPost(heading.id)}>
+                        <li key={index} className={this.state.activeHeading === heading.id ? 'active' : ''} style={{ marginLeft: `${heading.level - 2}em` }} onClick={() => this.scrollMediaPost(heading.id)}>
                             <div>
                                 <span className="leftSide">
                                     {(heading.level === 2 ? countH1++ + "." : "")}
@@ -154,4 +171,48 @@ export default class MobileTOC extends React.Component<IMobileTOCProps, IMobileT
                 .catch((error) => console.log('Error sharing', error));
         }
     }
+
+    private setupObserver(): void {
+        const headings = document.querySelectorAll('h2, h3');
+
+        this.observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        this.setState({ activeHeading: entry.target.id });
+                        this.updateProgressBar(headings, entry.target.id);
+                    }
+                });
+            },
+            {
+                rootMargin: '0% 0% -80% 0%',
+                threshold: 0
+            }
+        );
+
+        headings.forEach((heading: Element) => {
+            this.observer?.observe(heading);
+        });
+    }
+
+    private updateProgressBar(headings: NodeListOf<Element>, activeHeadingId: string): void {
+        let completedHeadings: number = 0;
+
+        if (headings) {
+            headings.forEach((heading: Element, index: number) => {
+                if (heading.id === activeHeadingId) {
+                    completedHeadings = index;
+                    return;
+                }
+            })
+
+            const progressPercentage: number = ((completedHeadings + 1) / headings.length) * 100;
+
+            // Update the mobileTOC background-image
+            if (this.element.current) {
+                this.element.current.style.backgroundImage = `linear-gradient(to right, rgb(255, 187, 1) ${progressPercentage}%,
+                transparent ${progressPercentage + 0.01}%)`;
+            }
+        }
+	}
 }

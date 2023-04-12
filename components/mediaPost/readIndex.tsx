@@ -1,13 +1,42 @@
 import { Component } from "react";
-import { IEmpty, IPost } from "@/definitions/definitions"; // TODO esto habra que mejorarlo
+import { IPost } from "@/definitions/definitions"; // TODO esto habra que mejorarlo
 import Utils from "@/utils/utils";
 import { JSDOM } from "jsdom";
 
 export type HeadingType = { id: string; text: string; level: number };
 
-// TODO se puede hacer que conforme vayas bajando el dom se vaya ilumando en que seccion estas
+interface IReadIndexState {
+	activeHeading: string;
+}
 
-class ReadIndex extends Component<IPost, IEmpty> {
+class ReadIndex extends Component<IPost, IReadIndexState> {
+
+	private observer: IntersectionObserver | null = null;
+
+	constructor(props: IPost) {
+		super(props);
+
+		this.state = {
+			activeHeading: ''
+		};
+	}
+
+
+	public componentDidMount(): void {
+		this.setupObserver();
+	}
+
+	public componentDidUpdate(prevProps: Readonly<IPost>, prevState: Readonly<IReadIndexState>, snapshot?: any): void {
+		if (prevProps.id !== this.props.id) {
+			this.setupObserver();
+		}
+	}
+
+	public componentWillUnmount() {
+		if (this.observer) {
+			this.observer.disconnect();
+		}
+	}
 
 	public render() {
 		if (Utils.isObjectEmpty(this.props)) return "";
@@ -24,7 +53,7 @@ class ReadIndex extends Component<IPost, IEmpty> {
 					<nav>
 						<ul>
 							{headings.map((heading: HeadingType, index: number) => (
-								<li key={index} style={{ marginLeft: `${heading.level - 2}em` }} onClick={() => this.scrollMediaPost(heading.id)}>
+								<li className={this.state.activeHeading === heading.id ? 'active' : ''} key={index} style={{ marginLeft: `${heading.level - 2}em` }} onClick={() => this.scrollMediaPost(heading.id)}>
 									<div>
 										<span className="leftSide">
 											{(heading.level === 2 ? countH1++ + "." : "")}
@@ -61,6 +90,28 @@ class ReadIndex extends Component<IPost, IEmpty> {
 	private scrollMediaPost(id: string): void {
 		const element = document.getElementById(id);
 		element?.scrollIntoView({ behavior: "smooth" });
+	}
+
+	private setupObserver(): void {
+		this.observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						this.setState({ activeHeading: entry.target.id });
+					}
+				});
+			},
+			{
+				rootMargin: '0% 0% -80% 0%',
+				threshold: 0
+			}
+		);
+
+		const headings = document.querySelectorAll('h2, h3');
+
+		headings.forEach((heading: Element) => {
+			this.observer?.observe(heading);
+		});
 	}
 }
 

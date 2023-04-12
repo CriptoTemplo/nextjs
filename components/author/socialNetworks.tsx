@@ -2,13 +2,10 @@ import { ISocialNetworks } from "@/definitions/definitions";
 import * as React from 'react';
 import Image from 'next/image';
 import styles from "@/styles/socialNetworks.module.scss";
-import youtubeLogo from '@/public/highlights-youtube.svg'
-//import telegramLogo from '@/public/highlights-telegram.svg'
 import twitterLogo from '@/public/highlights-twitter.svg'
-//import tiktokLogo from '@/public/highlights-tiktok.svg'
-import mailLogo from '@/public/highlights-mail.svg'
 import instagramLogo from '@/public/highlights-instagram.svg'
-
+import facebookLogo from '@/public/highlights-facebook.svg'
+import linkedinLogo from '@/public/highlights-linkedin.svg'
 export interface ISocialNetworksProps {
 }
 
@@ -26,10 +23,10 @@ export default class SocialNetworks extends React.Component<ISocialNetworks, ISo
     }
 
     public render() {
-        const linkedin: JSX.Element = this.props.linkedin ? this.renderImageElement(this.props.linkedin, mailLogo, "Haz click para ver la página de LinkedIn de este autor.") : <></>;
+        const linkedin: JSX.Element = this.props.linkedin ? this.renderImageElement(this.props.linkedin, linkedinLogo, "Haz click para ver la página de LinkedIn de este autor.") : <></>;
         const twitter: JSX.Element = this.props.twitter ? this.renderImageElement(this.props.twitter, twitterLogo, "Haz click para ver el feed de Twitter de este autor.") : <></>;
         const instagram: JSX.Element = this.props.instagram ? this.renderImageElement(this.props.instagram, instagramLogo, "Haz click para ver la página de Instagram de este autor.") : <></>;
-        const facebook: JSX.Element = this.props.facebook ? this.renderImageElement(this.props.facebook, youtubeLogo, "Haz click para ver el canal de YouTube de este autor.") : <></>;
+        const facebook: JSX.Element = this.props.facebook ? this.renderImageElement(this.props.facebook, facebookLogo, "Haz click para ver el canal de YouTube de este autor.") : <></>;
         return (
             <div className={styles.socialWrapper}>
                 {linkedin}

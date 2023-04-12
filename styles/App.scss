@@ -123,6 +123,11 @@ body::-webkit-scrollbar-thumb {
 	background-repeat: no-repeat;
 	background-size: 100% 2px;
 
+	/* Esto es para el progreso del articulo */
+	background-position: bottom left;
+    background-repeat: no-repeat;
+    background-size: 100% 2px;
+
 	//text-transform: uppercase;
 	&.show {
 		display: flex;
@@ -152,10 +157,10 @@ body::-webkit-scrollbar-thumb {
 				.text {
 					height: 100%;
 					line-height: 2.3rem;
-					font-family: Cabin-semi-bold, Cabin-fallback, sans-serif;
+					//font-family: Cabin-semi-bold, Cabin-fallback, sans-serif;
 					font-size: .875rem;
 					font-weight: 600;
-					letter-spacing: .07rem;
+					letter-spacing: 0.12rem;
 					text-transform: uppercase;
 				}
 			}
@@ -224,6 +229,10 @@ body::-webkit-scrollbar-thumb {
 						-o-transition: color 0.2s ease-out;
 						-ms-transition: color 0.2s ease-out;
 						transition: color 0.2s ease-out;
+
+						&.active {
+							color: rgb(255, 187, 1);
+						}
 
 						div {
 							display: flex;
@@ -414,6 +423,10 @@ body::-webkit-scrollbar-thumb {
 						-o-transition: color 0.2s ease-out;
 						-ms-transition: color 0.2s ease-out;
 						transition: color 0.2s ease-out;
+
+						&.active {
+							color: $text-hover-link;
+						}
 
 						div {
 							display: flex;
