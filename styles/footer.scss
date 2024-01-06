@@ -62,13 +62,15 @@
             box-sizing: border-box;
             .imgLogo {
                 .coverImage {
-                    width: fit-content;
-					height: 100%;
+                    width: auto;
+                    height: 100%;
                 }
             }
             .footerLinks {
                 display: grid;
                 grid-template-rows: auto;
+                row-gap: 0.5rem;
+
                 a {
                     text-decoration: none;
                     -webkit-user-drag: none;

@@ -29,7 +29,7 @@ export default function Guia(props: IGuiaProps) {
 			window.twttr.widgets.load();
 		}
 
-		if (!Utils.isObjectEmpty(props.guia)) {
+		if (props.guia && !Utils.isObjectEmpty(props.guia)) {
 			try {
 				GuiaStore.incrementViews(props.guia._id);
 			}

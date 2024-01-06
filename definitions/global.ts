@@ -14,8 +14,13 @@ export default class Global {
     static host = EHost.develop;
     static hostFront = EHostFront.develop;
 }
+
 export interface IHeader {
     Header: IHeaderDropdown[];
+}
+
+export interface IFooter {
+    Footer: IHeaderDropdown[];
 }
 
 export interface IHeaderDropdown {

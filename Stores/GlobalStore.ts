@@ -1,4 +1,4 @@
-import Global, { IHeader } from "../definitions/global";
+import Global, { IFooter, IHeader } from "../definitions/global";
 import { ILanding, ISitemap } from "../definitions/definitions";
 import BasicStore from './BasicStore';
 
@@ -11,7 +11,7 @@ export default class GlobalStore {
         return BasicStore.baseFetch(urlString, "GET", "");
     }
 
-    public static async getFooter(): Promise<IHeader> {
+    public static async getFooter(): Promise<IFooter> {
         let url = new URL(Global.host + "/footer");
         const urlString = url.toString();
 

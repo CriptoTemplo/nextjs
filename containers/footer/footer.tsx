@@ -8,11 +8,14 @@ import mailLogo from '@/public/highlights-mail.svg'
 import instagramLogo from '@/public/highlights-instagram.svg'
 import logo_thumbnail from '@/public/logo_thumbnail.webp'
 import Link from "next/link";
+import GlobalStore from "@/stores/GlobalStore";
+import { IFooter, IHeaderDropdown, TDropwdown } from "@/definitions/global";
 
 export interface IFooterProps {
 }
 
 export interface IFooterState {
+	footer: IFooter;
 }
 
 export default class Footer extends React.Component<IFooterProps, IFooterState> {
@@ -20,7 +23,12 @@ export default class Footer extends React.Component<IFooterProps, IFooterState> 
 		super(props);
 
 		this.state = {
+			footer: {} as IFooter
 		}
+	}
+
+	public async componentDidMount() {
+		this.getFooterInfo();
 	}
 
 	public render() {
@@ -62,7 +70,7 @@ export default class Footer extends React.Component<IFooterProps, IFooterState> 
 						src={telegramLogo}
 						alt="Link para ir al canal de Telegram de Empezar a Invertir"
 						width={48}
-						height={48}	
+						height={48}
 					/>
 				</div>
 				<div className="socialLogo">
@@ -70,7 +78,7 @@ export default class Footer extends React.Component<IFooterProps, IFooterState> 
 						src={twitterLogo}
 						alt="Link para ir al Twitter de Empezar a Invertir"
 						width={48}
-						height={48}	
+						height={48}
 					/>
 				</div>
 				<div className="socialLogo">
@@ -84,7 +92,7 @@ export default class Footer extends React.Component<IFooterProps, IFooterState> 
 						src={tiktokLogo}
 						alt="Link para ir al canal de TikTok de Empezar a Invertir"
 						width={48}
-						height={48}	
+						height={48}
 					/>
 
 				</div>
@@ -93,7 +101,7 @@ export default class Footer extends React.Component<IFooterProps, IFooterState> 
 						src={mailLogo}
 						alt="Link para ir enviar un e-mail a Empezar a Invertir"
 						width={48}
-						height={48}	
+						height={48}
 					/>
 				</div>
 			</>
@@ -108,33 +116,39 @@ export default class Footer extends React.Component<IFooterProps, IFooterState> 
 						alt="Logo en grande de Empezar a Invertir"
 						width={300}
 						height={300}
-						/>
+					/>
 				</div>
-				<div className="footerLinks">
-					<span className="title">Cursos</span>
-					<span className="link">Trading</span>
-					<span className="link">Bolsa</span>
-					<span className="link">Criptomonedas</span>
-					<span className="link">Grupo inversion</span>
-				</div>
-				<div className="footerLinks">
-					<span className="title">Cursos</span>
-					<span className="link">Trading</span>
-					<span className="link">Bolsa</span>
-					<span className="link">Criptomonedas</span>
-					<span className="link">Grupo inversion</span>
-				</div>
-				<div className="footerLinks">
-					<span className="title">Cursos</span>
-					<span className="link">Trading</span>
-					<span className="link">Bolsa</span>
-					<span className="link">Criptomonedas</span>
-					<span className="link">Grupo inversion</span>
-				</div>
-				<div className="footerLinks">
-					<Link href="/sitemap" className="title">Sitemap</Link>
-				</div>
+				{this.renderColumns()}
 			</>
 		);
+	}
+
+	private renderColumns(): JSX.Element[] {
+		return this.state.footer?.Footer?.map((column: IHeaderDropdown, index: number) => {
+			return (
+				<div className="footerLinks" key={index}>
+					<span className="title">{column.main[0]}</span>
+					{this.renderColumnLinks(column.dropdown)}
+				</div>
+			)
+		})
+	}
+
+	private renderColumnLinks(dropdown: [TDropwdown]): JSX.Element[] {
+		return dropdown.map((link: TDropwdown, index: number) => {
+			return (
+				<Link href={link[1]} className="link" key={index}>
+					{link[0]}
+				</Link>
+			)
+		})
+	}
+
+	private async getFooterInfo(): Promise<void> {
+		const footer: IFooter = await GlobalStore.getFooter();
+		console.log(footer)
+		this.setState({
+			footer
+		})
 	}
 }
